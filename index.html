@@ -35,8 +35,8 @@
             background-color: var(--primary-bg);
             color: var(--text-main);
             line-height: 1.6;
-            /* Увеличен отступ снизу, чтобы контент не перекрывался панелью */
-            padding-bottom: 120px; 
+            /* Отступ снизу, чтобы контент не заезжал под фиксированную панель */
+            padding-bottom: 110px; 
         }
 
         /* --- ШАПКА (HEADER) --- */
@@ -183,25 +183,21 @@
             margin-bottom: 1rem;
         }
 
-        /* --- НИЖНЯЯ НАВИГАЦИЯ (BOTTOM NAV) ИСПРАВЛЕНА --- */
+        /* --- НИЖНЯЯ НАВИГАЦИЯ (ИСПРАВЛЕНА ДЛЯ МОБИЛЬНЫХ) --- */
         .bottom-nav {
             position: fixed;
-            /* Поднимаем панель над системными кнопками телефона (Safe Area) */
-            bottom: calc(20px + env(safe-area-inset-bottom, 20px));
-            
-            /* Надежное центрирование без transform */
+            bottom: 20px; 
             left: 0;
             right: 0;
             margin: 0 auto;
-            width: fit-content; /* Панель занимает ровно столько места, сколько нужно */
-            
+            width: fit-content; /* Панель по центру без transform */
             background-color: #ffffff;
             border-radius: 40px;
             box-shadow: 0 8px 24px rgba(75, 0, 95, 0.2);
             display: flex;
             gap: 0.5rem;
             padding: 0.5rem;
-            z-index: 9999; /* Максимальный приоритет, чтобы точно быть сверху */
+            z-index: 9999; /* Панель всегда сверху */
             border: 1px solid var(--border-color);
         }
 
@@ -236,7 +232,7 @@
             box-shadow: 0 4px 10px rgba(75, 0, 95, 0.3);
         }
 
-        /* --- ИКОНКА С МАСКОЙ --- */
+        /* --- ИКОНКА С МАСКОЙ (ЗАГРУЗКА С GITHUB) --- */
         .icon-wrapper {
             width: 32px;
             height: 32px;
@@ -261,6 +257,7 @@
             transition: transform 0.2s ease;
         }
 
+        /* Запасная иконка (если картинка не загрузится) */
         .fallback-svg {
             position: absolute;
             top: 0;
@@ -308,11 +305,12 @@
         .highlight-box { background: rgba(235, 255, 170, 0.4); border-left: 4px solid var(--color-indigo); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 1rem; color: var(--color-spruce); }
         .img-placeholder { width: 100%; height: 150px; background-color: rgba(246, 215, 255, 0.5); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--color-indigo); margin: 1rem 0; border: 2px dashed var(--color-indigo); opacity: 0.8; font-size: 0.9rem;}
 
+        /* Адаптивность для мобильных */
         @media (max-width: 600px) {
             .logo-area span { display: none; }
             .hero h1 { font-size: 1.8rem; }
             .bottom-nav { 
-                bottom: calc(15px + env(safe-area-inset-bottom, 15px)); 
+                bottom: 15px; /* Приподнимаем панель на мобильных */
                 padding: 0.4rem; 
                 gap: 0.2rem; 
             }
@@ -324,6 +322,7 @@
 </head>
 <body>
 
+    <!-- ШАПКА -->
     <header>
         <div class="header-container">
             <a href="#" class="logo-area" onclick="navigate('home')">
@@ -354,10 +353,14 @@
         </div>
     </header>
 
+    <!-- КОНТЕНТ -->
     <main>
+        <!-- СТРАНИЦА 1: ГЛАВНАЯ -->
         <div id="page-home" class="page active">
+            <!-- Пустая страница -->
         </div>
 
+        <!-- СТРАНИЦА 2: ЭЛЕМЕНТЫ ТЕЛА -->
         <div id="page-body-elements" class="page">
             <div class="hero">
                 <h1>Инструкция по разметке<br>видео художественной гимнастики</h1>
@@ -455,4 +458,155 @@
                             <strong>Действие прервано:</strong> Отмечается, если спортсменка выполнила действие с ошибкой: потеря равновесия (отклонение формы >20°), падение или потеря предмета.
                         </div>
                         <div class="highlight-box">
-           
+                            <strong>Зум:</strong> Отмечается, если видно форму элемента, но из-за сильного приближения камеры не видно часть тела гимнастки. Если из-за зума невозможно определить элемент — фрагмент не размечается, вместо него ставится «Техническое: Пауза».
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Шаг 5: Самопроверка</summary>
+                    <div class="details-content">
+                        <p>После разметки всех действий — перепроверить сквозным просмотром видео со сверкой по инструкции и чек-листу элементов. Особое внимание уделить соответствию названия действия фактически выполняемому движению. Желательно просмотреть видео 2 раза: первый — на названия, второй — на чек-бокс «Зум».</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Специфика классов и термины</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>Динамический элемент R – правила</h3>
+                        <ul>
+                            <li><strong>Бросок без преакробатики:</strong> В начальную границу бокса обязательно должен войти момент, когда гимнастка еще держит предмет.</li>
+                            <li><strong>Бросок на преакробатике/ВВ:</strong> Преакробатический элемент или ВВ при броске обязательно входит в начальную границу.</li>
+                            <li><strong>Ловля:</strong> Бокс заканчивается не раньше завершения преакробатики или ВВ при ловле.</li>
+                            <li><strong>Серия прыжков:</strong> 3 одинаковых прыжка с поворотом размечаются как R, если бросок на 1-м, 2-й в полете, ловля на 3-м.</li>
+                        </ul>
+                        <div class="img-placeholder">Схема динамического элемента R</div>
+                    </div>
+                    
+                    <div>
+                        <h3>Спортивные термины</h3>
+                        <ul>
+                            <li><strong>Релеве:</strong> Подъём на полупальцы с отрывом пятки от пола.</li>
+                            <li><strong>Турлян:</strong> Медленный поворот на одной ноге (не считается вращением).</li>
+                            <li><strong>Плие:</strong> Сгибание одной или обеих ног / приседание.</li>
+                            <li><strong>Элемент DB:</strong> Прыжки, Равновесия и Вращения.</li>
+                            <li><strong>Элемент DA:</strong> Технически сложная манипуляция с предметом (минимум 2 критерия).</li>
+                            <li><strong>Высокий бросок:</strong> Более 2 ростов гимнастки. <br> <strong>Малый бросок:</strong> Менее 2 ростов.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Типичные ошибки</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Захват лишних кадров</h3>
+                        <p>Включение в фрагмент времени ожидания в статичной позе до или после действия.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Неверный класс</h3>
+                        <p>Путаница между Вращением и Вертикальным вращением, или между Преакробатическим элементом и Прыжком.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Пропуск серий</h3>
+                        <p>Выделение серии элементов одним фрагментом вместо отдельных фрагментов для каждого элемента.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- СТРАНИЦА 3: ЭЛЕМЕНТЫ ПРЕДМЕТА -->
+        <div id="page-object-elements" class="page">
+            <div class="placeholder-content">
+                <h1>Разметка с предметом</h1>
+                <p>Здесь будет размещена информация о разметке элементов с предметами (мяч, обруч, булавы, лента, скакалка).</p>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА 4: ФИДБЕК -->
+        <div id="page-feedback" class="page">
+            <div class="placeholder-content">
+                <h1>Обратная связь</h1>
+                <p>Здесь будет форма для отправки отзывов, сообщений об ошибках или предложений по улучшению.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="navigate('home')" title="Главная">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+        </button>
+        <button class="nav-btn" onclick="navigate('body-elements')" title="Элементы тела">
+            <div class="icon-wrapper" id="gymnast-icon-wrapper">
+                <div class="icon-gymnast-img" id="gymnast-img"></div>
+                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="5" r="3"></circle>
+                    <path d="M6 12h12"></path>
+                    <path d="M12 5v14"></path>
+                    <path d="M8 22l4-5 4 5"></path>
+                </svg>
+            </div>
+        </button>
+        <button class="nav-btn" onclick="navigate('object-elements')" title="Элементы предмета">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <path d="M2 12h20"></path>
+            </svg>
+        </button>
+        <button class="nav-btn" onclick="navigate('feedback')" title="Фидбек">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <!-- СКРИПТЫ -->
+    <script>
+        // Проверка загрузки картинки с GitHub для отображения запасной SVG при ошибке
+        const imgElement = new Image();
+        imgElement.src = 'https://tturuturu1-blip.github.io/hg_db/gimnastka.png';
+        
+        imgElement.onerror = function() {
+            document.getElementById('gymnast-icon-wrapper').classList.add('img-failed');
+        };
+
+        // Логика переключения страниц
+        function navigate(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const navMap = {
+                'home': 0,
+                'body-elements': 1,
+                'object-elements': 2,
+                'feedback': 3
+            };
+            
+            if (navMap[pageId] !== undefined) {
+                navBtns[navMap[pageId]].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
