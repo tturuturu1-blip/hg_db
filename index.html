@@ -9,21 +9,16 @@
     <link rel="icon" type="image/png" href="https://tturuturu1-blip.github.io/hg_db/icon/gimnastka.png">
     
     <style>
-        /* Базовые переменные (Палитра 2026) */
+        /* Базовые переменные (Обновленная схема окрашивания) */
         :root {
-            --color-lavender: #F6D7FF;
-            --color-indigo: #4B005F;
-            --color-lime: #EBFFAA;
-            --color-moss: #5F7300;
-            --color-spruce: #374126;
+            --bg-color: #F6D7FF;        /* Lavender Veil - Фон */
+            --accent-dark: #374126;     /* Dark Spruce - Главный акцент (заголовки, кнопки) */
+            --text-main: #4B005F;       /* Indigo - Основной текст, обводка блоков */
+            --accent-light: #EBFFAA;    /* Lime Cream - Заливка блоков, иконки */
+            --border-hover: #5F7300;    /* Forest Moss - Границы, ховеры, текст в блоках */
             
-            --primary-bg: var(--color-lavender);
-            --text-main: var(--color-spruce);
-            --text-light: var(--color-moss);
-            --accent: var(--color-indigo);
-            --card-bg: #ffffff;
-            --border-color: rgba(55, 65, 38, 0.15);
-            --shadow: 0 4px 12px rgba(75, 0, 95, 0.06);
+            --primary-bg: var(--bg-color);
+            --shadow: 0 4px 12px rgba(75, 0, 95, 0.08); /* Тень от Indigo */
         }
 
         * {
@@ -35,7 +30,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--primary-bg);
-            color: var(--text-main);
+            color: var(--text-main); /* Indigo */
             line-height: 1.6;
             padding-bottom: 110px; 
             display: flex;
@@ -52,7 +47,7 @@
             top: 0;
             z-index: 100;
             padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-hover); /* Forest Moss */
         }
 
         .header-container {
@@ -69,7 +64,7 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--color-spruce);
+            color: var(--text-main); /* Indigo */
             font-weight: 800;
             font-size: 1.1rem;
             white-space: nowrap;
@@ -79,12 +74,12 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--color-indigo);
+            background-color: var(--accent-dark); /* Dark Spruce */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-lime);
+            color: var(--accent-light); /* Lime Cream */
         }
 
         .logo-icon svg {
@@ -100,7 +95,7 @@
             justify-content: flex-end;
         }
 
-        /* Адаптивный поиск */
+        /* Адаптивный поиск (Обводка Indigo) */
         .search-container {
             flex-grow: 1;
             max-width: 400px;
@@ -113,7 +108,7 @@
             width: 100%;
             padding: 10px 16px 10px 40px;
             border-radius: 30px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-main); /* Indigo */
             background-color: #ffffff;
             font-family: inherit;
             color: var(--text-main);
@@ -122,21 +117,21 @@
         }
 
         .search-container input:focus {
-            border-color: var(--color-indigo);
-            box-shadow: 0 0 0 3px rgba(75, 0, 95, 0.15);
+            border-color: var(--accent-dark); /* Dark Spruce при фокусе */
+            box-shadow: 0 0 0 3px rgba(55, 65, 38, 0.15);
         }
 
         .search-icon {
             position: absolute;
             left: 14px;
-            color: var(--text-light);
+            color: var(--border-hover); /* Forest Moss */
             width: 18px;
             height: 18px;
         }
 
         .menu-btn {
             background-color: #ffffff;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-main); /* Indigo */
             border-radius: 50%;
             width: 44px;
             height: 44px;
@@ -144,15 +139,17 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--color-spruce);
-            transition: background 0.2s;
+            color: var(--text-main);
+            transition: all 0.2s;
             flex-shrink: 0;
             z-index: 10001;
         }
 
+        /* Ховер меню - Forest Moss */
         .menu-btn:hover {
-            background-color: rgba(235, 255, 170, 0.4);
-            color: var(--color-indigo);
+            background-color: var(--accent-light); /* Lime Cream */
+            color: var(--accent-dark); /* Dark Spruce */
+            border-color: var(--border-hover); /* Forest Moss */
         }
 
         /* --- БОКОВОЕ МЕНЮ (SIDE MENU) --- */
@@ -162,7 +159,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(55, 65, 38, 0.5);
+            background: rgba(55, 65, 38, 0.5); 
             backdrop-filter: blur(4px);
             z-index: 1000;
             opacity: 0;
@@ -181,14 +178,14 @@
             right: -320px;
             width: 300px;
             height: 100vh;
-            background-color: var(--card-bg);
+            background-color: #ffffff;
             box-shadow: -4px 0 24px rgba(75, 0, 95, 0.15);
             z-index: 1001;
             padding: 5rem 1.5rem 2rem 1.5rem;
             transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            border-left: 1px solid var(--border-color);
+            border-left: 2px solid var(--text-main); /* Обводка Indigo */
         }
 
         .side-menu.open {
@@ -203,7 +200,12 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--color-spruce);
+            color: var(--border-hover); /* Forest Moss */
+            transition: color 0.2s;
+        }
+
+        .side-menu-close:hover {
+            color: var(--accent-dark);
         }
 
         .side-menu-links {
@@ -218,16 +220,19 @@
             padding: 1rem;
             border-radius: 12px;
             text-decoration: none;
-            color: var(--color-spruce);
+            color: var(--text-main);
             font-weight: 600;
             font-size: 1.1rem;
             background-color: rgba(246, 215, 255, 0.3);
-            transition: background 0.2s, color 0.2s;
+            transition: all 0.2s;
+            border: 1px solid transparent;
         }
 
+        /* Ховер ссылок в меню - Forest Moss */
         .side-menu-links a:hover {
-            background-color: var(--color-lavender);
-            color: var(--color-indigo);
+            background-color: var(--accent-light); /* Lime Cream */
+            color: var(--accent-dark); /* Dark Spruce */
+            border-color: var(--border-hover);
         }
 
         /* --- КОНТЕНТ СТРАНИЦ --- */
@@ -254,31 +259,36 @@
         }
 
         .hero { text-align: center; margin-bottom: 4rem; margin-top: 2rem; }
-        .hero h1 { font-size: 2.5rem; color: var(--color-indigo); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
-        .hero p { font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
         
+        /* Заголовки - Dark Spruce */
+        .hero h1 { font-size: 2.5rem; color: var(--accent-dark); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+        
+        /* Второстепенный текст - Forest Moss */
+        .hero p { font-size: 1.1rem; color: var(--border-hover); max-width: 800px; margin: 0 auto 2rem; }
+        
+        /* Белые карточки с обводкой Indigo и заливкой Lime Cream */
         .placeholder-content {
             text-align: center;
             padding: 4rem 2rem;
-            background: var(--card-bg);
+            background: var(--accent-light); /* Lime Cream */
             border-radius: 32px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-main); /* Indigo */
         }
 
         .placeholder-content h1 {
-            color: var(--color-indigo);
+            color: var(--accent-dark); /* Dark Spruce */
             margin-bottom: 1rem;
         }
 
-        /* --- СТИЛИ ДЛЯ АККОРДЕОНОВ (ВОЗВРАЩЕНО) --- */
+        /* --- СТИЛИ ДЛЯ АККОРДЕОНОВ --- */
         .section { margin-bottom: 2rem; }
         
         details { 
-            background: var(--card-bg); 
+            background: var(--accent-light); /* Lime Cream заливка */
             border-radius: 20px; 
             margin-bottom: 1rem; 
-            border: 1px solid var(--border-color); 
+            border: 2px solid var(--text-main); /* Indigo обводка */
             overflow: hidden; 
             box-shadow: var(--shadow); 
         }
@@ -291,43 +301,61 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            color: var(--color-spruce); 
+            color: var(--accent-dark); /* Dark Spruce */
             transition: background 0.2s; 
         }
         
         summary::-webkit-details-marker { display: none; }
-        summary:hover { background: rgba(246, 215, 255, 0.4); }
+        
+        /* Ховер аккордеона - Forest Moss */
+        summary:hover { background: rgba(95, 115, 0, 0.1); }
         
         summary::after { 
             content: '+'; 
             font-size: 1.5rem; 
-            color: var(--color-indigo); 
+            color: var(--accent-dark); 
             font-weight: 300; 
         }
         
-        details[open] summary::after { content: '−'; color: var(--color-moss); }
-        details[open] summary { border-bottom: 1px solid var(--border-color); }
+        details[open] summary::after { 
+            content: '−'; 
+            color: var(--border-hover); 
+        }
         
-        .details-content { padding: 1.5rem; color: var(--text-main); background-color: #fafbfc; }
-        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--color-indigo); font-size: 1.1rem; }
+        details[open] summary { border-bottom: 2px solid var(--text-main); }
+        
+        /* Текст внутри блоков - Forest Moss */
+        .details-content { padding: 1.5rem; color: var(--border-hover); }
+        
+        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--accent-dark); font-size: 1.1rem; }
         .details-content ul { margin-left: 1.2rem; margin-bottom: 1rem; }
         .details-content li { margin-bottom: 0.5rem; }
-        .details-content strong { color: var(--color-indigo); }
+        .details-content strong { color: var(--accent-dark); }
         .details-content p { margin-bottom: 1rem; }
+
+        /* Блоки выделения (Белый фон с Indigo обводкой) */
+        .highlight-box {
+            background: #ffffff; 
+            border-left: 4px solid var(--text-main); 
+            padding: 1.2rem; 
+            border-radius: 0 12px 12px 0; 
+            margin-bottom: 1rem; 
+            color: var(--border-hover); 
+        }
 
         /* Стили для страницы "Источники" */
         .sources-card {
-            background: var(--card-bg);
+            background: var(--accent-light); /* Lime Cream */
             padding: 2rem;
             border-radius: 24px;
             box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-main); /* Indigo */
             max-width: 800px;
             margin: 0 auto;
         }
 
         .sources-card h2 {
-            color: var(--color-indigo);
+            color: var(--accent-dark); /* Dark Spruce */
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.5rem;
@@ -342,7 +370,7 @@
 
         .sources-list li {
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-hover); /* Forest Moss */
         }
 
         .sources-list li:last-child {
@@ -351,21 +379,21 @@
         }
 
         .sources-list a {
-            color: var(--color-moss);
+            color: var(--border-hover);
             text-decoration: none;
             font-weight: 500;
             display: inline-block;
             margin-top: 0.5rem;
-            border-bottom: 1px dashed var(--color-moss);
+            border-bottom: 1px dashed var(--border-hover); 
             transition: color 0.2s, border-color 0.2s;
         }
 
         .sources-list a:hover {
-            color: var(--color-indigo);
-            border-bottom-color: var(--color-indigo);
+            color: var(--accent-dark);
+            border-bottom-style: solid;
         }
 
-        /* --- НИЖНЯЯ НАВИГАЦИЯ --- */
+        /* --- НИЖНЯЯ НАВИГАЦИЯ (Обводка Indigo) --- */
         .bottom-nav {
             position: fixed;
             bottom: 20px; 
@@ -375,12 +403,12 @@
             width: fit-content;
             background-color: #ffffff;
             border-radius: 40px;
-            box-shadow: 0 8px 24px rgba(75, 0, 95, 0.2);
+            box-shadow: 0 8px 24px rgba(75, 0, 95, 0.15);
             display: flex;
             gap: 0.5rem;
             padding: 0.5rem;
             z-index: 999;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--text-main); /* Indigo обводка */
         }
 
         .nav-btn {
@@ -393,7 +421,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--color-spruce);
+            color: var(--text-main); /* Indigo */
             transition: all 0.2s ease;
             position: relative;
         }
@@ -403,15 +431,17 @@
             height: 28px;
         }
 
+        /* Ховер нижней навигации - Forest Moss */
         .nav-btn:hover {
-            background-color: rgba(235, 255, 170, 0.6);
-            color: var(--color-indigo);
+            background-color: var(--accent-light);
+            color: var(--border-hover);
         }
 
+        /* Активное состояние - Dark Spruce фон, Lime Cream иконка */
         .nav-btn.active {
-            background-color: var(--color-indigo);
-            color: var(--color-lime);
-            box-shadow: 0 4px 10px rgba(75, 0, 95, 0.3);
+            background-color: var(--accent-dark);
+            color: var(--accent-light);
+            box-shadow: 0 4px 10px rgba(55, 65, 38, 0.3);
         }
 
         /* --- ИКОНКИ С МАСКАМИ --- */
@@ -546,7 +576,7 @@
                         <a href="https://www.flaticon.com/ru/free-icons/-" title="Обратная связь иконки" target="_blank" rel="noopener noreferrer">Обратная связь иконки от Magnific - Flaticon</a>
                     </li>
                 </ul>
-                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-light);">
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--border-hover);">
                     © 2026 Разметка гимнасток. Все права защищены.
                 </p>
             </div>
@@ -1074,7 +1104,6 @@
 
     <!-- СКРИПТЫ -->
     <script>
-        // Проверка загрузки всех 4 картинок с GitHub
         const imagesToCheck = [
             { src: 'https://tturuturu1-blip.github.io/hg_db/icon/home.png', wrapper: 'home-icon-wrapper' },
             { src: 'https://tturuturu1-blip.github.io/hg_db/icon/gimnastka.png', wrapper: 'gymnast-icon-wrapper' },
@@ -1090,7 +1119,6 @@
             };
         });
 
-        // Логика работы бокового меню
         function toggleMenu() {
             const sideMenu = document.getElementById('sideMenu');
             const overlay = document.getElementById('menuOverlay');
@@ -1098,7 +1126,6 @@
             overlay.classList.toggle('open');
         }
 
-        // Логика переключения страниц
         function navigate(pageId) {
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
