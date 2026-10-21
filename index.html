@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разметка гимнасток</title>
+    <style>
+        /* Базовые переменные (Палитра 2026) */
+        :root {
+            --color-lavender: #F6D7FF;     /* Lavender Veil - Фон */
+            --color-indigo: #4B005F;       /* Indigo - Главный акцент */
+            --color-lime: #EBFFAA;         /* Lime Cream - Светлый акцент */
+            --color-moss: #5F7300;         /* Forest Moss - Второстепенный акцент */
+            --color-spruce: #374126;       /* Dark Spruce - Основной текст */
+            
+            --primary-bg: var(--color-lavender);
+            --text-main: var(--color-spruce);
+            --text-light: var(--color-moss);
+            --accent: var(--color-indigo);
+            --accent-hover: #360045;
+            
+            --card-bg: #ffffff;
+            --border-color: rgba(55, 65, 38, 0.15);
+            --shadow: 0 4px 12px rgba(75, 0, 95, 0.06);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 100px;
+        }
+
+        /* --- ШАПКА (HEADER) --- */
+        header {
+            background-color: rgba(246, 215, 255, 0.9);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--color-spruce);
+            font-weight: 800;
+            font-size: 1.1rem;
+            white-space: nowrap;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--color-indigo);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-lime);
+        }
+
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
+
+        /* Адаптивный поиск */
+        .search-container {
+            flex-grow: 1;
+            max-width: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 16px 10px 40px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            background-color: #ffffff;
+            font-family: inherit;
+            color: var(--text-main);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .search-container input:focus {
+            border-color: var(--color-indigo);
+            box-shadow: 0 0 0 3px rgba(75, 0, 95, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            color: var(--text-light);
+            width: 18px;
+            height: 18px;
+        }
+
+        .menu-btn {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-spruce);
+            transition: background 0.2s;
+            flex-shrink: 0;
+        }
+
+        .menu-btn:hover {
+            background-color: rgba(235, 255, 170, 0.4);
+            color: var(--color-indigo);
+        }
+
+        /* --- КОНТЕНТ СТРАНИЦ --- */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .placeholder-content {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--card-bg);
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .placeholder-content h1 {
+            color: var(--color-indigo);
+            margin-bottom: 1rem;
+        }
+
+        /* --- НИЖНЯЯ НАВИГАЦИЯ (BOTTOM NAV) --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border-radius: 40px;
+            box-shadow: 0 8px 24px rgba(75, 0, 95, 0.15);
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--color-spruce);
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .nav-btn svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        /* --- СТИЛИ ДЛЯ ИКОНКИ-КАРТИНКИ (CSS MASK) --- */
+        .icon-gymnast-img {
+            width: 32px;
+            height: 32px;
+            background-color: currentColor; /* Цвет берется из цвета кнопки */
+            -webkit-mask-image: url('gimnastka.png'); /* Ссылка на вашу картинку */
+            mask-image: url('gimnastka.png');
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center;
+            mask-position: center;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(235, 255, 170, 0.6);
+            color: var(--color-indigo);
+        }
+
+        .nav-btn.active {
+            background-color: var(--color-indigo);
+            color: var(--color-lime); /* При активации картинка станет цвета Lime Cream */
+            box-shadow: 0 4px 10px rgba(75, 0, 95, 0.3);
+        }
+        
+        .nav-btn.active .icon-gymnast-img {
+            transform: scale(1.05); /* Легкое увеличение при активации */
+        }
+
+        /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
+        .hero { text-align: center; margin-bottom: 4rem; }
+        .hero h1 { font-size: 2.5rem; color: var(--color-indigo); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+        .hero p { font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
+        
+        .btn { display: inline-block; background: var(--accent); color: var(--color-lime); padding: 1rem 2.5rem; border-radius: 30px; text-decoration: none; font-weight: 700; transition: 0.3s; box-shadow: 0 4px 15px rgba(75, 0, 95, 0.3); }
+        .btn:hover { background: var(--color-moss); color: var(--color-lime); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(95, 115, 0, 0.3); }
+
+        .section { margin-bottom: 4rem; }
+        .section-title { font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--color-spruce); font-weight: 800; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
+
+        .card { background: var(--card-bg); padding: 1.5rem; border-radius: 24px; box-shadow: var(--shadow); border: 1px solid var(--border-color); transition: 0.2s; }
+        .card:hover { transform: translateY(-4px); border-color: var(--color-moss); box-shadow: 0 10px 20px rgba(75, 0, 95, 0.1); }
+        .card h3 { font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; color: var(--color-indigo); }
+        .card-icon { width: 36px; height: 36px; background-color: rgba(235, 255, 170, 0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-indigo); font-weight: bold; }
+
+        details { background: var(--card-bg); border-radius: 20px; margin-bottom: 1rem; border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow); }
+        summary { padding: 1.2rem 1.5rem; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--color-spruce); transition: background 0.2s; }
+        summary::-webkit-details-marker { display: none; }
+        summary:hover { background: rgba(246, 215, 255, 0.4); }
+        summary::after { content: '+'; font-size: 1.5rem; color: var(--color-indigo); font-weight: 300; }
+        details[open] summary::after { content: '−'; color: var(--color-moss); }
+        details[open] summary { border-bottom: 1px solid var(--border-color); }
+        .details-content { padding: 1.5rem; color: var(--text-main); background-color: #fafbfc; }
+        .details-content ul { margin-left: 1.2rem; margin-bottom: 1rem; }
+        .details-content li { margin-bottom: 0.5rem; }
+        .details-content strong { color: var(--color-indigo); }
+
+        .highlight-box { background: rgba(235, 255, 170, 0.4); border-left: 4px solid var(--color-indigo); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 1rem; color: var(--color-spruce); }
+        .img-placeholder { width: 100%; height: 150px; background-color: rgba(246, 215, 255, 0.5); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: var(--color-indigo); margin: 1rem 0; border: 2px dashed var(--color-indigo); opacity: 0.8; font-size: 0.9rem;}
+
+        @media (max-width: 600px) {
+            .logo-area span { display: none; }
+            .hero h1 { font-size: 1.8rem; }
+            .bottom-nav { bottom: 15px; padding: 0.4rem; gap: 0.2rem; }
+            .nav-btn { width: 50px; height: 50px; }
+            .nav-btn svg { width: 24px; height: 24px; }
+            .icon-gymnast-img { width: 28px; height: 28px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo-area" onclick="navigate('home')">
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                    </svg>
+                </div>
+                <span>Разметка гимнасток</span>
+            </a>
+            
+            <div class="header-right">
+                <div class="search-container">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" placeholder="Поиск...">
+                </div>
+                <button class="menu-btn" aria-label="Меню">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div id="page-home" class="page active">
+        </div>
+
+        <div id="page-body-elements" class="page">
+            <div class="hero">
+                <h1>Инструкция по разметке<br>видео художественной гимнастики</h1>
+                <p>Полное руководство по определению, классификации и выделению действий гимнастки во время выступления. Узнайте, как правильно определять границы, классы и дополнительные характеристики элементов.</p>
+            </div>
+
+            <section class="section">
+                <div class="grid-3">
+                    <div class="card">
+                        <h3><div class="card-icon">🎯</div> Цель проекта</h3>
+                        <p>Определить и выделить все отдельные действия гимнастки во время выступления: границы выступления, трудности тела, технические действия.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🎥</div> Входные данные</h3>
+                        <p>Видеозаписи выступлений спортсменок. Качество и зум проверяются перед началом работы.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">📦</div> Выходные данные</h3>
+                        <p>Небольшие видеофрагменты, выделенные цветными боксами, включающие выполнение гимнасткой одного отдельного действия.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Классы объектов разметки</h2>
+                <div class="grid-2">
+                    <div class="card">
+                        <h3><div class="card-icon">⚙️</div> Техническое</h3>
+                        <p>Выступление, взятие предмета, пауза, падение. Включает в себя композицию движений под музыку и технические действия.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">⚖️</div> Равновесие</h3>
+                        <p>Статичные и динамические формы на ограниченной площади опоры с сохранением баланса.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🔄</div> Вращение</h3>
+                        <p>Повороты вокруг вертикальной оси на 180°, 360° и более с принятием определенной формы.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🤸‍♀️</div> Прыжок</h3>
+                        <p>Сильное отталкивание одной или двумя ногами с выполнением сложной формы в воздухе.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🙃</div> Преакробатика</h3>
+                        <p>Акробатические вращательные движения (перевороты, кувырки, перекаты, рыбки).</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🌀</div> Вертикальное вращение</h3>
+                        <p>Поворот на 360° вокруг своей вертикальной оси (в полете, сидя, лежа).</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">🚀</div> Динамический элемент R</h3>
+                        <p>Высокий бросок + 2 и более вращения во время полета + ловля предмета.</p>
+                    </div>
+                    <div class="card">
+                        <h3><div class="card-icon">💃</div> Танцевальные шаги</h3>
+                        <p>Дорожки шагов под музыку (длительность 6-10 секунд).</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">5 Шагов разметки</h2>
+                
+                <details open>
+                    <summary>Шаг 1: Определить границы выступления</summary>
+                    <div class="details-content">
+                        <p><strong>Начало:</strong> Найти момент замирания гимнастки в статичной позе (~1 сек). Начать фрагмент «Техническое / Выступление» с первого кадра, когда гимнастка ещё стоит в статичной позе, но уже готова к первому движению.</p>
+                        <p><strong>Конец:</strong> Момент, когда гимнастка завершает выступление, замерев в финальной статичной позе (~1 сек). Не включать в фрагмент всё время нахождения в статичной позе.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Шаг 2: Определить класс и название действия</summary>
+                    <div class="details-content">
+                        <p>Внимательно просмотреть отрывок видео, определить основные характеристики действия и сравнить с информацией в разделе «Объекты разметки». После выбора класса — перейти в соответствующий раздел и выбрать точное название действия.</p>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Шаг 3: Выделить фрагмент</summary>
+                    <div class="details-content">
+                        <ul>
+                            <li><strong>Полное включение:</strong> Включить действие в границы полностью — не обрезать и не захватывать лишнее.</li>
+                            <li><strong>Серии элементов:</strong> Каждый элемент серии выделяется отдельным фрагментом вплотную, без свободного кадра между ними и без взаимного перекрытия.</li>
+                            <li><strong>Допустимое наложение:</strong> Наложение допустимо только для классов: «Техническое», «Динамический элемент с вращением R», «Танцевальные шаги».</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Шаг 4: Дополнительные характеристики (Чек-боксы)</summary>
+                    <div class="details-content">
+                        <div class="highlight-box">
+                            <strong>Действие прервано:</strong> Отмечается, если спортсменка выполнила действие с ошибкой: потеря равновесия (отклонение формы >20°), падение или потеря предмета.
+                        </div>
+                        <div class="highlight-box">
+                            <strong>Зум:</strong> Отмечается, если видно форму элемента, но из-за сильного приближения камеры не видно часть тела гимнастки. Если из-за зума невозможно определить элемент — фрагмент не размечается, вместо него ставится «Техническое: Пауза».
+                        </div>
+                    </div>
+                </details>
+
+                <details>
+                    <summary>Шаг 5: Самопроверка</summary>
+                    <div class="details-content">
+                        <p>После разметки всех действий — перепроверить сквозным просмотром видео со сверкой по инструкции и чек-листу элементов. Особое внимание уделить соответствию названия действия фактически выполняемому движению. Желательно просмотреть видео 2 раза: первый — на названия, второй — на чек-бокс «Зум».</p>
+                    </div>
+                </details>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Специфика классов и термины</h2>
+                <div class="grid-2">
+                    <div>
+                        <h3>Динамический элемент R – правила</h3>
+                        <ul>
+                            <li><strong>Бросок без преакробатики:</strong> В начальную границу бокса обязательно должен войти момент, когда гимнастка еще держит предмет.</li>
+                            <li><strong>Бросок на преакробатике/ВВ:</strong> Преакробатический элемент или ВВ при броске обязательно входит в начальную границу.</li>
+                            <li><strong>Ловля:</strong> Бокс заканчивается не раньше завершения преакробатики или ВВ при ловле.</li>
+                            <li><strong>Серия прыжков:</strong> 3 одинаковых прыжка с поворотом размечаются как R, если бросок на 1-м, 2-й в полете, ловля на 3-м.</li>
+                        </ul>
+                        <div class="img-placeholder">Схема динамического элемента R</div>
+                    </div>
+                    
+                    <div>
+                        <h3>Спортивные термины</h3>
+                        <ul>
+                            <li><strong>Релеве:</strong> Подъём на полупальцы с отрывом пятки от пола.</li>
+                            <li><strong>Турлян:</strong> Медленный поворот на одной ноге (не считается вращением).</li>
+                            <li><strong>Плие:</strong> Сгибание одной или обеих ног / приседание.</li>
+                            <li><strong>Элемент DB:</strong> Прыжки, Равновесия и Вращения.</li>
+                            <li><strong>Элемент DA:</strong> Технически сложная манипуляция с предметом (минимум 2 критерия).</li>
+                            <li><strong>Высокий бросок:</strong> Более 2 ростов гимнастки. <br> <strong>Малый бросок:</strong> Менее 2 ростов.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Типичные ошибки</h2>
+                <div class="grid-3">
+                    <div class="card">
+                        <h3>Захват лишних кадров</h3>
+                        <p>Включение в фрагмент времени ожидания в статичной позе до или после действия.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Неверный класс</h3>
+                        <p>Путаница между Вращением и Вертикальным вращением, или между Преакробатическим элементом и Прыжком.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Пропуск серий</h3>
+                        <p>Выделение серии элементов одним фрагментом вместо отдельных фрагментов для каждого элемента.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div id="page-object-elements" class="page">
+            <div class="placeholder-content">
+                <h1>Разметка с предметом</h1>
+                <p>Здесь будет размещена информация о разметке элементов с предметами (мяч, обруч, булавы, лента, скакалка).</p>
+            </div>
+        </div>
+
+        <div id="page-feedback" class="page">
+            <div class="placeholder-content">
+                <h1>Обратная связь</h1>
+                <p>Здесь будет форма для отправки отзывов, сообщений об ошибках или предложений по улучшению.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- НИЖНЯЯ НАВИГАЦИЯ -->
+    <nav class="bottom-nav">
+        <button class="nav-btn active" onclick="navigate('home')" title="Главная">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+        </button>
+        <button class="nav-btn" onclick="navigate('body-elements')" title="Элементы тела">
+            <!-- Иконка на основе вашей картинки -->
+            <div class="icon-gymnast-img"></div>
+        </button>
+        <button class="nav-btn" onclick="navigate('object-elements')" title="Элементы предмета">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                <path d="M2 12h20"></path>
+            </svg>
+        </button>
+        <button class="nav-btn" onclick="navigate('feedback')" title="Фидбек">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            </svg>
+        </button>
+    </nav>
+
+    <script>
+        function navigate(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const navBtns = document.querySelectorAll('.nav-btn');
+            navBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const navMap = {
+                'home': 0,
+                'body-elements': 1,
+                'object-elements': 2,
+                'feedback': 3
+            };
+            
+            if (navMap[pageId] !== undefined) {
+                navBtns[navMap[pageId]].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
