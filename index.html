@@ -41,6 +41,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку при открытии меню */
         }
 
         /* --- ШАПКА (HEADER) --- */
@@ -72,6 +73,7 @@
             font-weight: 800;
             font-size: 1.1rem;
             white-space: nowrap;
+            cursor: pointer;
         }
 
         .logo-icon {
@@ -145,10 +147,86 @@
             color: var(--color-spruce);
             transition: background 0.2s;
             flex-shrink: 0;
+            z-index: 10001; /* Выше выезжающего меню */
         }
 
         .menu-btn:hover {
             background-color: rgba(235, 255, 170, 0.4);
+            color: var(--color-indigo);
+        }
+
+        /* --- БОКОВОЕ МЕНЮ (SIDE MENU) --- */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(55, 65, 38, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            box-shadow: -4px 0 24px rgba(75, 0, 95, 0.15);
+            z-index: 1001;
+            padding: 5rem 1.5rem 2rem 1.5rem;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            border-left: 1px solid var(--border-color);
+        }
+
+        .side-menu.open {
+            right: 0;
+        }
+
+        .side-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--color-spruce);
+        }
+
+        .side-menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .side-menu-links a {
+            display: block;
+            padding: 1rem;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--color-spruce);
+            font-weight: 600;
+            font-size: 1.1rem;
+            background-color: rgba(246, 215, 255, 0.3);
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .side-menu-links a:hover {
+            background-color: var(--color-lavender);
             color: var(--color-indigo);
         }
 
@@ -158,6 +236,7 @@
             margin: 0 auto;
             padding: 2rem 1.5rem;
             flex: 1; 
+            width: 100%;
         }
 
         .page {
@@ -174,6 +253,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .hero { text-align: center; margin-bottom: 4rem; margin-top: 2rem; }
+        .hero h1 { font-size: 2.5rem; color: var(--color-indigo); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+        .hero p { font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
+        
         .placeholder-content {
             text-align: center;
             padding: 4rem 2rem;
@@ -186,6 +269,56 @@
         .placeholder-content h1 {
             color: var(--color-indigo);
             margin-bottom: 1rem;
+        }
+
+        /* Стили для страницы "Источники" */
+        .sources-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .sources-card h2 {
+            color: var(--color-indigo);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .sources-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .sources-list li {
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sources-list li:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .sources-list a {
+            color: var(--color-moss);
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 0.5rem;
+            border-bottom: 1px dashed var(--color-moss);
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .sources-list a:hover {
+            color: var(--color-indigo);
+            border-bottom-color: var(--color-indigo);
         }
 
         /* --- НИЖНЯЯ НАВИГАЦИЯ --- */
@@ -202,7 +335,7 @@
             display: flex;
             gap: 0.5rem;
             padding: 0.5rem;
-            z-index: 9999;
+            z-index: 999;
             border: 1px solid var(--border-color);
         }
 
@@ -278,64 +411,6 @@
         .img-failed .fallback-svg { display: block; }
         .nav-btn.active .nav-icon-img { transform: scale(1.05); }
 
-        /* --- ПОДВАЛ (FOOTER) --- */
-        footer {
-            background-color: transparent;
-            text-align: center;
-            padding: 2rem 1rem 6rem 1rem;
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: auto;
-        }
-
-        .footer-copyright {
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .footer-links {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            align-items: center;
-        }
-
-        .footer-links a {
-            color: var(--color-moss);
-            text-decoration: none;
-            border-bottom: 1px dashed transparent;
-            transition: border-color 0.2s, color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--color-indigo);
-            border-bottom-color: var(--color-indigo);
-        }
-
-        /* --- ОСТАЛЬНЫЕ СТИЛИ --- */
-        .hero { text-align: center; margin-bottom: 4rem; }
-        .hero h1 { font-size: 2.5rem; color: var(--color-indigo); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
-        .hero p { font-size: 1.1rem; color: var(--text-light); max-width: 800px; margin: 0 auto 2rem; }
-        
-        .section { margin-bottom: 2rem; }
-        .section-title { font-size: 1.8rem; margin-bottom: 2rem; text-align: center; color: var(--color-spruce); font-weight: 800; }
-
-        details { background: var(--card-bg); border-radius: 20px; margin-bottom: 1rem; border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow); }
-        summary { padding: 1.2rem 1.5rem; font-weight: 700; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; color: var(--color-spruce); transition: background 0.2s; }
-        summary::-webkit-details-marker { display: none; }
-        summary:hover { background: rgba(246, 215, 255, 0.4); }
-        summary::after { content: '+'; font-size: 1.5rem; color: var(--color-indigo); font-weight: 300; }
-        details[open] summary::after { content: '−'; color: var(--color-moss); }
-        details[open] summary { border-bottom: 1px solid var(--border-color); }
-        .details-content { padding: 1.5rem; color: var(--text-main); background-color: #fafbfc; }
-        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--color-indigo); font-size: 1.1rem; }
-        .details-content ul { margin-left: 1.2rem; margin-bottom: 1rem; }
-        .details-content li { margin-bottom: 0.5rem; }
-        .details-content strong { color: var(--color-indigo); }
-        .details-content p { margin-bottom: 1rem; }
-
-        .highlight-box { background: rgba(235, 255, 170, 0.4); border-left: 4px solid var(--color-indigo); padding: 1.2rem; border-radius: 0 12px 12px 0; margin-bottom: 1rem; color: var(--color-spruce); }
-        
         @media (max-width: 600px) {
             .logo-area span { display: none; }
             .hero h1 { font-size: 1.8rem; }
@@ -343,6 +418,7 @@
             .nav-btn { width: 50px; height: 50px; }
             .nav-btn svg { width: 24px; height: 24px; }
             .icon-wrapper { width: 28px; height: 28px; }
+            .side-menu { width: 80%; right: -80%; } /* Меню на мобильных занимает 80% ширины */
         }
     </style>
 </head>
@@ -368,7 +444,8 @@
                     </svg>
                     <input type="text" placeholder="Поиск...">
                 </div>
-                <button class="menu-btn" aria-label="Меню">
+                <!-- Кнопка вызова меню -->
+                <button class="menu-btn" aria-label="Меню" onclick="toggleMenu()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
@@ -379,14 +456,60 @@
         </div>
     </header>
 
+    <!-- БОКОВОЕ МЕНЮ -->
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <aside class="side-menu" id="sideMenu">
+        <button class="side-menu-close" onclick="toggleMenu()">✕</button>
+        <ul class="side-menu-links">
+            <li><a href="#" onclick="navigate('home'); toggleMenu();">Главная</a></li>
+            <li><a href="#" onclick="navigate('sources'); toggleMenu();">Источники</a></li>
+        </ul>
+    </aside>
+
     <!-- КОНТЕНТ -->
     <main>
         <!-- СТРАНИЦА 1: ГЛАВНАЯ -->
         <div id="page-home" class="page active">
-            <!-- Пустая страница -->
+            <div class="hero">
+                <h1>Добро пожаловать<br>в систему разметки</h1>
+                <p>Выберите нужный раздел в нижнем меню или откройте боковую панель для доступа к дополнительным материалам.</p>
+            </div>
         </div>
 
-        <!-- СТРАНИЦА 2: ЭЛЕМЕНТЫ ТЕЛА -->
+        <!-- СТРАНИЦА: ИСТОЧНИКИ -->
+        <div id="page-sources" class="page">
+            <div class="hero" style="margin-bottom: 2rem;">
+                <h1>Источники</h1>
+                <p>Информация об авторстве использованных материалов и иконок.</p>
+            </div>
+            
+            <div class="sources-card">
+                <h2>Благодарности</h2>
+                <ul class="sources-list">
+                    <li>
+                        <strong>Иконка «Главная»</strong><br>
+                        <a href="https://www.flaticon.com/ru/free-icons/-" title="Главная кнопка иконки" target="_blank" rel="noopener noreferrer">Главная кнопка иконки от icon_small - Flaticon</a>
+                    </li>
+                    <li>
+                        <strong>Иконка «Элементы тела» (Гимнастка)</strong><br>
+                        <a href="https://www.flaticon.com/ru/free-icons/" title="гимнастка иконки" target="_blank" rel="noopener noreferrer">Гимнастка иконки от DinosoftLabs - Flaticon</a>
+                    </li>
+                    <li>
+                        <strong>Иконка «Работа с предметом»</strong><br>
+                        <a href="https://www.flaticon.com/ru/free-icons/" title="пилатес иконки" target="_blank" rel="noopener noreferrer">Пилатес иконки от Yogi Aprelliyanto - Flaticon</a>
+                    </li>
+                    <li>
+                        <strong>Иконка «Фидбек»</strong><br>
+                        <a href="https://www.flaticon.com/ru/free-icons/-" title="Обратная связь иконки" target="_blank" rel="noopener noreferrer">Обратная связь иконки от Magnific - Flaticon</a>
+                    </li>
+                </ul>
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-light);">
+                    © 2024 Разметка гимнасток. Все права защищены.
+                </p>
+            </div>
+        </div>
+
+        <!-- СТРАНИЦА 2: ЭЛЕМЕНТЫ ТЕЛА (Скопирован весь текст из предыдущего кода) -->
         <div id="page-body-elements" class="page">
             <div class="hero">
                 <h1>Инструкция к проекту<br>Гимнастки август</h1>
@@ -906,19 +1029,6 @@
         </button>
     </nav>
 
-    <!-- ПОДВАЛ -->
-    <footer>
-        <div class="footer-copyright">
-            © 2024 Разметка гимнасток. Все права защищены.
-        </div>
-        <div class="footer-links">
-            <a href="https://www.flaticon.com/ru/free-icons/-" title="Главная кнопка иконки" target="_blank" rel="noopener noreferrer">Главная кнопка иконки от icon_small - Flaticon</a>
-            <a href="https://www.flaticon.com/ru/free-icons/" title="гимнастка иконки" target="_blank" rel="noopener noreferrer">Гимнастка иконки от DinosoftLabs - Flaticon</a>
-            <a href="https://www.flaticon.com/ru/free-icons/" title="пилатес иконки" target="_blank" rel="noopener noreferrer">Пилатес иконки от Yogi Aprelliyanto - Flaticon</a>
-            <a href="https://www.flaticon.com/ru/free-icons/-" title="Обратная связь иконки" target="_blank" rel="noopener noreferrer">Обратная связь иконки от Magnific - Flaticon</a>
-        </div>
-    </footer>
-
     <!-- СКРИПТЫ -->
     <script>
         // Проверка загрузки всех 4 картинок с GitHub
@@ -937,24 +1047,39 @@
             };
         });
 
+        // Логика работы бокового меню
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const overlay = document.getElementById('menuOverlay');
+            sideMenu.classList.toggle('open');
+            overlay.classList.toggle('open');
+        }
+
         // Логика переключения страниц
         function navigate(pageId) {
+            // Скрываем все страницы
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
                 page.classList.remove('active');
             });
 
+            // Показываем нужную страницу
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
+            // Обновляем активную кнопку в нижнем меню
             const navBtns = document.querySelectorAll('.nav-btn');
             navBtns.forEach(btn => {
                 btn.classList.remove('active');
             });
             
+            // Если мы перешли на страницу "Источники" (дочернюю от Главной), 
+            // логично оставить активной кнопку "Главная"
+            const activeBottomNavId = pageId === 'sources' ? 'home' : pageId;
+
             const navMap = {
                 'home': 0,
                 'body-elements': 1,
@@ -962,8 +1087,8 @@
                 'feedback': 3
             };
             
-            if (navMap[pageId] !== undefined) {
-                navBtns[navMap[pageId]].classList.add('active');
+            if (navMap[activeBottomNavId] !== undefined) {
+                navBtns[navMap[activeBottomNavId]].classList.add('active');
             }
         }
     </script>
