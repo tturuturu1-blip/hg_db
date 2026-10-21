@@ -41,7 +41,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            overflow-x: hidden; /* Предотвращаем горизонтальную прокрутку при открытии меню */
+            overflow-x: hidden;
         }
 
         /* --- ШАПКА (HEADER) --- */
@@ -147,7 +147,7 @@
             color: var(--color-spruce);
             transition: background 0.2s;
             flex-shrink: 0;
-            z-index: 10001; /* Выше выезжающего меню */
+            z-index: 10001;
         }
 
         .menu-btn:hover {
@@ -270,6 +270,50 @@
             color: var(--color-indigo);
             margin-bottom: 1rem;
         }
+
+        /* --- СТИЛИ ДЛЯ АККОРДЕОНОВ (ВОЗВРАЩЕНО) --- */
+        .section { margin-bottom: 2rem; }
+        
+        details { 
+            background: var(--card-bg); 
+            border-radius: 20px; 
+            margin-bottom: 1rem; 
+            border: 1px solid var(--border-color); 
+            overflow: hidden; 
+            box-shadow: var(--shadow); 
+        }
+        
+        summary { 
+            padding: 1.2rem 1.5rem; 
+            font-weight: 700; 
+            cursor: pointer; 
+            list-style: none; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            color: var(--color-spruce); 
+            transition: background 0.2s; 
+        }
+        
+        summary::-webkit-details-marker { display: none; }
+        summary:hover { background: rgba(246, 215, 255, 0.4); }
+        
+        summary::after { 
+            content: '+'; 
+            font-size: 1.5rem; 
+            color: var(--color-indigo); 
+            font-weight: 300; 
+        }
+        
+        details[open] summary::after { content: '−'; color: var(--color-moss); }
+        details[open] summary { border-bottom: 1px solid var(--border-color); }
+        
+        .details-content { padding: 1.5rem; color: var(--text-main); background-color: #fafbfc; }
+        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--color-indigo); font-size: 1.1rem; }
+        .details-content ul { margin-left: 1.2rem; margin-bottom: 1rem; }
+        .details-content li { margin-bottom: 0.5rem; }
+        .details-content strong { color: var(--color-indigo); }
+        .details-content p { margin-bottom: 1rem; }
 
         /* Стили для страницы "Источники" */
         .sources-card {
@@ -418,7 +462,7 @@
             .nav-btn { width: 50px; height: 50px; }
             .nav-btn svg { width: 24px; height: 24px; }
             .icon-wrapper { width: 28px; height: 28px; }
-            .side-menu { width: 80%; right: -80%; } /* Меню на мобильных занимает 80% ширины */
+            .side-menu { width: 80%; right: -80%; }
         }
     </style>
 </head>
@@ -444,7 +488,6 @@
                     </svg>
                     <input type="text" placeholder="Поиск...">
                 </div>
-                <!-- Кнопка вызова меню -->
                 <button class="menu-btn" aria-label="Меню" onclick="toggleMenu()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
                         <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -504,12 +547,12 @@
                     </li>
                 </ul>
                 <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-light);">
-                    © 2024 Разметка гимнасток. Все права защищены.
+                    © 2026 Разметка гимнасток. Все права защищены.
                 </p>
             </div>
         </div>
 
-        <!-- СТРАНИЦА 2: ЭЛЕМЕНТЫ ТЕЛА (Скопирован весь текст из предыдущего кода) -->
+        <!-- СТРАНИЦА 2: ЭЛЕМЕНТЫ ТЕЛА (Гимнастки август) -->
         <div id="page-body-elements" class="page">
             <div class="hero">
                 <h1>Инструкция к проекту<br>Гимнастки август</h1>
@@ -1057,27 +1100,22 @@
 
         // Логика переключения страниц
         function navigate(pageId) {
-            // Скрываем все страницы
             const pages = document.querySelectorAll('.page');
             pages.forEach(page => {
                 page.classList.remove('active');
             });
 
-            // Показываем нужную страницу
             const targetPage = document.getElementById('page-' + pageId);
             if (targetPage) {
                 targetPage.classList.add('active');
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
-            // Обновляем активную кнопку в нижнем меню
             const navBtns = document.querySelectorAll('.nav-btn');
             navBtns.forEach(btn => {
                 btn.classList.remove('active');
             });
             
-            // Если мы перешли на страницу "Источники" (дочернюю от Главной), 
-            // логично оставить активной кнопку "Главная"
             const activeBottomNavId = pageId === 'sources' ? 'home' : pageId;
 
             const navMap = {
