@@ -8,17 +8,21 @@
     <!-- Иконка вкладки (Favicon) -->
     <link rel="icon" type="image/png" href="https://tturuturu1-blip.github.io/hg_db/icon/gimnastka.png">
     
+    <!-- Подключение шрифтов Playfair Display и Playfair -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Playfair:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Базовые переменные (Обновленная схема окрашивания) */
+        /* Базовые переменные (Новая схема окрашивания) */
         :root {
-            --bg-color: #F6D7FF;        /* Lavender Veil - Фон */
-            --accent-dark: #374126;     /* Dark Spruce - Главный акцент (заголовки, кнопки) */
-            --text-main: #4B005F;       /* Indigo - Основной текст, обводка блоков */
-            --accent-light: #EBFFAA;    /* Lime Cream - Заливка блоков, иконки */
-            --border-hover: #5F7300;    /* Forest Moss - Границы, ховеры, текст в блоках */
+            --bg-page: #B7D5D4;           /* Light Blue (Фон страницы) */
+            --bg-card: #F2EFE4;           /* Ghost Cream (Карточки, поиск, панель) */
+            --text-main: #3B1F2B;         /* Midnight Violet (Основной текст) */
+            --accent: #0072BB;            /* Twitter Blue (Заголовки, кнопки) */
+            --bg-hover: #E5E1D3;          /* Чуть темнее Ghost Cream для ховеров */
             
-            --primary-bg: var(--bg-color);
-            --shadow: 0 4px 12px rgba(75, 0, 95, 0.08); /* Тень от Indigo */
+            --shadow: 0 4px 12px rgba(59, 31, 43, 0.08);
         }
 
         * {
@@ -28,9 +32,10 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-main); /* Indigo */
+            /* Основной шрифт Playfair */
+            font-family: 'Playfair', serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
             line-height: 1.6;
             padding-bottom: 110px; 
             display: flex;
@@ -39,15 +44,20 @@
             overflow-x: hidden;
         }
 
+        /* Применение Playfair Display к заголовкам */
+        h1, h2, h3, h4, .hero h1, summary, .logo-area {
+            font-family: 'Playfair Display', serif;
+        }
+
         /* --- ШАПКА (HEADER) --- */
         header {
-            background-color: rgba(246, 215, 255, 0.9);
+            background-color: rgba(183, 213, 212, 0.9); /* Light Blue с прозрачностью */
             backdrop-filter: blur(12px);
             position: sticky;
             top: 0;
             z-index: 100;
             padding: 1rem 1.5rem;
-            border-bottom: 1px solid var(--border-hover); /* Forest Moss */
+            box-shadow: 0 2px 10px rgba(59, 31, 43, 0.05);
         }
 
         .header-container {
@@ -64,9 +74,9 @@
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            color: var(--text-main); /* Indigo */
+            color: var(--text-main);
             font-weight: 800;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             white-space: nowrap;
             cursor: pointer;
         }
@@ -74,12 +84,12 @@
         .logo-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--accent-dark); /* Dark Spruce */
+            background-color: var(--accent); 
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--accent-light); /* Lime Cream */
+            color: #FFFFFF;
         }
 
         .logo-icon svg {
@@ -95,7 +105,7 @@
             justify-content: flex-end;
         }
 
-        /* Адаптивный поиск (Обводка Indigo) */
+        /* Адаптивный поиск (Ghost Cream) */
         .search-container {
             flex-grow: 1;
             max-width: 400px;
@@ -108,30 +118,29 @@
             width: 100%;
             padding: 10px 16px 10px 40px;
             border-radius: 30px;
-            border: 2px solid var(--text-main); /* Indigo */
-            background-color: #ffffff;
-            font-family: inherit;
+            border: none;
+            background-color: var(--bg-card);
+            font-family: 'Playfair', serif;
             color: var(--text-main);
             outline: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: box-shadow 0.2s;
         }
 
         .search-container input:focus {
-            border-color: var(--accent-dark); /* Dark Spruce при фокусе */
-            box-shadow: 0 0 0 3px rgba(55, 65, 38, 0.15);
+            box-shadow: 0 0 0 3px rgba(0, 114, 187, 0.2);
         }
 
         .search-icon {
             position: absolute;
             left: 14px;
-            color: var(--border-hover); /* Forest Moss */
+            color: var(--accent); 
             width: 18px;
             height: 18px;
         }
 
         .menu-btn {
-            background-color: #ffffff;
-            border: 2px solid var(--text-main); /* Indigo */
+            background-color: var(--bg-card);
+            border: none;
             border-radius: 50%;
             width: 44px;
             height: 44px;
@@ -139,17 +148,15 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-main);
-            transition: all 0.2s;
+            color: var(--accent);
+            transition: background 0.2s;
             flex-shrink: 0;
             z-index: 10001;
         }
 
-        /* Ховер меню - Forest Moss */
         .menu-btn:hover {
-            background-color: var(--accent-light); /* Lime Cream */
-            color: var(--accent-dark); /* Dark Spruce */
-            border-color: var(--border-hover); /* Forest Moss */
+            background-color: var(--bg-hover);
+            color: var(--text-main);
         }
 
         /* --- БОКОВОЕ МЕНЮ (SIDE MENU) --- */
@@ -159,7 +166,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(55, 65, 38, 0.5); 
+            background: rgba(59, 31, 43, 0.5); 
             backdrop-filter: blur(4px);
             z-index: 1000;
             opacity: 0;
@@ -178,14 +185,13 @@
             right: -320px;
             width: 300px;
             height: 100vh;
-            background-color: #ffffff;
-            box-shadow: -4px 0 24px rgba(75, 0, 95, 0.15);
+            background-color: var(--bg-page); /* Light Blue */
+            box-shadow: -4px 0 24px rgba(59, 31, 43, 0.15);
             z-index: 1001;
             padding: 5rem 1.5rem 2rem 1.5rem;
             transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
-            border-left: 2px solid var(--text-main); /* Обводка Indigo */
         }
 
         .side-menu.open {
@@ -200,12 +206,12 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--border-hover); /* Forest Moss */
+            color: var(--accent);
             transition: color 0.2s;
         }
 
         .side-menu-close:hover {
-            color: var(--accent-dark);
+            color: var(--text-main);
         }
 
         .side-menu-links {
@@ -223,16 +229,14 @@
             color: var(--text-main);
             font-weight: 600;
             font-size: 1.1rem;
-            background-color: rgba(246, 215, 255, 0.3);
+            background-color: var(--bg-card); /* Ghost Cream */
             transition: all 0.2s;
-            border: 1px solid transparent;
+            border: none;
         }
 
-        /* Ховер ссылок в меню - Forest Moss */
         .side-menu-links a:hover {
-            background-color: var(--accent-light); /* Lime Cream */
-            color: var(--accent-dark); /* Dark Spruce */
-            border-color: var(--border-hover);
+            background-color: var(--accent);
+            color: #FFFFFF;
         }
 
         /* --- КОНТЕНТ СТРАНИЦ --- */
@@ -260,24 +264,24 @@
 
         .hero { text-align: center; margin-bottom: 4rem; margin-top: 2rem; }
         
-        /* Заголовки - Dark Spruce */
-        .hero h1 { font-size: 2.5rem; color: var(--accent-dark); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
+        /* Заголовки - Twitter Blue */
+        .hero h1 { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 800; line-height: 1.2; }
         
-        /* Второстепенный текст - Forest Moss */
-        .hero p { font-size: 1.1rem; color: var(--border-hover); max-width: 800px; margin: 0 auto 2rem; }
+        /* Текст под заголовком - Midnight Violet */
+        .hero p { font-size: 1.1rem; color: var(--text-main); max-width: 800px; margin: 0 auto 2rem; }
         
-        /* Белые карточки с обводкой Indigo и заливкой Lime Cream */
+        /* Карточки-заглушки (Ghost Cream) */
         .placeholder-content {
             text-align: center;
             padding: 4rem 2rem;
-            background: var(--accent-light); /* Lime Cream */
+            background: var(--bg-card);
             border-radius: 32px;
             box-shadow: var(--shadow);
-            border: 2px solid var(--text-main); /* Indigo */
+            border: none;
         }
 
         .placeholder-content h1 {
-            color: var(--accent-dark); /* Dark Spruce */
+            color: var(--accent);
             margin-bottom: 1rem;
         }
 
@@ -285,10 +289,10 @@
         .section { margin-bottom: 2rem; }
         
         details { 
-            background: var(--accent-light); /* Lime Cream заливка */
+            background: var(--bg-card); /* Ghost Cream карточка */
             border-radius: 20px; 
             margin-bottom: 1rem; 
-            border: 2px solid var(--text-main); /* Indigo обводка */
+            border: none;
             overflow: hidden; 
             box-shadow: var(--shadow); 
         }
@@ -301,61 +305,60 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
-            color: var(--accent-dark); /* Dark Spruce */
+            color: var(--text-main); 
             transition: background 0.2s; 
         }
         
         summary::-webkit-details-marker { display: none; }
         
-        /* Ховер аккордеона - Forest Moss */
-        summary:hover { background: rgba(95, 115, 0, 0.1); }
+        summary:hover { background: var(--bg-hover); }
         
         summary::after { 
             content: '+'; 
             font-size: 1.5rem; 
-            color: var(--accent-dark); 
+            color: var(--accent); 
             font-weight: 300; 
         }
         
         details[open] summary::after { 
             content: '−'; 
-            color: var(--border-hover); 
+            color: var(--accent); 
         }
         
-        details[open] summary { border-bottom: 2px solid var(--text-main); }
+        /* Текст внутри блоков - Midnight Violet */
+        /* Фон контента делаем белым, чтобы текст читался контрастно на кремовой карточке */
+        .details-content { padding: 1.5rem; color: var(--text-main); background-color: #FFFFFF; }
         
-        /* Текст внутри блоков - Forest Moss */
-        .details-content { padding: 1.5rem; color: var(--border-hover); }
-        
-        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--accent-dark); font-size: 1.1rem; }
+        /* Подзаголовки внутри текста - Twitter Blue */
+        .details-content h4 { margin-top: 1rem; margin-bottom: 0.5rem; color: var(--accent); font-size: 1.1rem; }
         .details-content ul { margin-left: 1.2rem; margin-bottom: 1rem; }
         .details-content li { margin-bottom: 0.5rem; }
-        .details-content strong { color: var(--accent-dark); }
+        .details-content strong { color: var(--accent); }
         .details-content p { margin-bottom: 1rem; }
 
-        /* Блоки выделения (Белый фон с Indigo обводкой) */
+        /* Блоки выделения внутри текста */
         .highlight-box {
-            background: #ffffff; 
-            border-left: 4px solid var(--text-main); 
+            background: var(--bg-card); 
+            border-left: 4px solid var(--accent); 
             padding: 1.2rem; 
             border-radius: 0 12px 12px 0; 
             margin-bottom: 1rem; 
-            color: var(--border-hover); 
+            color: var(--text-main); 
         }
 
         /* Стили для страницы "Источники" */
         .sources-card {
-            background: var(--accent-light); /* Lime Cream */
+            background: var(--bg-card); /* Ghost Cream */
             padding: 2rem;
             border-radius: 24px;
             box-shadow: var(--shadow);
-            border: 2px solid var(--text-main); /* Indigo */
+            border: none;
             max-width: 800px;
             margin: 0 auto;
         }
 
         .sources-card h2 {
-            color: var(--accent-dark); /* Dark Spruce */
+            color: var(--accent);
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.5rem;
@@ -370,7 +373,7 @@
 
         .sources-list li {
             padding-bottom: 1rem;
-            border-bottom: 1px solid var(--border-hover); /* Forest Moss */
+            border-bottom: 1px solid rgba(59, 31, 43, 0.1); 
         }
 
         .sources-list li:last-child {
@@ -379,21 +382,21 @@
         }
 
         .sources-list a {
-            color: var(--border-hover);
+            color: var(--accent);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             display: inline-block;
             margin-top: 0.5rem;
-            border-bottom: 1px dashed var(--border-hover); 
+            border-bottom: 1px dashed var(--accent); 
             transition: color 0.2s, border-color 0.2s;
         }
 
         .sources-list a:hover {
-            color: var(--accent-dark);
-            border-bottom-style: solid;
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
         }
 
-        /* --- НИЖНЯЯ НАВИГАЦИЯ (Обводка Indigo) --- */
+        /* --- НИЖНЯЯ НАВИГАЦИЯ (Ghost Cream) --- */
         .bottom-nav {
             position: fixed;
             bottom: 20px; 
@@ -401,14 +404,14 @@
             right: 0;
             margin: 0 auto;
             width: fit-content;
-            background-color: #ffffff;
+            background-color: var(--bg-card); /* Ghost Cream */
             border-radius: 40px;
-            box-shadow: 0 8px 24px rgba(75, 0, 95, 0.15);
+            box-shadow: 0 8px 24px rgba(59, 31, 43, 0.15);
             display: flex;
             gap: 0.5rem;
             padding: 0.5rem;
             z-index: 999;
-            border: 2px solid var(--text-main); /* Indigo обводка */
+            border: none;
         }
 
         .nav-btn {
@@ -421,7 +424,7 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            color: var(--text-main); /* Indigo */
+            color: var(--text-main); 
             transition: all 0.2s ease;
             position: relative;
         }
@@ -431,17 +434,16 @@
             height: 28px;
         }
 
-        /* Ховер нижней навигации - Forest Moss */
         .nav-btn:hover {
-            background-color: var(--accent-light);
-            color: var(--border-hover);
+            background-color: rgba(255, 255, 255, 0.4);
+            color: var(--accent);
         }
 
-        /* Активное состояние - Dark Spruce фон, Lime Cream иконка */
+        /* Активное состояние - Twitter Blue фон, белая иконка */
         .nav-btn.active {
-            background-color: var(--accent-dark);
-            color: var(--accent-light);
-            box-shadow: 0 4px 10px rgba(55, 65, 38, 0.3);
+            background-color: var(--accent);
+            color: #FFFFFF;
+            box-shadow: 0 4px 10px rgba(0, 114, 187, 0.3);
         }
 
         /* --- ИКОНКИ С МАСКАМИ --- */
@@ -576,7 +578,7 @@
                         <a href="https://www.flaticon.com/ru/free-icons/-" title="Обратная связь иконки" target="_blank" rel="noopener noreferrer">Обратная связь иконки от Magnific - Flaticon</a>
                     </li>
                 </ul>
-                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--border-hover);">
+                <p style="text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-main);">
                     © 2026 Разметка гимнасток. Все права защищены.
                 </p>
             </div>
