@@ -17,7 +17,6 @@
     
     --header-height: 80px;
     
-    /* Ширины меню */
     --sidebar-w-collapsed: 85px; 
     --sidebar-w-expanded: 280px;
     --sidebar-w-current: var(--sidebar-w-expanded); 
@@ -53,7 +52,7 @@ body:not(.menu-open) {
     --sidebar-w-current: var(--sidebar-w-collapsed);
 }
 
-/* --- ШАПКА (ВСЕГДА СВЕРХУ) --- */
+/* --- ШАПКА --- */
 header {
     position: fixed;
     top: 0;
@@ -64,7 +63,6 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Отступ слева 20px, чтобы иконка шапки идеально совпадала с иконками меню */
     padding: 0 2rem 0 20px; 
     z-index: 2000; 
     color: var(--bg-page);
@@ -73,7 +71,6 @@ header {
 .header-left { display: flex; align-items: center; }
 .header-logo-area { display: flex; align-items: center; gap: 15px; cursor: pointer; }
 
-/* Увеличиваем круг в шапке */
 .header-logo-icon {
     width: 50px; 
     height: 50px; 
@@ -87,7 +84,6 @@ header {
     flex-shrink: 0;
 }
 
-/* Увеличиваем иконку внутри круга в шапке */
 .header-logo-icon .nav-icon-img {
     width: 28px;
     height: 28px;
@@ -103,7 +99,7 @@ header {
 }
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
-/* --- БОКОВОЕ МЕНЮ --- */
+/* --- БОКОВОЕ МЕНЮ (Скругленное) --- */
 .sidebar {
     position: fixed;
     top: var(--header-height); 
@@ -111,10 +107,10 @@ header {
     width: var(--sidebar-w-current);
     height: calc(100vh - var(--header-height));
     background-color: var(--bg-sidebar);
-    /* Убрали скругление всей панели, оно теперь только вокруг кнопки */
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: 2rem 0;
+    /* Скругление правой части панели, как на референсе */
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 20px 0; /* Отступы сверху и снизу */
     overflow-y: auto;
     overflow-x: hidden; 
     z-index: 1000;
@@ -140,12 +136,10 @@ header {
     text-decoration: none;
     font-weight: 500;
     border-radius: var(--radius-btn) 0 0 var(--radius-btn); 
-    /* Сдвигаем иконку и текст чуть вправо (20px) */
     padding: 12px 0 12px 20px; 
     margin-bottom: 5px;
 }
 
-/* Прячем текст при сворачивании */
 body:not(.menu-open) .nav-text { display: none; }
 body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; padding-right: 0; }
 
@@ -156,7 +150,7 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     background-color: var(--bg-page);
     color: var(--bg-header);
     font-weight: 700;
-    margin-right: 20px; /* Оставляем место для изгиба */
+    margin-right: 20px; 
     padding-left: 20px; 
 }
 
@@ -170,8 +164,8 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     height: 20px;
     background: transparent;
     border-bottom-left-radius: 20px;
-    /* ВАЖНО: Цвет тени должен совпадать с цветом ЗЕЛЕНОЙ панели */
-    box-shadow: -8px 8px 0 0 var(--bg-sidebar); 
+    /* Тень цвета панели, чтобы создать плавный переход */
+    box-shadow: -10px 10px 0 0 var(--bg-sidebar); 
     z-index: 1;
 }
 
@@ -185,12 +179,12 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     height: 20px;
     background: transparent;
     border-top-left-radius: 20px;
-    /* ВАЖНО: Цвет тени должен совпадать с цветом ЗЕЛЕНОЙ панели */
-    box-shadow: -8px -8px 0 0 var(--bg-sidebar);
+    /* Тень цвета панели */
+    box-shadow: -10px -10px 0 0 var(--bg-sidebar);
     z-index: 1;
 }
 
-/* Увеличиваем круг иконки в меню (до 50px, как в шапке) */
+/* Круг иконки */
 .nav-icon-wrapper {
     width: 50px;
     height: 50px;
@@ -209,7 +203,6 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     color: #FFF;
 }
 
-/* Увеличиваем иконку внутри круга (до 28px) */
 .nav-icon-img {
     width: 28px; 
     height: 28px;
@@ -239,7 +232,7 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
 /* Подменю */
 .sub-nav {
-    display: flex; flex-direction: column; padding-left: 75px; /* Выровнено под текст */
+    display: flex; flex-direction: column; padding-left: 75px; 
     margin-top: 0.2rem; gap: 0.2rem; position: relative;
 }
 body:not(.menu-open) .sub-nav { display: none; } 
@@ -252,14 +245,11 @@ body:not(.menu-open) .sub-nav { display: none; }
 .sub-nav .nav-btn:hover { color: #FFF; background-color: rgba(255, 255, 255, 0.1); }
 .sub-nav .nav-btn.active { color: var(--accent-orange); background-color: transparent; padding-left: 10px; }
 
-/* Точка в подменю */
 .sub-nav .nav-btn.active::before {
     content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
     width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent-orange); box-shadow: none;
 }
 .sub-nav .nav-btn.active::after { display: none; }
-
-.bottom-menu { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-left: 10px; margin-right: 10px; }
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
 main { width: 100%; padding: 3rem 2.5rem; }
@@ -294,7 +284,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .icon-ball { -webkit-mask-image: url('../icon/ball.png'); mask-image: url('../icon/ball.png'); }
 .icon-validation { -webkit-mask-image: url('../icon/feedback.png'); mask-image: url('../icon/feedback.png'); }
 
-/* Адаптивность для мобилок */
+/* Адаптивность */
 @media (max-width: 768px) {
     .hero-split { flex-direction: column-reverse; text-align: center; }
     .hero-text h1 { font-size: 3rem; }
