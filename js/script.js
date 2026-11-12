@@ -23,10 +23,12 @@
     // --- ИКОНКИ: ФОЛБЭК ---
     (function checkIcons() {
         const icons = [
-            { file: 'home.png',      cls: '.icon-home' },
-            { file: 'gimnastka.png', cls: '.icon-gymnast' },
-            { file: 'ball.png',      cls: '.icon-ball' },
-            { file: 'feedback.png',  cls: '.icon-validation' }
+            { file: 'home.png',          cls: '.icon-home' },
+            { file: 'gimnastka.png',     cls: '.icon-gymnast' },
+            { file: 'ball.png',          cls: '.icon-ball' },
+            { file: 'Knowledgebase.png', cls: '.icon-knowledgebase' },
+            { file: 'Projects.png',      cls: '.icon-projects' },
+            { file: 'Copyright.png',     cls: '.icon-copyright' }
         ];
         icons.forEach(({ file, cls }) => {
             const img = new Image();
@@ -44,7 +46,7 @@
         const shouldOpen = typeof open === 'boolean' ? open : !body.classList.contains('menu-open');
         body.classList.toggle('menu-open', shouldOpen);
         if (menuToggle) menuToggle.setAttribute('aria-expanded', String(shouldOpen));
-        closeAllFlyouts(); // При смене состояния меню закрываем все всплывашки
+        closeAllFlyouts(); 
     }
 
     function toggleMenu() {
@@ -57,7 +59,7 @@
 
     // --- ПОЗИЦИОНИРОВАНИЕ FLYOUT ---
     function updateFlyoutPosition(detailsEl) {
-        if (body.classList.contains('menu-open')) return; // Только для свернутого меню
+        if (body.classList.contains('menu-open')) return; 
         if (!detailsEl.hasAttribute('open')) return;
 
         const summary = detailsEl.querySelector('summary');
@@ -65,23 +67,19 @@
         
         if (summary && subNav) {
             const rect = summary.getBoundingClientRect();
-            // Позиционируем строго по вертикали кнопки, а по горизонтали справа от панели
             subNav.style.top = `${rect.top}px`;
             subNav.style.left = `${rect.right + 15}px`;
         }
     }
 
-    // Вешаем обработчик toggle на все details
     document.querySelectorAll('details.nav-group').forEach(details => {
         details.addEventListener('toggle', () => {
             if (!body.classList.contains('menu-open')) {
-                // Если открыли одну группу в свернутом режиме, закрываем остальные
                 if (details.hasAttribute('open')) {
                     document.querySelectorAll('details.nav-group').forEach(other => {
                         if (other !== details) other.removeAttribute('open');
                     });
                 }
-                // Небольшая задержка нужна, чтобы элемент успел получить display: flex
                 setTimeout(() => updateFlyoutPosition(details), 10);
             }
         });
@@ -141,14 +139,13 @@
         if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
         if (isMobile()) setMenu(false);
         
-        closeAllFlyouts(); // Закрываем flyout при переходе
+        closeAllFlyouts(); 
     }
 
     // --- ОБРАБОТЧИКИ ---
     if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
 
     document.addEventListener('click', (e) => {
-        // Клик по ссылке навигации
         const link = e.target.closest('[data-page]');
         if (link) {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -157,7 +154,6 @@
             return;
         }
 
-        // Закрытие flyout при клике вне его области
         if (!body.classList.contains('menu-open') && e.target.closest('details.nav-group') === null) {
             closeAllFlyouts();
         }
