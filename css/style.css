@@ -310,12 +310,11 @@ body:not(.menu-open) details.nav-group > summary {
 /* --- ВСПЛЫВАЮЩЕЕ ОКНО (FLYOUT) В СВЁРНУТОМ СОСТОЯНИИ --- */
 body:not(.menu-open) .sub-nav { display: none; }
 
-/* Окно теперь в светлых тонах сайта */
 body:not(.menu-open) details.nav-group[open] .sub-nav {
     display: flex;
     position: fixed;
-    left: 75px; /* Позиция задается через JS */
-    top: 0;     /* Позиция задается через JS */
+    left: 75px; 
+    top: 0;     
     width: 240px;
     background-color: var(--bg-card);
     padding: 12px;
@@ -330,7 +329,6 @@ body:not(.menu-open) details.nav-group[open] .sub-nav {
     to { opacity: 1; transform: translateX(0); }
 }
 
-/* Заголовок в flyout */
 body:not(.menu-open) .flyout-title {
     display: block;
     color: var(--text-main);
@@ -342,15 +340,18 @@ body:not(.menu-open) .flyout-title {
     margin-bottom: 8px;
 }
 
-/* Ссылки внутри flyout */
+/* Выравнивание ссылок по левому краю в flyout */
 body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn {
-    color: var(--text-light);
+    justify-content: flex-start;
+    text-align: left;
+    height: auto;
+    margin: 0 0 2px 0;
     padding: 10px 12px;
     border-radius: 12px;
     font-size: 1.05rem;
     width: 100%;
-    margin-bottom: 2px;
     font-family: 'Raleway', sans-serif;
+    color: var(--text-light);
 }
 
 body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn:hover {
@@ -365,7 +366,7 @@ body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active {
 }
 
 body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active::before {
-    display: none; /* Убираем зеленую точку в режиме flyout */
+    display: none; 
 }
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
@@ -483,7 +484,9 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .icon-home { -webkit-mask-image: url('../icon/home.png'); mask-image: url('../icon/home.png'); }
 .icon-gymnast { -webkit-mask-image: url('../icon/gimnastka.png'); mask-image: url('../icon/gimnastka.png'); }
 .icon-ball { -webkit-mask-image: url('../icon/ball.png'); mask-image: url('../icon/ball.png'); }
-.icon-validation { -webkit-mask-image: url('../icon/feedback.png'); mask-image: url('../icon/feedback.png'); }
+.icon-knowledgebase { -webkit-mask-image: url('../icon/Knowledgebase.png'); mask-image: url('../icon/Knowledgebase.png'); }
+.icon-projects { -webkit-mask-image: url('../icon/Projects.png'); mask-image: url('../icon/Projects.png'); }
+.icon-copyright { -webkit-mask-image: url('../icon/Copyright.png'); mask-image: url('../icon/Copyright.png'); }
 
 /* --- АДАПТИВНОСТЬ --- */
 @media (max-width: 900px) {
