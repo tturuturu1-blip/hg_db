@@ -17,7 +17,8 @@
     
     --header-height: 80px;
     
-    --sidebar-w-collapsed: 85px; /* Сделали чуть шире для больших иконок */
+    /* Ширины меню */
+    --sidebar-w-collapsed: 85px; 
     --sidebar-w-expanded: 280px;
     --sidebar-w-current: var(--sidebar-w-expanded); 
     
@@ -63,8 +64,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* Выравниваем иконку в шапке по левому краю с иконками в меню (отступ 15px) */
-    padding: 0 2rem 0 15px; 
+    /* Отступ слева 20px, чтобы иконка шапки идеально совпадала с иконками меню */
+    padding: 0 2rem 0 20px; 
     z-index: 2000; 
     color: var(--bg-page);
 }
@@ -85,9 +86,8 @@ header {
     position: relative;
     flex-shrink: 0;
 }
-.header-logo-icon:hover { opacity: 0.9; }
 
-/* Увеличиваем саму иконку внутри круга (шапка) */
+/* Увеличиваем иконку внутри круга в шапке */
 .header-logo-icon .nav-icon-img {
     width: 28px;
     height: 28px;
@@ -103,7 +103,7 @@ header {
 }
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
-/* --- БОКОВОЕ МЕНЮ (КАРТОЧКА) --- */
+/* --- БОКОВОЕ МЕНЮ --- */
 .sidebar {
     position: fixed;
     top: var(--header-height); 
@@ -111,15 +111,14 @@ header {
     width: var(--sidebar-w-current);
     height: calc(100vh - var(--header-height));
     background-color: var(--bg-sidebar);
-    /* Добавили скругление, чтобы переход был плавным */
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    /* Убрали скругление всей панели, оно теперь только вокруг кнопки */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     padding: 2rem 0;
     overflow-y: auto;
     overflow-x: hidden; 
     z-index: 1000;
     transition: width 0.3s ease;
-    box-shadow: 4px 0 15px rgba(0,0,0,0.05); /* Легкая тень для отделения от фона */
 }
 
 .sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; height: 100%; }
@@ -137,12 +136,12 @@ header {
     color: var(--text-sidebar);
     transition: all 0.3s ease;
     text-align: left;
-    font-size: 1.3rem; /* Увеличили шрифт */
+    font-size: 1.3rem; 
     text-decoration: none;
     font-weight: 500;
     border-radius: var(--radius-btn) 0 0 var(--radius-btn); 
-    /* Отступ слева 15px (как у иконки в шапке) */
-    padding: 12px 0 12px 15px; 
+    /* Сдвигаем иконку и текст чуть вправо (20px) */
+    padding: 12px 0 12px 20px; 
     margin-bottom: 5px;
 }
 
@@ -157,36 +156,41 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     background-color: var(--bg-page);
     color: var(--bg-header);
     font-weight: 700;
-    margin-right: 20px; 
-    /* Сдвигаем активный элемент чуть вправо */
-    padding-left: 25px; 
+    margin-right: 20px; /* Оставляем место для изгиба */
+    padding-left: 20px; 
 }
 
-/* Верхний и нижний изгибы выреза */
-.nav-btn.active::before,
+/* Верхний изгиб (слева от кнопки) */
+.nav-btn.active::before {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background: transparent;
+    border-bottom-left-radius: 20px;
+    /* ВАЖНО: Цвет тени должен совпадать с цветом ЗЕЛЕНОЙ панели */
+    box-shadow: -8px 8px 0 0 var(--bg-sidebar); 
+    z-index: 1;
+}
+
+/* Нижний изгиб (слева от кнопки) */
 .nav-btn.active::after {
     content: '';
     position: absolute;
     right: -20px;
+    bottom: 0;
     width: 20px;
     height: 20px;
     background: transparent;
+    border-top-left-radius: 20px;
+    /* ВАЖНО: Цвет тени должен совпадать с цветом ЗЕЛЕНОЙ панели */
+    box-shadow: -8px -8px 0 0 var(--bg-sidebar);
     z-index: 1;
 }
 
-.nav-btn.active::before {
-    top: 0;
-    border-bottom-left-radius: 20px;
-    box-shadow: -8px 8px 0 0 var(--bg-page); 
-}
-
-.nav-btn.active::after {
-    bottom: 0;
-    border-top-left-radius: 20px;
-    box-shadow: -8px -8px 0 0 var(--bg-page);
-}
-
-/* Увеличиваем круг иконки в меню (до 50px) */
+/* Увеличиваем круг иконки в меню (до 50px, как в шапке) */
 .nav-icon-wrapper {
     width: 50px;
     height: 50px;
@@ -205,7 +209,7 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
     color: #FFF;
 }
 
-/* Увеличиваем саму иконку внутри (до 28px) */
+/* Увеличиваем иконку внутри круга (до 28px) */
 .nav-icon-img {
     width: 28px; 
     height: 28px;
@@ -218,8 +222,7 @@ body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; paddin
 /* --- ВЫПАДАЮЩИЕ СПИСКИ --- */
 details.nav-group { background: transparent; border: none; width: 100%; }
 details.nav-group > summary {
-    /* Увеличиваем отступ для стрелочки */
-    padding: 12px 15px 12px 15px;
+    padding: 12px 15px 12px 20px;
     font-size: 1.3rem;
     font-weight: 500;
     color: var(--text-sidebar);
@@ -236,7 +239,7 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
 /* Подменю */
 .sub-nav {
-    display: flex; flex-direction: column; padding-left: 70px; /* Сдвинули под текст */
+    display: flex; flex-direction: column; padding-left: 75px; /* Выровнено под текст */
     margin-top: 0.2rem; gap: 0.2rem; position: relative;
 }
 body:not(.menu-open) .sub-nav { display: none; } 
