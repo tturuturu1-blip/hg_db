@@ -2,7 +2,8 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Справочник по разметке проектов гимнастики: глоссарий, элементы тела, работа с предметом, критерии DA, валидация выступлений.">
     <title>Разметка гимнасток</title>
     <link rel="icon" type="image/png" href="icon/gimnastka.png">
     <link rel="stylesheet" href="css/style.css">
@@ -10,36 +11,36 @@
 <body class="menu-open">
 
     <!-- БОКОВОЕ МЕНЮ -->
-    <aside class="sidebar" id="sidebar">
+    <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
         <nav class="sidebar-nav">
-            <a href="#" class="nav-btn active" onclick="navigate('home')" id="nav-home">
-                <div class="nav-icon-wrapper"><div class="nav-icon-img icon-home"></div></div>
+            <a href="#home" class="nav-btn active" data-page="home" id="nav-home" aria-current="page" title="Главная">
+                <span class="nav-icon-wrapper"><span class="nav-icon-img icon-home" aria-hidden="true"></span></span>
                 <span class="nav-text">Главная</span>
             </a>
-            
+
             <details class="nav-group">
                 <summary>
-                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-gymnast"></div></div>
+                    <span class="nav-icon-wrapper"><span class="nav-icon-img icon-gymnast" aria-hidden="true"></span></span>
                     <span class="nav-text">База знаний</span>
-                    <span class="summary-arrow nav-text">▼</span>
+                    <span class="summary-arrow nav-text" aria-hidden="true">▼</span>
                 </summary>
                 <div class="sub-nav">
-                    <a href="#" class="nav-btn" onclick="navigate('glossary')" id="nav-glossary">Глоссарий</a>
-                    <a href="#" class="nav-btn" onclick="navigate('body-elements')" id="nav-body-elements">Элементы тела</a>
-                    <a href="#" class="nav-btn" onclick="navigate('object-elements')" id="nav-object-elements">Работа с предметом</a>
-                    <a href="#" class="nav-btn" onclick="navigate('da')" id="nav-da">DA</a>
+                    <a href="#glossary" class="nav-btn" data-page="glossary" id="nav-glossary" title="Глоссарий">Глоссарий</a>
+                    <a href="#body-elements" class="nav-btn" data-page="body-elements" id="nav-body-elements" title="Элементы тела">Элементы тела</a>
+                    <a href="#object-elements" class="nav-btn" data-page="object-elements" id="nav-object-elements" title="Работа с предметом">Работа с предметом</a>
+                    <a href="#da" class="nav-btn" data-page="da" id="nav-da" title="Критерии DA">DA</a>
                 </div>
             </details>
 
             <details class="nav-group">
                 <summary>
-                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-validation"></div></div>
+                    <span class="nav-icon-wrapper"><span class="nav-icon-img icon-validation" aria-hidden="true"></span></span>
                     <span class="nav-text">Разметка проектов</span>
-                    <span class="summary-arrow nav-text">▼</span>
+                    <span class="summary-arrow nav-text" aria-hidden="true">▼</span>
                 </summary>
                 <div class="sub-nav">
-                    <a href="#" class="nav-btn" onclick="navigate('gymnasts-august')" id="nav-gymnasts-august">Гимнасты август</a>
-                    <a href="#" class="nav-btn" onclick="navigate('validation')" id="nav-validation">Валидация выступлений</a>
+                    <a href="#gymnasts-august" class="nav-btn" data-page="gymnasts-august" id="nav-gymnasts-august" title="Гимнасты август">Гимнасты август</a>
+                    <a href="#validation" class="nav-btn" data-page="validation" id="nav-validation" title="Валидация выступлений">Валидация выступлений</a>
                 </div>
             </details>
         </nav>
@@ -47,21 +48,24 @@
 
     <!-- ОБЕРТКА ДЛЯ КОНТЕНТА -->
     <div class="main-wrapper">
-        
+
         <!-- ШАПКА -->
         <header>
             <div class="header-left">
-                <div class="header-logo-area" onclick="toggleMenu()">
-                    <div class="header-logo-icon" title="Открыть/Скрыть меню">
-                        <div class="nav-icon-img icon-gymnast"></div>
-                    </div>
-                    <div class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</div>
-                </div>
+                <button type="button" class="header-logo-area" id="menu-toggle"
+                        aria-label="Открыть или скрыть меню"
+                        aria-controls="sidebar" aria-expanded="true">
+                    <span class="header-logo-icon" title="Открыть/Скрыть меню">
+                        <span class="nav-icon-img icon-gymnast" aria-hidden="true"></span>
+                    </span>
+                    <span class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</span>
+                </button>
             </div>
-            
+
+            <!-- Поиск: визуальный плейсхолдер, обработчик логики будет добавлен отдельно -->
             <div class="header-search">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" placeholder="Поиск...">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="search" placeholder="Поиск..." aria-label="Поиск по сайту">
             </div>
         </header>
 
@@ -74,36 +78,36 @@
                         <p>База знаний и инструкции</p>
                     </div>
                     <div class="hero-image-container">
-                        <div class="hero-decor-1"></div>
-                        <div class="hero-decor-2"></div>
+                        <div class="hero-decor-1" aria-hidden="true"></div>
+                        <div class="hero-decor-2" aria-hidden="true"></div>
                         <div class="hero-img-wrapper">
-                            <img src="images/websiteheader.jpg" alt="Гимнастка">
+                            <img src="images/websiteheader.jpg" alt="Гимнастка" width="350" height="400">
                         </div>
                     </div>
                 </div>
 
                 <div class="home-grid">
-                    <div class="home-card" onclick="navigate('glossary')">
-                        <div class="card-icon-circle bg-orange">
+                    <a href="#glossary" class="home-card" data-page="glossary">
+                        <div class="card-icon-circle bg-orange" aria-hidden="true">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                         </div>
                         <div><h3>Глоссарий</h3><p>Термины и их сокращения, используемые в разметке.</p></div>
-                        <div class="arrow">→</div>
-                    </div>
-                    <div class="home-card" onclick="navigate('body-elements')">
-                        <div class="card-icon-circle bg-green">
+                        <div class="arrow" aria-hidden="true">→</div>
+                    </a>
+                    <a href="#body-elements" class="home-card" data-page="body-elements">
+                        <div class="card-icon-circle bg-green" aria-hidden="true">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
                         </div>
                         <div><h3>Элементы тела</h3><p>Описание равновесий, вращений, прыжков и других элементов.</p></div>
-                        <div class="arrow">→</div>
-                    </div>
-                    <div class="home-card" onclick="navigate('validation')">
-                        <div class="card-icon-circle bg-dark">
+                        <div class="arrow" aria-hidden="true">→</div>
+                    </a>
+                    <a href="#validation" class="home-card" data-page="validation">
+                        <div class="card-icon-circle bg-dark" aria-hidden="true">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
                         </div>
                         <div><h3>Валидация</h3><p>Инструкция по проверке и исправлению данных на карте кластеров.</p></div>
-                        <div class="arrow">→</div>
-                    </div>
+                        <div class="arrow" aria-hidden="true">→</div>
+                    </a>
                 </div>
             </div>
 
