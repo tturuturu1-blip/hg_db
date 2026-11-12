@@ -17,10 +17,8 @@
     
     --header-height: 80px;
     
-    /* Ширины меню: свернутое и развернутое */
-    --sidebar-w-collapsed: 80px;
+    --sidebar-w-collapsed: 85px; /* Сделали чуть шире для больших иконок */
     --sidebar-w-expanded: 280px;
-    /* Текущая ширина (меняется через JS) */
     --sidebar-w-current: var(--sidebar-w-expanded); 
     
     --radius-btn: 50px;
@@ -42,20 +40,19 @@ h1, h2, h3, h4, summary, .logo-text, .nav-btn {
     letter-spacing: 1px;
 }
 
-/* --- ОБЕРТКА КОНТЕНТА (СДВИГАЕТСЯ) --- */
+/* --- ОБЕРТКА КОНТЕНТА --- */
 .main-wrapper {
-    padding-top: var(--header-height); /* Отступ под фиксированную шапку */
+    padding-top: var(--header-height);
     padding-left: var(--sidebar-w-current);
     transition: padding-left 0.3s ease;
     min-height: 100vh;
 }
 
-/* Модификации для свернутого состояния */
 body:not(.menu-open) {
     --sidebar-w-current: var(--sidebar-w-collapsed);
 }
 
-/* --- ШАПКА (ВСЕГДА СВЕРХУ, НА ВСЮ ШИРИНУ) --- */
+/* --- ШАПКА (ВСЕГДА СВЕРХУ) --- */
 header {
     position: fixed;
     top: 0;
@@ -66,19 +63,35 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2.5rem;
-    z-index: 2000; /* Выше боковой панели */
+    /* Выравниваем иконку в шапке по левому краю с иконками в меню (отступ 15px) */
+    padding: 0 2rem 0 15px; 
+    z-index: 2000; 
     color: var(--bg-page);
 }
 
 .header-left { display: flex; align-items: center; }
 .header-logo-area { display: flex; align-items: center; gap: 15px; cursor: pointer; }
+
+/* Увеличиваем круг в шапке */
 .header-logo-icon {
-    width: 45px; height: 45px; background-color: var(--accent-orange);
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    color: #FFF; position: relative;
+    width: 50px; 
+    height: 50px; 
+    background-color: var(--accent-orange);
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    color: #FFF; 
+    position: relative;
+    flex-shrink: 0;
 }
 .header-logo-icon:hover { opacity: 0.9; }
+
+/* Увеличиваем саму иконку внутри круга (шапка) */
+.header-logo-icon .nav-icon-img {
+    width: 28px;
+    height: 28px;
+}
 
 .logo-text { font-size: 1.6rem; font-weight: 700; line-height: 1; color: var(--bg-page); }
 
@@ -90,19 +103,23 @@ header {
 }
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
-/* --- БОКОВОЕ МЕНЮ (ПОД ШАПКОЙ) --- */
+/* --- БОКОВОЕ МЕНЮ (КАРТОЧКА) --- */
 .sidebar {
     position: fixed;
-    top: var(--header-height); /* Строго под шапкой */
+    top: var(--header-height); 
     left: 0;
     width: var(--sidebar-w-current);
     height: calc(100vh - var(--header-height));
     background-color: var(--bg-sidebar);
+    /* Добавили скругление, чтобы переход был плавным */
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     padding: 2rem 0;
     overflow-y: auto;
-    overflow-x: hidden; /* Скрываем вылезающие элементы при сворачивании */
+    overflow-x: hidden; 
     z-index: 1000;
     transition: width 0.3s ease;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.05); /* Легкая тень для отделения от фона */
 }
 
 .sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; height: 100%; }
@@ -120,19 +137,18 @@ header {
     color: var(--text-sidebar);
     transition: all 0.3s ease;
     text-align: left;
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Увеличили шрифт */
     text-decoration: none;
     font-weight: 500;
     border-radius: var(--radius-btn) 0 0 var(--radius-btn); 
-    /* Иконка ближе к левому краю */
-    padding: 12px 0 12px 10px; 
+    /* Отступ слева 15px (как у иконки в шапке) */
+    padding: 12px 0 12px 15px; 
     margin-bottom: 5px;
 }
 
 /* Прячем текст при сворачивании */
 body:not(.menu-open) .nav-text { display: none; }
 body:not(.menu-open) .nav-btn { justify-content: center; padding-left: 0; padding-right: 0; }
-body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
 
 .nav-btn:hover { color: #FFF; }
 
@@ -141,7 +157,9 @@ body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
     background-color: var(--bg-page);
     color: var(--bg-header);
     font-weight: 700;
-    margin-right: 20px; /* Оставляем место для выреза */
+    margin-right: 20px; 
+    /* Сдвигаем активный элемент чуть вправо */
+    padding-left: 25px; 
 }
 
 /* Верхний и нижний изгибы выреза */
@@ -159,7 +177,7 @@ body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
 .nav-btn.active::before {
     top: 0;
     border-bottom-left-radius: 20px;
-    box-shadow: -8px 8px 0 0 var(--bg-page); /* Тень создает вырез */
+    box-shadow: -8px 8px 0 0 var(--bg-page); 
 }
 
 .nav-btn.active::after {
@@ -168,10 +186,10 @@ body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
     box-shadow: -8px -8px 0 0 var(--bg-page);
 }
 
-/* Круглая иконка */
+/* Увеличиваем круг иконки в меню (до 50px) */
 .nav-icon-wrapper {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -187,8 +205,10 @@ body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
     color: #FFF;
 }
 
+/* Увеличиваем саму иконку внутри (до 28px) */
 .nav-icon-img {
-    width: 20px; height: 20px;
+    width: 28px; 
+    height: 28px;
     background-color: currentColor; 
     -webkit-mask-size: contain; mask-size: contain;
     -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
@@ -198,8 +218,9 @@ body:not(.menu-open) .nav-icon-wrapper { transform: translateX(0) !important; }
 /* --- ВЫПАДАЮЩИЕ СПИСКИ --- */
 details.nav-group { background: transparent; border: none; width: 100%; }
 details.nav-group > summary {
-    padding: 12px 0 12px 10px;
-    font-size: 1.2rem;
+    /* Увеличиваем отступ для стрелочки */
+    padding: 12px 15px 12px 15px;
+    font-size: 1.3rem;
     font-weight: 500;
     color: var(--text-sidebar);
     display: flex; align-items: center; gap: 15px;
@@ -210,32 +231,32 @@ details.nav-group > summary:hover { color: #FFF; }
 
 body:not(.menu-open) details.nav-group > summary { justify-content: center; padding-left: 0; }
 
-.summary-arrow { margin-left: auto; margin-right: 15px; font-size: 0.7rem; transition: transform 0.3s; color: rgba(255,255,255,0.5); }
+.summary-arrow { margin-left: auto; font-size: 0.8rem; transition: transform 0.3s; color: rgba(255,255,255,0.5); }
 details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
 /* Подменю */
 .sub-nav {
-    display: flex; flex-direction: column; padding-left: 60px;
+    display: flex; flex-direction: column; padding-left: 70px; /* Сдвинули под текст */
     margin-top: 0.2rem; gap: 0.2rem; position: relative;
 }
-body:not(.menu-open) .sub-nav { display: none; } /* Скрываем подменю в свернутом состоянии */
+body:not(.menu-open) .sub-nav { display: none; } 
 
 .sub-nav .nav-btn {
-    padding: 8px 10px; font-size: 1rem; font-family: 'Raleway', sans-serif;
+    padding: 8px 10px; font-size: 1.1rem; font-family: 'Raleway', sans-serif;
     text-transform: none; letter-spacing: 0; color: rgba(232, 229, 219, 0.7);
     margin-right: 0; border-radius: 20px;
 }
 .sub-nav .nav-btn:hover { color: #FFF; background-color: rgba(255, 255, 255, 0.1); }
-.sub-nav .nav-btn.active { color: var(--accent-orange); background-color: transparent; }
+.sub-nav .nav-btn.active { color: var(--accent-orange); background-color: transparent; padding-left: 10px; }
 
 /* Точка в подменю */
 .sub-nav .nav-btn.active::before {
-    content: ''; position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+    content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
     width: 6px; height: 6px; border-radius: 50%; background-color: var(--accent-orange); box-shadow: none;
 }
 .sub-nav .nav-btn.active::after { display: none; }
 
-.bottom-menu { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+.bottom-menu { margin-top: auto; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); margin-left: 10px; margin-right: 10px; }
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
 main { width: 100%; padding: 3rem 2.5rem; }
@@ -243,7 +264,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Остальные стили для контента (карточки, заголовки) оставляем как были */
 .hero-split { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; }
 .hero-text h1 { font-size: 5rem; color: var(--text-main); margin-bottom: 0.5rem; line-height: 0.9; }
 .hero-text p { font-size: 1.5rem; color: var(--accent-orange); font-family: 'Bebas Neue', sans-serif; }
