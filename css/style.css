@@ -369,6 +369,24 @@ body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active::before {
     display: none; 
 }
 
+/* --- ФИКС СДВИГА ТЕКСТА В РАЗВЕРНУТОМ МЕНЮ --- */
+/* Принудительно сбрасываем все inline-стили (top/left), если они остались от flyout */
+body.menu-open .sub-nav {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    animation: none !important;
+    z-index: auto !important;
+    padding-left: 85px !important;
+    margin-top: 0.2rem !important;
+}
+
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
 main { width: 100%; padding: 3rem 2.5rem; }
 .page { display: none; width: 100%; }
