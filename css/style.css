@@ -24,7 +24,6 @@
     --radius-btn: 50px;
     --shadow: 0 10px 30px rgba(40, 39, 29, 0.08);
 
-    /* Единый брейкпоинт (используется и в JS через matchMedia) */
     --bp-mobile: 900px;
 }
 
@@ -82,18 +81,26 @@ header {
 
 .header-left { display: flex; align-items: center; }
 
-/* Кнопка-логотип: сброс стилей button (в HTML теперь <button>) */
+/* Кнопка-логотип: агрессивный сброс стилей button */
 .header-logo-area {
     display: flex;
     align-items: center;
     gap: 15px;
     cursor: pointer;
-    background: transparent;
-    border: none;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    appearance: none;
+    -webkit-appearance: none;
     color: inherit;
     font: inherit;
     text-align: left;
     padding: 0;
+    outline: none;
+}
+
+.header-logo-area:focus-visible {
+    outline: 2px solid var(--accent-orange) !important;
 }
 
 .header-logo-icon {
@@ -109,10 +116,7 @@ header {
     flex-shrink: 0;
 }
 
-.header-logo-icon .nav-icon-img {
-    width: 28px;
-    height: 28px;
-}
+.header-logo-icon .nav-icon-img { width: 28px; height: 28px; }
 
 .logo-text { font-size: 1.6rem; font-weight: 700; line-height: 1; color: var(--bg-page); }
 
@@ -127,20 +131,10 @@ header {
     outline: none;
 }
 .header-search input::placeholder { color: rgba(255, 255, 255, 0.55); }
-.header-search input:focus {
-    background-color: rgba(255, 255, 255, 0.16);
-    box-shadow: 0 0 0 2px var(--accent-orange);
-}
-.header-search svg {
-    position: absolute;
-    left: 15px;
-    color: rgba(255,255,255,0.5);
-    width: 18px;
-    height: 18px;
-    pointer-events: none;
-}
+.header-search input:focus { background-color: rgba(255, 255, 255, 0.16); box-shadow: 0 0 0 2px var(--accent-orange); }
+.header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; pointer-events: none; }
 
-/* --- БОКОВОЕ МЕНЮ (Скругленное) --- */
+/* --- БОКОВОЕ МЕНЮ --- */
 .sidebar {
     position: fixed;
     top: var(--header-height);
@@ -157,13 +151,10 @@ header {
     transition: width 0.3s ease;
 }
 
-/* Стилизованный скроллбар в панели */
+/* Стилизованный скроллбар */
 .sidebar::-webkit-scrollbar { width: 6px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
-.sidebar::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.18);
-    border-radius: 3px;
-}
+.sidebar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 3px; }
 .sidebar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.32); }
 .sidebar { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.25) transparent; }
 
@@ -185,37 +176,24 @@ header {
     font-size: 1.3rem;
     text-decoration: none;
     font-weight: 500;
-    border-radius: var(--radius-btn) 0 0 var(--radius-btn);
-    padding: 12px 0 12px 20px;
+    padding: 12px 20px;
     margin-bottom: 5px;
+    z-index: 1; /* Контекст для вырезов */
 }
 
 .nav-btn:hover { color: #FFF; }
-
-/* Свёрнутое меню: скрываем текст, центрируем иконки, убираем «вырез» */
-body:not(.menu-open) .nav-text { display: none; }
-body:not(.menu-open) .nav-btn {
-    justify-content: center;
-    padding-left: 0;
-    padding-right: 0;
-}
-body:not(.menu-open) .nav-btn.active {
-    margin-right: 0;
-    border-radius: var(--radius-btn);
-}
-body:not(.menu-open) .nav-btn.active::before,
-body:not(.menu-open) .nav-btn.active::after { display: none; }
 
 /* Активный пункт (Вырез) */
 .nav-btn.active {
     background-color: var(--bg-page);
     color: var(--bg-header);
     font-weight: 700;
-    margin-right: 20px;
-    padding-left: 20px;
+    margin-right: 20px; /* Оставляем место для выреза */
+    border-radius: 40px 0 0 40px; /* Скругляем только левую часть */
+    z-index: 2; /* Выше вырезов */
 }
 
-/* Верхний изгиб (справа от кнопки, плавный переход к панели) */
+/* Верхний изгиб (справа) */
 .nav-btn.active::before {
     content: '';
     position: absolute;
@@ -223,13 +201,13 @@ body:not(.menu-open) .nav-btn.active::after { display: none; }
     top: 0;
     width: 20px;
     height: 20px;
-    background: transparent;
+    background: transparent !important; /* Жёстко прозрачный */
     border-bottom-left-radius: 20px;
-    box-shadow: -10px 10px 0 0 var(--bg-sidebar);
-    z-index: 1;
+    box-shadow: -10px 10px 0 0 var(--bg-sidebar); /* Рисуем цвет панели вокруг изгиба */
+    z-index: -1;
 }
 
-/* Нижний изгиб (справа от кнопки) */
+/* Нижний изгиб (справа) */
 .nav-btn.active::after {
     content: '';
     position: absolute;
@@ -237,10 +215,10 @@ body:not(.menu-open) .nav-btn.active::after { display: none; }
     bottom: 0;
     width: 20px;
     height: 20px;
-    background: transparent;
+    background: transparent !important;
     border-top-left-radius: 20px;
     box-shadow: -10px -10px 0 0 var(--bg-sidebar);
-    z-index: 1;
+    z-index: -1;
 }
 
 /* Круг иконки */
@@ -254,7 +232,6 @@ body:not(.menu-open) .nav-btn.active::after { display: none; }
     background-color: rgba(255,255,255,0.1);
     transition: all 0.3s ease;
     flex-shrink: 0;
-    z-index: 2;
 }
 
 .nav-btn.active .nav-icon-wrapper {
@@ -271,24 +248,17 @@ body:not(.menu-open) .nav-btn.active::after { display: none; }
     -webkit-mask-position: center; mask-position: center;
 }
 
-/* Фолбэк: иконка не загрузилась (класс ставит script.js) */
+/* Фолбэк иконок */
 .img-failed .nav-icon-img { display: none; }
-.img-failed {
-    color: rgba(255, 255, 255, 0.7);
-}
-.img-failed::after {
-    content: '•';
-    font-size: 1.4rem;
-    line-height: 1;
-    font-family: 'Bebas Neue', sans-serif;
-}
+.img-failed { color: rgba(255, 255, 255, 0.7); }
+.img-failed::after { content: '•'; font-size: 1.4rem; line-height: 1; font-family: 'Bebas Neue', sans-serif; }
 .header-logo-icon.img-failed { color: #FFF; }
 .header-logo-icon.img-failed::after { content: 'Г'; font-size: 1.3rem; }
 
 /* --- ВЫПАДАЮЩИЕ СПИСКИ --- */
 details.nav-group { background: transparent; border: none; width: 100%; }
 details.nav-group > summary {
-    padding: 12px 15px 12px 20px;
+    padding: 12px 20px;
     font-size: 1.3rem;
     font-weight: 500;
     color: var(--text-sidebar);
@@ -301,33 +271,20 @@ details.nav-group > summary {
 }
 details.nav-group > summary::-webkit-details-marker { display: none; }
 details.nav-group > summary:hover { color: #FFF; }
-
-/* Родительская группа, содержащая активный пункт — подсвечиваем */
 details.nav-group.has-active > summary { color: #FFF; }
 
-body:not(.menu-open) details.nav-group > summary {
-    justify-content: center;
-    padding-left: 0;
-}
-
-.summary-arrow {
-    margin-left: auto;
-    font-size: 0.8rem;
-    transition: transform 0.3s;
-    color: rgba(255,255,255,0.5);
-}
+.summary-arrow { margin-left: auto; font-size: 0.8rem; transition: transform 0.3s; color: rgba(255,255,255,0.5); }
 details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
 /* Подменю */
 .sub-nav {
     display: flex;
     flex-direction: column;
-    padding-left: 85px; /* совпадает с реальным отступом текста (20 + 50 + 15) */
+    padding-left: 85px;
     margin-top: 0.2rem;
     gap: 0.2rem;
     position: relative;
 }
-body:not(.menu-open) .sub-nav { display: none; }
 
 .sub-nav .nav-btn {
     padding: 8px 10px 8px 15px;
@@ -338,6 +295,7 @@ body:not(.menu-open) .sub-nav { display: none; }
     color: rgba(232, 229, 219, 0.7);
     margin-right: 0;
     border-radius: 20px;
+    margin-bottom: 0;
 }
 .sub-nav .nav-btn:hover { color: #FFF; background-color: rgba(255, 255, 255, 0.1); }
 .sub-nav .nav-btn.active {
@@ -352,7 +310,7 @@ body:not(.menu-open) .sub-nav { display: none; }
     content: '';
     position: absolute;
     left: 0;
-    right: auto; /* сброс унаследованного right: -20px */
+    right: auto;
     top: 50%;
     transform: translateY(-50%);
     width: 6px;
@@ -362,6 +320,38 @@ body:not(.menu-open) .sub-nav { display: none; }
     box-shadow: none;
 }
 .sub-nav .nav-btn.active::after { display: none; }
+
+/* --- СВЁРНУТОЕ СОСТОЯНИЕ МЕНЮ --- */
+body:not(.menu-open) .nav-text { display: none; }
+
+body:not(.menu-open) .nav-btn {
+    justify-content: center;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 5px auto; /* Центрируем кнопку */
+    border-radius: 50%; /* В свёрнутом виде это круг */
+}
+
+/* Убираем белый фон и вырезы у активной кнопки в свёрнутом виде */
+body:not(.menu-open) .nav-btn.active {
+    background-color: transparent;
+    margin-right: auto;
+    border-radius: 50%;
+}
+body:not(.menu-open) .nav-btn.active::before,
+body:not(.menu-open) .nav-btn.active::after { display: none; }
+
+/* Настройка summary для свёрнутого состояния */
+body:not(.menu-open) details.nav-group > summary {
+    justify-content: center;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+body:not(.menu-open) .sub-nav { display: none; }
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
 main { width: 100%; padding: 3rem 2.5rem; }
@@ -380,7 +370,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 2rem; }
 
-/* Карточка теперь <a>: сброс стилей ссылки */
+/* Карточка теперь <a>: сброс стилей ссылки и принудительное удаление подчёркивания */
 .home-card {
     background: var(--bg-card);
     padding: 2rem;
@@ -392,8 +382,11 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    text-decoration: none;
+    text-decoration: none !important;
     color: inherit;
+}
+.home-card * {
+    text-decoration: none !important; /* Убирает синюю линию со всех вложенных элементов */
 }
 .home-card:hover { transform: translateY(-8px); border-color: var(--accent-orange); }
 
@@ -428,19 +421,14 @@ main { width: 100%; padding: 3rem 2.5rem; }
     main { padding: 2rem 1.5rem; }
 }
 
-/* Очень узкие экраны: панель как overlay */
 @media (max-width: 600px) {
     .main-wrapper { padding-left: var(--sidebar-w-collapsed); }
-    body.menu-open .sidebar {
-        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25);
-    }
+    body.menu-open .sidebar { box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25); }
 }
 
 /* Уважение к предпочтениям пользователя */
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
+    *, *::before, *::after {
         animation-duration: 0.001ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.001ms !important;
