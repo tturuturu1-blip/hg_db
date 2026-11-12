@@ -46,6 +46,13 @@
         const shouldOpen = typeof open === 'boolean' ? open : !body.classList.contains('menu-open');
         body.classList.toggle('menu-open', shouldOpen);
         if (menuToggle) menuToggle.setAttribute('aria-expanded', String(shouldOpen));
+        
+        // Очищаем инлайновые координаты, чтобы они не ломали верстку в развернутом режиме
+        document.querySelectorAll('.sub-nav').forEach(nav => {
+            nav.style.top = '';
+            nav.style.left = '';
+        });
+        
         closeAllFlyouts(); 
     }
 
