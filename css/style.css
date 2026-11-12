@@ -12,7 +12,7 @@
     --bg-card: #FFFFFF;
     --text-main: #1A1815;
     --text-light: #5A5A5A;
-    --text-sidebar: #4A5240; /* Темно-зеленый текст для светлой панели */
+    --text-sidebar: #4A5240; 
     --accent-orange: #D16A48;
 
     --header-height: 80px;
@@ -43,11 +43,7 @@ h1, h2, h3, h4, summary, .logo-text, .nav-btn {
     letter-spacing: 1px;
 }
 
-/* Фокус для клавиатуры */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-summary:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible, summary:focus-visible {
     outline: 2px solid var(--bg-sidebar);
     outline-offset: 2px;
 }
@@ -139,11 +135,8 @@ header {
     left: 0;
     width: var(--sidebar-w-current);
     height: calc(100vh - var(--header-height));
-    
-    /* Цвет панели как у страницы */
     background-color: var(--bg-page);
     border-right: 1px solid rgba(40, 39, 29, 0.08);
-    
     padding: 20px 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -151,7 +144,6 @@ header {
     transition: width 0.3s ease;
 }
 
-/* Стилизованный скроллбар */
 .sidebar::-webkit-scrollbar { width: 6px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: rgba(74, 82, 64, 0.2); border-radius: 3px; }
@@ -182,7 +174,6 @@ header {
 
 .nav-btn:hover { color: var(--text-main); }
 
-/* Активный пункт: зеленый текст */
 .nav-btn.active {
     background-color: transparent;
     color: var(--bg-sidebar); 
@@ -193,7 +184,6 @@ header {
 .nav-btn.active::before,
 .nav-btn.active::after { display: none !important; }
 
-/* Круг иконки */
 .icon-wrapper {
     width: 50px;
     height: 50px;
@@ -208,7 +198,6 @@ header {
     color: var(--text-sidebar);
 }
 
-/* Активная иконка становится зеленой */
 .nav-btn.active .icon-wrapper {
     background-color: var(--bg-sidebar);
     color: #FFF;
@@ -224,12 +213,7 @@ header {
     -webkit-mask-position: center; mask-position: center;
 }
 
-/* Фолбэк иконок (с SVG) */
-.fallback-svg {
-    display: none;
-    width: 24px;
-    height: 24px;
-}
+.fallback-svg { display: none; width: 24px; height: 24px; }
 .img-failed .nav-icon-img { display: none; }
 .img-failed .fallback-svg { display: block; }
 
@@ -254,7 +238,7 @@ details.nav-group.has-active > summary { color: var(--bg-sidebar); }
 .summary-arrow { margin-left: auto; font-size: 0.8rem; transition: transform 0.3s; color: rgba(74, 82, 64, 0.5); }
 details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
-/* Подменю */
+/* Подменю (в развернутом состоянии) */
 .sub-nav {
     display: flex;
     flex-direction: column;
@@ -263,6 +247,8 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
     gap: 0.2rem;
     position: relative;
 }
+
+.flyout-title { display: none; } /* Скрываем заголовок в обычном состоянии */
 
 .sub-nav .nav-btn {
     padding: 8px 10px 8px 15px;
@@ -283,7 +269,6 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
     margin-right: 0;
     border-radius: 0;
 }
-
 .sub-nav .nav-btn.active::before {
     content: '';
     position: absolute;
@@ -300,7 +285,6 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
 
 /* --- СВЁРНУТОЕ СОСТОЯНИЕ МЕНЮ --- */
 body:not(.menu-open) .nav-text { display: none; }
-
 body:not(.menu-open) .nav-btn {
     justify-content: center;
     padding: 0;
@@ -309,13 +293,11 @@ body:not(.menu-open) .nav-btn {
     margin: 0 auto 5px auto;
     border-radius: 50%;
 }
-
 body:not(.menu-open) .nav-btn.active {
     background-color: transparent;
     margin-right: auto;
     border-radius: 50%;
 }
-
 body:not(.menu-open) details.nav-group > summary {
     justify-content: center;
     padding: 0;
@@ -324,7 +306,67 @@ body:not(.menu-open) details.nav-group > summary {
     margin: 0 auto;
     border-radius: 50%;
 }
+
+/* --- ВСПЛЫВАЮЩЕЕ ОКНО (FLYOUT) В СВЁРНУТОМ СОСТОЯНИИ --- */
 body:not(.menu-open) .sub-nav { display: none; }
+
+/* Окно теперь в светлых тонах сайта */
+body:not(.menu-open) details.nav-group[open] .sub-nav {
+    display: flex;
+    position: fixed;
+    left: 75px; /* Позиция задается через JS */
+    top: 0;     /* Позиция задается через JS */
+    width: 240px;
+    background-color: var(--bg-card);
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(40, 39, 29, 0.15), 0 0 0 1px rgba(74, 82, 64, 0.1);
+    z-index: 3000;
+    animation: flyoutFadeIn 0.2s ease forwards;
+}
+
+@keyframes flyoutFadeIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* Заголовок в flyout */
+body:not(.menu-open) .flyout-title {
+    display: block;
+    color: var(--text-main);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    padding: 8px 12px 12px;
+    border-bottom: 1px solid rgba(40, 39, 29, 0.1);
+    margin-bottom: 8px;
+}
+
+/* Ссылки внутри flyout */
+body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn {
+    color: var(--text-light);
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    width: 100%;
+    margin-bottom: 2px;
+    font-family: 'Raleway', sans-serif;
+}
+
+body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn:hover {
+    background-color: rgba(74, 82, 64, 0.08);
+    color: var(--bg-sidebar);
+}
+
+body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active {
+    background-color: rgba(74, 82, 64, 0.1);
+    color: var(--bg-sidebar);
+    font-weight: 600;
+}
+
+body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active::before {
+    display: none; /* Убираем зеленую точку в режиме flyout */
+}
 
 /* --- ОСНОВНОЙ КОНТЕНТ --- */
 main { width: 100%; padding: 3rem 2.5rem; }
@@ -376,7 +418,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 }
 .home-card:hover .arrow { background-color: var(--bg-sidebar); color: #FFF; }
 
-/* --- КОНТЕНТ СТРАНИЦ (Аккордеоны, текст) --- */
+/* --- КОНТЕНТ СТРАНИЦ (Аккордеоны) --- */
 .section { margin-bottom: 1.5rem; }
 .content-acc {
     background: var(--bg-card);
@@ -425,10 +467,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     letter-spacing: 0;
 }
 .details-content p { margin-bottom: 1rem; }
-.details-content ul {
-    padding-left: 1.5rem;
-    margin-bottom: 1rem;
-}
+.details-content ul { padding-left: 1.5rem; margin-bottom: 1rem; }
 .details-content li { margin-bottom: 0.5rem; }
 .details-content strong { color: var(--text-main); }
 
