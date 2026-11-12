@@ -81,7 +81,7 @@ header {
 
 .header-left { display: flex; align-items: center; }
 
-/* Кнопка-логотип: агрессивный сброс стилей button */
+/* Кнопка-логотип */
 .header-logo-area {
     display: flex;
     align-items: center;
@@ -142,8 +142,11 @@ header {
     width: var(--sidebar-w-current);
     height: calc(100vh - var(--header-height));
     background-color: var(--bg-sidebar);
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
+    
+    /* УБРАЛИ СКРУГЛЕНИЯ СВЕРХУ И СНИЗУ */
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    
     padding: 20px 0;
     overflow-y: auto;
     overflow-x: hidden;
@@ -171,54 +174,29 @@ header {
     gap: 15px;
     cursor: pointer;
     color: var(--text-sidebar);
-    transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease, margin 0.3s ease, border-radius 0.3s ease;
+    transition: color 0.3s ease, background-color 0.3s ease, padding 0.3s ease, border-radius 0.3s ease;
     text-align: left;
     font-size: 1.3rem;
     text-decoration: none;
     font-weight: 500;
     padding: 12px 20px;
     margin-bottom: 5px;
-    z-index: 1; /* Контекст для вырезов */
 }
 
 .nav-btn:hover { color: #FFF; }
 
-/* Активный пункт (Вырез) */
+/* Активный пункт: убрали белый фон и вырезы */
 .nav-btn.active {
-    background-color: var(--bg-page);
-    color: var(--bg-header);
+    background-color: transparent; /* Фон прозрачный */
+    color: #FFF; /* Текст белый для контраста */
     font-weight: 700;
-    margin-right: 20px; /* Оставляем место для выреза */
-    border-radius: 40px 0 0 40px; /* Скругляем только левую часть */
-    z-index: 2; /* Выше вырезов */
+    border-radius: var(--radius-btn);
 }
 
-/* Верхний изгиб (справа) */
-.nav-btn.active::before {
-    content: '';
-    position: absolute;
-    right: -20px;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    background: transparent !important; /* Жёстко прозрачный */
-    border-bottom-left-radius: 20px;
-    box-shadow: -10px 10px 0 0 var(--bg-sidebar); /* Рисуем цвет панели вокруг изгиба */
-    z-index: -1;
-}
-
-/* Нижний изгиб (справа) */
+/* Убираем псевдоэлементы выреза, так как фон теперь прозрачный */
+.nav-btn.active::before,
 .nav-btn.active::after {
-    content: '';
-    position: absolute;
-    right: -20px;
-    bottom: 0;
-    width: 20px;
-    height: 20px;
-    background: transparent !important;
-    border-top-left-radius: 20px;
-    box-shadow: -10px -10px 0 0 var(--bg-sidebar);
-    z-index: -1;
+    display: none !important;
 }
 
 /* Круг иконки */
@@ -234,9 +212,11 @@ header {
     flex-shrink: 0;
 }
 
+/* Активная иконка становится оранжевой (как на референсе) */
 .nav-btn.active .nav-icon-wrapper {
     background-color: var(--accent-orange);
     color: #FFF;
+    box-shadow: 0 4px 15px rgba(209, 106, 72, 0.4); /* Легкая тень для объема */
 }
 
 .nav-icon-img {
@@ -329,18 +309,15 @@ body:not(.menu-open) .nav-btn {
     padding: 0;
     width: 50px;
     height: 50px;
-    margin: 0 auto 5px auto; /* Центрируем кнопку */
-    border-radius: 50%; /* В свёрнутом виде это круг */
+    margin: 0 auto 5px auto;
+    border-radius: 50%;
 }
 
-/* Убираем белый фон и вырезы у активной кнопки в свёрнутом виде */
 body:not(.menu-open) .nav-btn.active {
     background-color: transparent;
     margin-right: auto;
     border-radius: 50%;
 }
-body:not(.menu-open) .nav-btn.active::before,
-body:not(.menu-open) .nav-btn.active::after { display: none; }
 
 /* Настройка summary для свёрнутого состояния */
 body:not(.menu-open) details.nav-group > summary {
@@ -370,7 +347,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr)); gap: 2rem; }
 
-/* Карточка теперь <a>: сброс стилей ссылки и принудительное удаление подчёркивания */
+/* Карточка <a>: убираем синие линии */
 .home-card {
     background: var(--bg-card);
     padding: 2rem;
@@ -386,7 +363,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     color: inherit;
 }
 .home-card * {
-    text-decoration: none !important; /* Убирает синюю линию со всех вложенных элементов */
+    text-decoration: none !important;
 }
 .home-card:hover { transform: translateY(-8px); border-color: var(--accent-orange); }
 
@@ -426,7 +403,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
     body.menu-open .sidebar { box-shadow: 4px 0 24px rgba(0, 0, 0, 0.25); }
 }
 
-/* Уважение к предпочтениям пользователя */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.001ms !important;
