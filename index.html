@@ -8,61 +8,21 @@
     <!-- Иконка вкладки -->
     <link rel="icon" type="image/png" href="icon/gimnastka.png">
     
-    <!-- Подключение шрифтов -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-    
     <!-- Подключение внешнего CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
-
-    <!-- ШАПКА -->
-    <header>
-        <div class="header-left">
-            <!-- Кнопка гамбургер (видна только на мобильных) -->
-            <button class="mobile-menu-btn" onclick="toggleSidebar()">
-                <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
-
-            <a href="#" class="header-logo-area" onclick="navigate('home')">
-                <div class="header-logo-icon">
-                    <div class="icon-wrapper" id="header-logo-icon">
-                        <div class="nav-icon-img icon-gymnast"></div>
-                        <!-- Запасная SVG иконка -->
-                        <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                    </div>
-                </div>
-                <div class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</div>
-            </a>
-        </div>
-        
-        <div class="header-search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" placeholder="Поиск...">
-        </div>
-    </header>
+<body class="menu-open">
 
     <!-- ЛЕВОЕ БОКОВОЕ МЕНЮ -->
     <aside class="sidebar" id="sidebar">
         <nav class="sidebar-nav">
-            <!-- Главная -->
             <a href="#" class="nav-btn active" onclick="navigate('home')" id="nav-home">
-                <div class="nav-icon-wrapper">
-                    <div class="nav-icon-img icon-home"></div>
-                    <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                </div>
+                <div class="nav-icon-wrapper"><div class="nav-icon-img icon-home"></div></div>
                 <span>Главная</span>
             </a>
-
-            <!-- База знаний -->
             <details class="nav-group">
                 <summary>
-                    <div class="nav-icon-wrapper">
-                        <div class="nav-icon-img icon-gymnast"></div>
-                        <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
-                    </div>
+                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-gymnast"></div></div>
                     <span>База знаний</span>
                     <span class="summary-arrow">▼</span>
                 </summary>
@@ -73,14 +33,9 @@
                     <a href="#" class="nav-btn" onclick="navigate('da')" id="nav-da">DA</a>
                 </div>
             </details>
-
-            <!-- Разметка проектов -->
             <details class="nav-group">
                 <summary>
-                    <div class="nav-icon-wrapper">
-                        <div class="nav-icon-img icon-validation"></div>
-                        <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                    </div>
+                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-validation"></div></div>
                     <span>Разметка проектов</span>
                     <span class="summary-arrow">▼</span>
                 </summary>
@@ -89,184 +44,103 @@
                     <a href="#" class="nav-btn" onclick="navigate('validation')" id="nav-validation">Валидация выступлений</a>
                 </div>
             </details>
-
-            <!-- Источники -->
             <div class="bottom-menu">
                 <a href="#" class="nav-btn" onclick="navigate('sources')" id="nav-sources">
-                    <div class="nav-icon-wrapper">
-                        <div class="nav-icon-img icon-home"></div>
-                        <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                    </div>
+                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-home"></div></div>
                     <span>Источники</span>
                 </a>
             </div>
         </nav>
     </aside>
 
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
-    <main>
-        <!-- СТРАНИЦА: ГЛАВНАЯ -->
-        <div id="page-home" class="page active">
-            <div class="hero-split">
-                <div class="hero-text">
-                    <h1>СПРАВОЧНИК ПО<br>РАЗМЕТКЕ ПРОЕКТОВ</h1>
-                    <p>База знаний и инструкции</p>
-                </div>
-                
-                <!-- Изображение гимнастки -->
-                <div class="hero-image-container">
-                    <div class="hero-decor-1"></div>
-                    <div class="hero-decor-2"></div>
-                    <div class="hero-img-wrapper">
-                        <!-- Путь к картинке из папки images -->
-                        <img src="images/websiteheader.jpg" alt="Гимнастка">
-                    </div>
-                </div>
-            </div>
-
-            <div class="home-grid">
-                <!-- Карточка 1 -->
-                <div class="home-card" onclick="navigate('glossary')">
-                    <div class="card-icon-circle bg-orange">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                    </div>
-                    <div>
-                        <h3>Глоссарий</h3>
-                        <p>Термины и их сокращения, используемые в разметке.</p>
-                    </div>
-                    <div class="arrow">→</div>
-                </div>
-                
-                <!-- Карточка 2 -->
-                <div class="home-card" onclick="navigate('body-elements')">
-                    <div class="card-icon-circle bg-green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
-                    </div>
-                    <div>
-                        <h3>Элементы тела</h3>
-                        <p>Описание равновесий, вращений, прыжков и других элементов.</p>
-                    </div>
-                    <div class="arrow">→</div>
-                </div>
-
-                <!-- Карточка 3 -->
-                <div class="home-card" onclick="navigate('validation')">
-                    <div class="card-icon-circle bg-dark">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                    </div>
-                    <div>
-                        <h3>Валидация</h3>
-                        <p>Инструкция по проверке и исправлению данных на карте кластеров.</p>
-                    </div>
-                    <div class="arrow">→</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ОСТАЛЬНЫЕ СТРАНИЦЫ -->
-        <div id="page-glossary" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>ГЛОССАРИЙ</h1>
-                <p>Термины и их сокращения</p>
-            </div>
-            <section class="section">
-                <details class="content-acc" open>
-                    <summary>Термины</summary>
-                    <div class="details-content">
-                        <p>Здесь будет размещен глоссарий.</p>
-                    </div>
-                </details>
-            </section>
-        </div>
-
-        <div id="page-body-elements" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>ЭЛЕМЕНТЫ ТЕЛА</h1>
-                <p>Равновесие, Вращение, Прыжок</p>
-            </div>
-             <section class="section">
-                <details class="content-acc" open>
-                    <summary>Элементы</summary>
-                    <div class="details-content">
-                        <p>Здесь будет описание элементов тела.</p>
-                    </div>
-                </details>
-            </section>
-        </div>
+    <!-- ОБЕРТКА ДЛЯ КОНТЕНТА -->
+    <div class="main-wrapper">
         
-        <div id="page-object-elements" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>РАБОТА С ПРЕДМЕТОМ</h1>
-            </div>
-             <section class="section">
-                <details class="content-acc" open>
-                    <summary>Предметы</summary>
-                    <div class="details-content">
-                        <p>В разработке.</p>
+        <!-- ШАПКА -->
+        <header>
+            <div class="header-left">
+                <!-- Логотип теперь служит кнопкой переключения меню -->
+                <div class="header-logo-area" onclick="toggleMenu()">
+                    <div class="header-logo-icon" title="Открыть/Скрыть меню">
+                        <div class="nav-icon-img icon-gymnast"></div>
                     </div>
-                </details>
-            </section>
-        </div>
-        
-         <div id="page-da" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>КРИТЕРИИ DA</h1>
+                    <div class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</div>
+                </div>
             </div>
-             <section class="section">
-                <details class="content-acc" open>
-                    <summary>Критерии</summary>
-                    <div class="details-content">
-                        <p>Описание критериев DA.</p>
+            
+            <div class="header-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" placeholder="Поиск...">
+            </div>
+        </header>
+
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
+        <main>
+            <div id="page-home" class="page active">
+                <div class="hero-split">
+                    <div class="hero-text">
+                        <h1>СПРАВОЧНИК ПО<br>РАЗМЕТКЕ ПРОЕКТОВ</h1>
+                        <p>База знаний и инструкции</p>
                     </div>
-                </details>
-            </section>
-        </div>
-
-        <div id="page-gymnasts-august" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>ГИМНАСТКИ АВГУСТ</h1>
-            </div>
-             <section class="section">
-                <details class="content-acc" open>
-                    <summary>Информация</summary>
-                    <div class="details-content">
-                        <p>Инструкция к проекту.</p>
+                    <div class="hero-image-container">
+                        <div class="hero-decor-1"></div>
+                        <div class="hero-decor-2"></div>
+                        <div class="hero-img-wrapper">
+                            <img src="images/websiteheader.jpg" alt="Гимнастка">
+                        </div>
                     </div>
-                </details>
-            </section>
-        </div>
+                </div>
 
-        <div id="page-validation" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>ВАЛИДАЦИЯ</h1>
-            </div>
-             <section class="section">
-                <details class="content-acc" open>
-                    <summary>Инструкция</summary>
-                    <div class="details-content">
-                        <p>Инструкция по проверке данных.</p>
+                <div class="home-grid">
+                    <div class="home-card" onclick="navigate('glossary')">
+                        <div class="card-icon-circle bg-orange">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                        </div>
+                        <div><h3>Глоссарий</h3><p>Термины и их сокращения, используемые в разметке.</p></div>
+                        <div class="arrow">→</div>
                     </div>
-                </details>
-            </section>
-        </div>
-
-        <div id="page-sources" class="page">
-            <div class="hero-text" style="margin-bottom: 2rem;">
-                <h1>ИСТОЧНИКИ</h1>
+                    <div class="home-card" onclick="navigate('body-elements')">
+                        <div class="card-icon-circle bg-green">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
+                        </div>
+                        <div><h3>Элементы тела</h3><p>Описание равновесий, вращений, прыжков и других элементов.</p></div>
+                        <div class="arrow">→</div>
+                    </div>
+                    <div class="home-card" onclick="navigate('validation')">
+                        <div class="card-icon-circle bg-dark">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                        </div>
+                        <div><h3>Валидация</h3><p>Инструкция по проверке и исправлению данных на карте кластеров.</p></div>
+                        <div class="arrow">→</div>
+                    </div>
+                </div>
             </div>
-            <div class="sources-card">
-                <h2>Авторство</h2>
-                <ul class="sources-list">
-                    <li>
-                        <strong>Иконка «Главная»</strong><br>
-                        <a href="https://www.flaticon.com/ru/free-icons/-" target="_blank">Главная кнопка иконки от icon_small - Flaticon</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </main>
 
-    <!-- Подключение скриптов -->
+            <!-- Другие страницы -->
+            <div id="page-glossary" class="page">
+                <div class="hero-text"><h1>ГЛОССАРИЙ</h1><p>Термины</p></div>
+            </div>
+            <div id="page-body-elements" class="page">
+                <div class="hero-text"><h1>ЭЛЕМЕНТЫ ТЕЛА</h1></div>
+            </div>
+            <div id="page-object-elements" class="page">
+                <div class="hero-text"><h1>РАБОТА С ПРЕДМЕТОМ</h1></div>
+            </div>
+            <div id="page-da" class="page">
+                <div class="hero-text"><h1>КРИТЕРИИ DA</h1></div>
+            </div>
+            <div id="page-gymnasts-august" class="page">
+                <div class="hero-text"><h1>ГИМНАСТКИ АВГУСТ</h1></div>
+            </div>
+            <div id="page-validation" class="page">
+                <div class="hero-text"><h1>ВАЛИДАЦИЯ</h1></div>
+            </div>
+            <div id="page-sources" class="page">
+                <div class="hero-text"><h1>ИСТОЧНИКИ</h1></div>
+            </div>
+        </main>
+    </div>
+
     <script src="js/script.js"></script>
 </body>
 </html>
