@@ -12,7 +12,7 @@ iconFiles.forEach(file => {
         
         if(className) {
             document.querySelectorAll(className).forEach(el => {
-                el.parentElement.classList.add('img-failed');
+                if(el.parentElement) el.parentElement.classList.add('img-failed');
             });
         }
     };
@@ -29,6 +29,7 @@ function navigate(pageId) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // Обновляем активные пункты
     const navBtns = document.querySelectorAll('.sidebar-nav .nav-btn');
     navBtns.forEach(btn => btn.classList.remove('active'));
     
@@ -36,14 +37,15 @@ function navigate(pageId) {
     if (activeBtn) activeBtn.classList.add('active');
 }
 
-// Функция скрытия/раскрытия меню при клике на логотип
+// Функция сворачивания/разворачивания меню
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
 }
 
 // Инициализация при загрузке
 window.addEventListener('DOMContentLoaded', () => {
-    if (window.innerWidth <= 768) {
+    // На мобильных устройствах (ширина < 900px) меню по умолчанию свернуто (узкая полоса)
+    if (window.innerWidth <= 900) {
         document.body.classList.remove('menu-open');
     } else {
         document.body.classList.add('menu-open');
