@@ -229,16 +229,10 @@ details.nav-group.has-active > summary { color: var(--bg-sidebar); }
     box-shadow: 0 10px 30px rgba(40, 39, 29, 0.15), 0 0 0 1px rgba(74, 82, 64, 0.1);
     z-index: 2000;
     flex-direction: column;
-    animation: flyoutFadeIn 0.2s ease forwards;
 }
 
 details.nav-group[open] .sub-nav {
     display: flex;
-}
-
-@keyframes flyoutFadeIn {
-    from { opacity: 0; transform: translateX(-10px); }
-    to { opacity: 1; transform: translateX(0); }
 }
 
 .flyout-title {
@@ -286,19 +280,18 @@ main { width: 100%; padding: 3rem 2.5rem; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
 /* --- ГЛАВНЫЙ БЛОК (HERO) --- */
-/* Десктоп и альбомная ориентация: Картинка слева, текст справа */
 .hero-split { 
     display: flex; 
-    align-items: center; /* Центрируем по вертикали */
+    align-items: center; 
     justify-content: flex-start; 
     margin-bottom: 5rem; 
-    gap: 4rem; /* Отступ между картинкой и текстом */
+    gap: 4rem;
 }
 
 .hero-image-container { 
     flex: 0 0 auto;
-    width: 180px; /* Размер по высоте надписи */
-    height: 220px; 
+    width: 220px; /* Немного увеличили размер */
+    height: 260px; 
     position: relative; 
 }
 
@@ -319,10 +312,10 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 .hero-decor-1 { 
     position: absolute; 
-    top: -15px; 
-    right: -15px; 
-    width: 120px; 
-    height: 120px; 
+    top: -20px; 
+    right: -20px; 
+    width: 140px; 
+    height: 140px; 
     background-color: var(--accent-orange); 
     border-radius: 50%; 
     z-index: 1; 
@@ -331,10 +324,10 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 .hero-decor-2 { 
     position: absolute; 
-    bottom: -15px; 
-    left: -15px; 
-    width: 80px; 
-    height: 80px; 
+    bottom: -20px; 
+    left: -20px; 
+    width: 100px; 
+    height: 100px; 
     background-color: var(--bg-sidebar); 
     border-radius: 50%; 
     z-index: 1; 
@@ -346,15 +339,16 @@ main { width: 100%; padding: 3rem 2.5rem; }
     text-align: left;
 }
 
+/* УВЕЛИЧЕН ШРИФТ */
 .hero-text h1 { 
-    font-size: 5rem; 
+    font-size: 5.2rem; 
     color: var(--text-main); 
     margin-bottom: 0.5rem; 
-    line-height: 0.9; 
+    line-height: 0.95; 
 }
 
 .hero-text p { 
-    font-size: 1.5rem; 
+    font-size: 1.6rem; 
     color: var(--accent-orange); 
     font-family: 'Bebas Neue', sans-serif; 
     margin-bottom: 1.5rem; 
@@ -404,7 +398,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .card-icon-circle .nav-icon-img { width: 26px; height: 26px; }
 .card-icon-circle .fallback-svg { width: 26px; height: 26px; }
 
-/* Увеличенная иконка для карточки "Элементы тела" */
 .home-card[data-page="body-elements"] .card-icon-circle .nav-icon-img {
     width: 38px;
     height: 38px;
@@ -505,7 +498,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 /* --- АДАПТИВНОСТЬ --- */
 
-/* Мобильные устройства в портретной ориентации */
 @media (max-width: 900px) and (orientation: portrait) {
     .hero-split { 
         flex-direction: column; 
@@ -514,15 +506,15 @@ main { width: 100%; padding: 3rem 2.5rem; }
         gap: 2rem;
     }
     .hero-image-container { 
-        width: 220px; /* Чуть меньше размер */
+        width: 220px;
         height: 260px; 
         margin-bottom: 1rem;
     }
-    .hero-decor-1 { width: 130px; height: 130px; top: -15px; right: -15px; }
-    .hero-decor-2 { width: 90px; height: 90px; bottom: -15px; left: -15px; }
+    .hero-decor-1 { width: 140px; height: 140px; top: -20px; right: -20px; }
+    .hero-decor-2 { width: 100px; height: 100px; bottom: -20px; left: -20px; }
     
     .hero-text { text-align: center; }
-    .hero-text h1 { font-size: 3rem; }
+    .hero-text h1 { font-size: 3.8rem; }
     .header-search { display: none; }
     main { padding: 2rem 1.5rem; }
     .page-header h1 { font-size: 3rem; }
@@ -531,10 +523,9 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .details-content { padding: 0 1.5rem 1.5rem 1.5rem; }
 }
 
-/* Мобильные устройства в альбомной ориентации - оставляем как на десктопе (в строку) */
 @media (max-width: 900px) and (orientation: landscape) {
     .hero-text h1 { font-size: 3.5rem; }
-    .hero-image-container { width: 140px; height: 180px; }
+    .hero-image-container { width: 180px; height: 220px; }
     .header-search { display: none; }
     main { padding: 2rem 1.5rem; }
 }
