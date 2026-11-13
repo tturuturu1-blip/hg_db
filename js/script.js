@@ -37,66 +37,66 @@
         });
     })();
 
-    // --- ЗАКРЫТИЕ ВСПЛЫВАЮЩИХ ОКОН ---
+    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ ---
+    const isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let closeTimeout;
+
+    function positionFlyout(details) {
+        const summary = details.querySelector('summary');
+        const subNav = details.querySelector('.sub-nav');
+        if (summary && subNav) {
+            const rect = summary.getBoundingClientRect();
+            subNav.style.top = `${rect.top}px`;
+            subNav.style.left = `${rect.right + 15}px`;
+        }
+    }
+
+    function openFlyout(details) {
+        clearTimeout(closeTimeout);
+        // Закрываем другие открытые окна
+        document.querySelectorAll('details.nav-group').forEach(d => {
+            if (d !== details) d.removeAttribute('open');
+        });
+        
+        // Открываем нужное и позиционируем
+        if (!details.hasAttribute('open')) {
+            details.setAttribute('open', '');
+            positionFlyout(details);
+        }
+    }
+
     function closeAllFlyouts() {
         document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
     }
 
-    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ (Hover для ПК / Click для тача) ---
-    const isDesktopHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-
-    document.querySelectorAll('details.nav-group').forEach(details => {
-        const summary = details.querySelector('summary');
-        const subNav = details.querySelector('.sub-nav');
-
-        // Функция открытия и позиционирования
-        function openFlyout() {
-            document.querySelectorAll('details.nav-group').forEach(d => {
-                if (d !== details) d.removeAttribute('open');
+    if (isDesktop) {
+        // Логика для ПК (наведение с задержкой)
+        document.querySelectorAll('details.nav-group').forEach(details => {
+            details.addEventListener('mouseenter', () => openFlyout(details));
+            details.addEventListener('mouseleave', () => {
+                closeTimeout = setTimeout(closeAllFlyouts, 150);
             });
-            details.setAttribute('open', '');
             
-            if (summary && subNav) {
-                const rect = summary.getBoundingClientRect();
-                subNav.style.top = `${rect.top}px`;
-                subNav.style.left = `${rect.right + 15}px`;
-            }
-        }
+            // Блокируем клик на десктопе, чтобы не срабатывало стандартное поведение details
+            const summary = details.querySelector('summary');
+            if (summary) summary.addEventListener('click', (e) => e.preventDefault());
+        });
+    } else {
+        // Логика для мобильных (клик)
+        document.querySelectorAll('details.nav-group').forEach(details => {
+            const summary = details.querySelector('summary');
+            if (!summary) return;
 
-        // Функция закрытия
-        function closeFlyout() {
-            details.removeAttribute('open');
-        }
-
-        if (isDesktopHover) {
-            // Логика для компьютеров (наведение)
-            details.addEventListener('mouseenter', openFlyout);
-            details.addEventListener('mouseleave', (e) => {
-                // Если курсор ушел в само выпадающее окно, не закрываем
-                if (subNav && subNav.contains(e.relatedTarget)) return;
-                closeFlyout();
-            });
-
-            if (subNav) {
-                subNav.addEventListener('mouseenter', openFlyout);
-                subNav.addEventListener('mouseleave', () => closeFlyout());
-            }
-            
-            // Блокируем клик, чтобы не было двойного срабатывания
-            summary.addEventListener('click', (e) => e.preventDefault());
-
-        } else {
-            // Логика для мобильных (клик)
             summary.addEventListener('click', (e) => {
                 e.preventDefault();
-                const isOpen = details.hasAttribute('open');
-                closeAllFlyouts(); // Закрываем все перед открытием
-                if (!isOpen) {
-                    openFlyout();
+                if (details.hasAttribute('open')) {
+                    closeAllFlyouts();
+                } else {
+                    openFlyout(details);
                 }
             });
-        }
-    });
+        });
+    }
 
     // --- ГРУППЫ ---
     function syncGroupsWithActive() {
