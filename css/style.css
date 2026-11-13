@@ -70,7 +70,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem 0 20px;
-    z-index: 1000; /* Уменьшен, чтобы панель была выше */
+    z-index: 1000;
     color: var(--bg-page);
 }
 
@@ -124,7 +124,7 @@ header {
     padding: 20px 0;
     overflow-y: auto;
     overflow-x: hidden;
-    z-index: 1050; /* Выше шапки, чтобы окна не перекрывались */
+    z-index: 1050; 
 }
 
 .sidebar::-webkit-scrollbar { width: 6px; }
@@ -227,7 +227,7 @@ details.nav-group.has-active > summary { color: var(--bg-sidebar); }
     padding: 12px;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(40, 39, 29, 0.15), 0 0 0 1px rgba(74, 82, 64, 0.1);
-    z-index: 2000; /* Убеждаемся, что окно выше всего */
+    z-index: 2000;
     flex-direction: column;
     animation: flyoutFadeIn 0.2s ease forwards;
 }
@@ -394,6 +394,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 1.5rem; color: #FFF;
 }
+
 .card-icon-circle .nav-icon-img { width: 26px; height: 26px; }
 .card-icon-circle .fallback-svg { width: 26px; height: 26px; }
 
@@ -485,6 +486,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .sources-list a:hover { color: var(--accent-orange); }
 
 /* --- ИКОНКИ (MASK) --- */
+/* Все иконки теперь берутся из папки icon */
 .icon-home { -webkit-mask-image: url('../icon/home.png'); mask-image: url('../icon/home.png'); }
 .icon-gymnast { -webkit-mask-image: url('../icon/gimnastka.png'); mask-image: url('../icon/gimnastka.png'); }
 .icon-ball { -webkit-mask-image: url('../icon/ball.png'); mask-image: url('../icon/ball.png'); }
@@ -492,9 +494,9 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .icon-projects { -webkit-mask-image: url('../icon/Projects.png'); mask-image: url('../icon/Projects.png'); }
 .icon-copyright { -webkit-mask-image: url('../icon/Copyright.png'); mask-image: url('../icon/Copyright.png'); }
 
-.icon-glossary { -webkit-mask-image: url('../images/Glossary.png'); mask-image: url('../images/Glossary.png'); }
-.icon-gymnasts-august { -webkit-mask-image: url('../images/GymnastsAugust.png'); mask-image: url('../images/GymnastsAugust.png'); }
-.icon-validation-new { -webkit-mask-image: url('../images/Validation.png'); mask-image: url('../images/Validation.png'); }
+.icon-glossary { -webkit-mask-image: url('../icon/Glossary.png'); mask-image: url('../icon/Glossary.png'); }
+.icon-gymnasts-august { -webkit-mask-image: url('../icon/GymnastsAugust.png'); mask-image: url('../icon/GymnastsAugust.png'); }
+.icon-validation-new { -webkit-mask-image: url('../icon/Validation.png'); mask-image: url('../icon/Validation.png'); }
 
 /* --- АДАПТИВНОСТЬ --- */
 @media (max-width: 900px) {
