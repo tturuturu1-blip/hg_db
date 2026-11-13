@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="icon/gimnastka.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="menu-open">
+<body>
 
     <!-- ОБЕРТКА ДЛЯ КОНТЕНТА -->
     <div class="main-wrapper">
@@ -16,12 +16,12 @@
         <!-- ШАПКА -->
         <header>
             <div class="header-left">
-                <button type="button" class="header-logo-area" id="menu-toggle" aria-label="Открыть или скрыть меню" aria-controls="sidebar" aria-expanded="true">
-                    <div class="header-logo-icon" title="Открыть/Скрыть меню">
+                <div class="header-logo-area">
+                    <div class="header-logo-icon">
                         <div class="nav-icon-img icon-gymnast" aria-hidden="true"></div>
                     </div>
                     <div class="logo-text">СПРАВОЧНИК<br>ПО РАЗМЕТКЕ</div>
-                </button>
+                </div>
             </div>
             
             <div class="header-search">
@@ -33,7 +33,6 @@
         <!-- ЛЕВОЕ БОКОВОЕ МЕНЮ -->
         <aside class="sidebar" id="sidebar" aria-label="Основная навигация">
             <nav class="sidebar-nav">
-                <!-- Главная -->
                 <a href="#home" class="nav-btn active" data-page="home" id="nav-home" aria-current="page" title="Главная">
                     <div class="icon-wrapper">
                         <div class="nav-icon-img icon-home" aria-hidden="true"></div>
@@ -42,9 +41,8 @@
                     <span class="nav-text">Главная</span>
                 </a>
 
-                <!-- База знаний (Dropdown) -->
                 <details class="nav-group">
-                    <summary>
+                    <summary title="База знаний">
                         <div class="icon-wrapper">
                             <div class="nav-icon-img icon-knowledgebase" aria-hidden="true"></div>
                             <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
@@ -61,9 +59,8 @@
                     </div>
                 </details>
 
-                <!-- Разметка проектов (Dropdown) -->
                 <details class="nav-group">
-                    <summary>
+                    <summary title="Разметка проектов">
                         <div class="icon-wrapper">
                             <div class="nav-icon-img icon-projects" aria-hidden="true"></div>
                             <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
@@ -81,7 +78,6 @@
                     </div>
                 </details>
 
-                <!-- Источники -->
                 <a href="#sources" class="nav-btn" data-page="sources" id="nav-sources" title="Источники">
                     <div class="icon-wrapper">
                         <div class="nav-icon-img icon-copyright" aria-hidden="true"></div>
@@ -105,80 +101,93 @@
                         <div class="hero-decor-1" aria-hidden="true"></div>
                         <div class="hero-decor-2" aria-hidden="true"></div>
                         <div class="hero-img-wrapper">
-                            <img src="images/websiteheader.jpg" alt="Гимнастка" width="350" height="400">
+                            <img src="images/websiteheader.jpg" alt="Гимнастка" width="450" height="550">
                         </div>
                     </div>
                 </div>
 
-                <div class="home-grid">
-                    <a href="#glossary" class="home-card" data-page="glossary">
-                        <div class="card-icon-circle bg-orange" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
-                        </div>
-                        <div>
-                            <h3>Глоссарий</h3>
-                            <p>Термины и их сокращения, используемые в разметке.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                    
-                    <a href="#body-elements" class="home-card" data-page="body-elements">
-                        <div class="card-icon-circle bg-green" aria-hidden="true">
-                            <div class="nav-icon-img icon-gymnast"></div>
-                            <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
-                        </div>
-                        <div>
-                            <h3>Элементы тела</h3>
-                            <p>Описание равновесий, вращений, прыжков и других элементов.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                    
-                    <a href="#object-elements" class="home-card" data-page="object-elements">
-                        <div class="card-icon-circle bg-dark" aria-hidden="true">
-                            <div class="nav-icon-img icon-ball"></div>
-                            <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
-                        </div>
-                        <div>
-                            <h3>Работа с предметом</h3>
-                            <p>Информация о разметке элементов с предметами.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                    
-                    <a href="#da" class="home-card" data-page="da">
-                        <div class="card-icon-circle bg-orange" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                        </div>
-                        <div>
-                            <h3>DA</h3>
-                            <p>Критерии элементов DA и особенности их разметки.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                    
-                    <a href="#gymnasts-august" class="home-card" data-page="gymnasts-august">
-                        <div class="card-icon-circle bg-green" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                        </div>
-                        <div>
-                            <h3>Гимнастки август</h3>
-                            <p>Общая информация и основные шаги в разметке.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                    
-                    <a href="#validation" class="home-card" data-page="validation">
-                        <div class="card-icon-circle bg-dark" aria-hidden="true">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
-                        </div>
-                        <div>
-                            <h3>Валидация</h3>
-                            <p>Инструкция по проверке и исправлению данных на карте кластеров.</p>
-                        </div>
-                        <div class="arrow">→</div>
-                    </a>
-                </div>
+                <!-- РАЗДЕЛ: БАЗА ЗНАНИЙ -->
+                <section class="home-section">
+                    <h2 class="section-title">База знаний</h2>
+                    <div class="home-grid">
+                        <a href="#glossary" class="home-card" data-page="glossary">
+                            <div class="card-icon-circle bg-orange" aria-hidden="true">
+                                <div class="nav-icon-img icon-glossary"></div>
+                                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h3>Глоссарий</h3>
+                                <p>Термины и их сокращения, используемые в разметке.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                        
+                        <a href="#body-elements" class="home-card" data-page="body-elements">
+                            <div class="card-icon-circle bg-green" aria-hidden="true">
+                                <div class="nav-icon-img icon-gymnast"></div>
+                                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
+                            </div>
+                            <div>
+                                <h3>Элементы тела</h3>
+                                <p>Описание равновесий, вращений, прыжков и других элементов.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                        
+                        <a href="#object-elements" class="home-card" data-page="object-elements">
+                            <div class="card-icon-circle bg-dark" aria-hidden="true">
+                                <div class="nav-icon-img icon-ball"></div>
+                                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path><path d="M2 12h20"></path></svg>
+                            </div>
+                            <div>
+                                <h3>Работа с предметом</h3>
+                                <p>Информация о разметке элементов с предметами.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                        
+                        <a href="#da" class="home-card" data-page="da">
+                            <div class="card-icon-circle bg-orange" aria-hidden="true">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            </div>
+                            <div>
+                                <h3>DA</h3>
+                                <p>Критерии элементов DA и особенности их разметки.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                    </div>
+                </section>
+
+                <!-- РАЗДЕЛ: РАЗМЕТКА ПРОЕКТОВ -->
+                <section class="home-section">
+                    <h2 class="section-title">Разметка проектов</h2>
+                    <div class="home-grid">
+                        <a href="#gymnasts-august" class="home-card" data-page="gymnasts-august">
+                            <div class="card-icon-circle bg-green" aria-hidden="true">
+                                <div class="nav-icon-img icon-gymnasts-august"></div>
+                                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div>
+                                <h3>Гимнастки август</h3>
+                                <p>Общая информация и основные шаги в разметке.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                        
+                        <a href="#validation" class="home-card" data-page="validation">
+                            <div class="card-icon-circle bg-dark" aria-hidden="true">
+                                <div class="nav-icon-img icon-validation-new"></div>
+                                <svg class="fallback-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+                            </div>
+                            <div>
+                                <h3>Валидация</h3>
+                                <p>Инструкция по проверке и исправлению данных на карте кластеров.</p>
+                            </div>
+                            <div class="arrow">→</div>
+                        </a>
+                    </div>
+                </section>
             </div>
 
             <!-- СТРАНИЦА: ГЛОССАРИЙ -->
@@ -434,6 +443,18 @@
                         <li>
                             <strong>Иконка «Разметка проектов» (Контрольный список)</strong><br>
                             <a href="https://www.flaticon.com/ru/free-icons/-" title="контрольный список иконки" target="_blank" rel="noopener noreferrer">Контрольный список иконки от Iamkikirizky - Flaticon</a>
+                        </li>
+                        <li>
+                            <strong>Иконка «Глоссарий» (Словарь)</strong><br>
+                            <a href="https://www.flaticon.com/ru/free-icons/" title="Словарь иконки" target="_blank" rel="noopener noreferrer">Словарь иконки от Magnific - Flaticon</a>
+                        </li>
+                        <li>
+                            <strong>Иконка «Гимнастки август»</strong><br>
+                            <a href="https://www.flaticon.com/ru/free-icons/" title=" иконки" target="_blank" rel="noopener noreferrer"> иконки от Park Jisun - Flaticon</a>
+                        </li>
+                        <li>
+                            <strong>Иконка «Валидация» (Контроль качества)</strong><br>
+                            <a href="https://www.flaticon.com/ru/free-icons/-" title="контроль качества иконки" target="_blank" rel="noopener noreferrer">Контроль качества иконки от zero_wing - Flaticon</a>
                         </li>
                     </ul>
                     <p style="text-align: center; margin-top: 3rem; font-size: 0.9rem; color: var(--text-light); font-family: 'Raleway', sans-serif; text-transform: uppercase;">
