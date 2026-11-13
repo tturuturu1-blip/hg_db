@@ -1,7 +1,6 @@
 (function () {
     'use strict';
 
-    const MOBILE_BP = 900;
     const DEFAULT_PAGE = 'home';
     const PAGE_IDS = [
         'home', 'glossary', 'body-elements', 'object-elements', 'da',
@@ -9,11 +8,8 @@
         'gymnastics-check', 'validation', 'sources'
     ];
 
-    const body = document.body;
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.getElementById('sidebar');
-
-    const isMobile = () => window.matchMedia(`(max-width: ${MOBILE_BP}px)`).matches;
 
     function normalizeHash(hash) {
         const id = (hash || '').replace(/^#/, '');
@@ -23,12 +19,18 @@
     // --- ИКОНКИ: ФОЛБЭК ---
     (function checkIcons() {
         const icons = [
-            { file: 'home.png',          cls: '.icon-home' },
-            { file: 'gimnastka.png',     cls: '.icon-gymnast' },
-            { file: 'ball.png',          cls: '.icon-ball' },
-            { file: 'Knowledgebase.png', cls: '.icon-knowledgebase' },
-            { file: 'Projects.png',      cls: '.icon-projects' },
-            { file: 'Copyright.png',     cls: '.icon-copyright' }
+            // Из папки icon/
+            { file: 'icon/home.png',          cls: '.icon-home' },
+            { file: 'icon/gimnastka.png',     cls: '.icon-gymnast' },
+            { file: 'icon/ball.png',          cls: '.icon-ball' },
+            { file: 'icon/Knowledgebase.png', cls: '.icon-knowledgebase' },
+            { file: 'icon/Projects.png',      cls: '.icon-projects' },
+            { file: 'icon/Copyright.png',     cls: '.icon-copyright' },
+            
+            // Из папки images/
+            { file: 'images/Glossary.png',       cls: '.icon-glossary' },
+            { file: 'images/GymnastsAugust.png', cls: '.icon-gymnasts-august' },
+            { file: 'images/Validation.png',     cls: '.icon-validation-new' }
         ];
         icons.forEach(({ file, cls }) => {
             const img = new Image();
@@ -37,35 +39,17 @@
                     if (el.parentElement) el.parentElement.classList.add('img-failed');
                 });
             };
-            img.src = `icon/${file}`;
+            img.src = file;
         });
     })();
 
-    // --- МЕНЮ ---
-    function setMenu(open) {
-        const shouldOpen = typeof open === 'boolean' ? open : !body.classList.contains('menu-open');
-        body.classList.toggle('menu-open', shouldOpen);
-        if (menuToggle) menuToggle.setAttribute('aria-expanded', String(shouldOpen));
-        
-        document.querySelectorAll('.sub-nav').forEach(nav => {
-            nav.style.top = '';
-            nav.style.left = '';
-        });
-        
-        closeAllFlyouts(); 
-    }
-
-    function toggleMenu() {
-        setMenu(!body.classList.contains('menu-open'));
-    }
-
+    // --- ЗАКРЫТИЕ ВСПЛЫВАЮЩИХ ОКОН ---
     function closeAllFlyouts() {
         document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
     }
 
     // --- ПОЗИЦИОНИРОВАНИЕ FLYOUT ---
     function updateFlyoutPosition(detailsEl) {
-        if (body.classList.contains('menu-open')) return; 
         if (!detailsEl.hasAttribute('open')) return;
 
         const summary = detailsEl.querySelector('summary');
@@ -80,12 +64,10 @@
 
     document.querySelectorAll('details.nav-group').forEach(details => {
         details.addEventListener('toggle', () => {
-            if (!body.classList.contains('menu-open')) {
-                if (details.hasAttribute('open')) {
-                    document.querySelectorAll('details.nav-group').forEach(other => {
-                        if (other !== details) other.removeAttribute('open');
-                    });
-                }
+            if (details.hasAttribute('open')) {
+                document.querySelectorAll('details.nav-group').forEach(other => {
+                    if (other !== details) other.removeAttribute('open');
+                });
                 setTimeout(() => updateFlyoutPosition(details), 10);
             }
         });
@@ -96,9 +78,6 @@
         document.querySelectorAll('details.nav-group').forEach(group => {
             const hasActive = !!group.querySelector('.sub-nav .nav-btn.active');
             group.classList.toggle('has-active', hasActive);
-            if (hasActive && body.classList.contains('menu-open')) {
-                group.setAttribute('open', '');
-            }
         });
     }
 
@@ -143,14 +122,11 @@
         }
 
         if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (isMobile()) setMenu(false);
         
         closeAllFlyouts(); 
     }
 
     // --- ОБРАБОТЧИКИ ---
-    if (menuToggle) menuToggle.addEventListener('click', toggleMenu);
-
     document.addEventListener('click', (e) => {
         const link = e.target.closest('[data-page]');
         if (link) {
@@ -160,7 +136,7 @@
             return;
         }
 
-        if (!body.classList.contains('menu-open') && e.target.closest('details.nav-group') === null) {
+        if (e.target.closest('details.nav-group') === null) {
             closeAllFlyouts();
         }
     });
@@ -169,31 +145,16 @@
         const id = normalizeHash(location.hash);
         renderPage(id);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        if (isMobile()) setMenu(false);
     });
-
-    let lastIsMobile = isMobile();
-    const mq = window.matchMedia(`(max-width: ${MOBILE_BP}px)`);
-    const onBreakpointChange = () => {
-        const nowMobile = isMobile();
-        if (nowMobile !== lastIsMobile) {
-            lastIsMobile = nowMobile;
-            setMenu(!nowMobile);
-        }
-    };
-    if (typeof mq.addEventListener === 'function') mq.addEventListener('change', onBreakpointChange);
-    else if (typeof mq.addListener === 'function') mq.addListener(onBreakpointChange);
 
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeAllFlyouts();
-            if (isMobile() && body.classList.contains('menu-open')) setMenu(false);
         }
     });
 
     // --- СТАРТ ---
     document.addEventListener('DOMContentLoaded', () => {
-        setMenu(!isMobile());
         const initialId = normalizeHash(location.hash);
         if (!location.hash || initialId !== location.hash.replace(/^#/, '')) {
             history.replaceState(null, '', '#' + initialId);
@@ -203,5 +164,4 @@
     });
 
     window.navigate = navigate;
-    window.toggleMenu = toggleMenu;
 })();
