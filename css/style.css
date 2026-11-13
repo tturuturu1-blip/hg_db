@@ -248,7 +248,7 @@ details.nav-group[open] .summary-arrow { transform: rotate(180deg); }
     position: relative;
 }
 
-.flyout-title { display: none; } /* Скрываем заголовок в обычном состоянии */
+.flyout-title { display: none; } 
 
 .sub-nav .nav-btn {
     padding: 8px 10px 8px 15px;
@@ -340,7 +340,6 @@ body:not(.menu-open) .flyout-title {
     margin-bottom: 8px;
 }
 
-/* Выравнивание ссылок по левому краю в flyout */
 body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn {
     justify-content: flex-start;
     text-align: left;
@@ -369,8 +368,7 @@ body:not(.menu-open) details.nav-group[open] .sub-nav .nav-btn.active::before {
     display: none; 
 }
 
-/* --- ФИКС СДВИГА ТЕКСТА В РАЗВЕРНУТОМ МЕНЮ --- */
-/* Принудительно сбрасываем все inline-стили (top/left), если они остались от flyout */
+/* Фикс сдвига текста в развернутом меню */
 body.menu-open .sub-nav {
     position: relative !important;
     top: auto !important;
@@ -424,6 +422,18 @@ main { width: 100%; padding: 3rem 2.5rem; }
 }
 .home-card * { text-decoration: none !important; }
 .home-card:hover { transform: translateY(-8px); border-color: var(--bg-sidebar); }
+
+.card-icon-circle {
+    width: 50px; height: 50px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.5rem; color: #FFF;
+}
+.card-icon-circle .nav-icon-img { width: 26px; height: 26px; }
+.card-icon-circle .fallback-svg { width: 26px; height: 26px; }
+
+.bg-orange { background-color: var(--accent-orange); }
+.bg-green { background-color: var(--bg-sidebar); }
+.bg-dark { background-color: var(--bg-header); }
 
 .home-card h3 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 2rem; }
 .home-card p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 1.5rem; }
