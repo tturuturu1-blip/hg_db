@@ -16,7 +16,6 @@
     // --- ИКОНКИ: ФОЛБЭК ---
     (function checkIcons() {
         const icons = [
-            // Все картинки в папке icon/
             { file: 'icon/home.png',          cls: '.icon-home' },
             { file: 'icon/gimnastka.png',     cls: '.icon-gymnast' },
             { file: 'icon/ball.png',          cls: '.icon-ball' },
@@ -43,27 +42,60 @@
         document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
     }
 
-    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ ---
-    document.querySelectorAll('details.nav-group > summary').forEach(summary => {
-        summary.addEventListener('click', (e) => {
-            e.preventDefault();
-            const details = summary.parentElement;
-            const isOpen = details.hasAttribute('open');
+    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ (Hover для ПК / Click для тача) ---
+    const isDesktopHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-            document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
+    document.querySelectorAll('details.nav-group').forEach(details => {
+        const summary = details.querySelector('summary');
+        const subNav = details.querySelector('.sub-nav');
 
-            if (!isOpen) {
-                details.setAttribute('open', '');
-                
+        // Функция открытия и позиционирования
+        function openFlyout() {
+            document.querySelectorAll('details.nav-group').forEach(d => {
+                if (d !== details) d.removeAttribute('open');
+            });
+            details.setAttribute('open', '');
+            
+            if (summary && subNav) {
                 const rect = summary.getBoundingClientRect();
-                const subNav = details.querySelector('.sub-nav');
-                
-                if (subNav) {
-                    subNav.style.top = `${rect.top}px`;
-                    subNav.style.left = `${rect.right + 15}px`;
-                }
+                subNav.style.top = `${rect.top}px`;
+                subNav.style.left = `${rect.right + 15}px`;
             }
-        });
+        }
+
+        // Функция закрытия
+        function closeFlyout() {
+            details.removeAttribute('open');
+        }
+
+        if (isDesktopHover) {
+            // Логика для компьютеров (наведение)
+            details.addEventListener('mouseenter', openFlyout);
+            details.addEventListener('mouseleave', (e) => {
+                // Если курсор ушел в само выпадающее окно, не закрываем
+                if (subNav && subNav.contains(e.relatedTarget)) return;
+                closeFlyout();
+            });
+
+            if (subNav) {
+                subNav.addEventListener('mouseenter', openFlyout);
+                subNav.addEventListener('mouseleave', () => closeFlyout());
+            }
+            
+            // Блокируем клик, чтобы не было двойного срабатывания
+            summary.addEventListener('click', (e) => e.preventDefault());
+
+        } else {
+            // Логика для мобильных (клик)
+            summary.addEventListener('click', (e) => {
+                e.preventDefault();
+                const isOpen = details.hasAttribute('open');
+                closeAllFlyouts(); // Закрываем все перед открытием
+                if (!isOpen) {
+                    openFlyout();
+                }
+            });
+        }
     });
 
     // --- ГРУППЫ ---
