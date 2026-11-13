@@ -16,15 +16,16 @@
     // --- ИКОНКИ: ФОЛБЭК ---
     (function checkIcons() {
         const icons = [
+            // Все картинки в папке icon/
             { file: 'icon/home.png',          cls: '.icon-home' },
             { file: 'icon/gimnastka.png',     cls: '.icon-gymnast' },
             { file: 'icon/ball.png',          cls: '.icon-ball' },
             { file: 'icon/Knowledgebase.png', cls: '.icon-knowledgebase' },
             { file: 'icon/Projects.png',      cls: '.icon-projects' },
             { file: 'icon/Copyright.png',     cls: '.icon-copyright' },
-            { file: 'images/Glossary.png',       cls: '.icon-glossary' },
-            { file: 'images/GymnastsAugust.png', cls: '.icon-gymnasts-august' },
-            { file: 'images/Validation.png',     cls: '.icon-validation-new' }
+            { file: 'icon/Glossary.png',      cls: '.icon-glossary' },
+            { file: 'icon/GymnastsAugust.png',cls: '.icon-gymnasts-august' },
+            { file: 'icon/Validation.png',    cls: '.icon-validation-new' }
         ];
         icons.forEach(({ file, cls }) => {
             const img = new Image();
@@ -42,17 +43,15 @@
         document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
     }
 
-    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ (Кастомный клик) ---
+    // --- УПРАВЛЕНИЕ ВЫПАДАЮЩИМИ ОКНАМИ ---
     document.querySelectorAll('details.nav-group > summary').forEach(summary => {
         summary.addEventListener('click', (e) => {
-            e.preventDefault(); // Отключаем стандартное поведение details, чтобы не было двойных срабатываний
+            e.preventDefault();
             const details = summary.parentElement;
             const isOpen = details.hasAttribute('open');
 
-            // Сначала закрываем все остальные окна
             document.querySelectorAll('details.nav-group').forEach(d => d.removeAttribute('open'));
 
-            // Если текущее было закрыто — открываем и позиционируем
             if (!isOpen) {
                 details.setAttribute('open', '');
                 
@@ -60,7 +59,6 @@
                 const subNav = details.querySelector('.sub-nav');
                 
                 if (subNav) {
-                    // Выравниваем верх окна строго по верхнему краю иконки
                     subNav.style.top = `${rect.top}px`;
                     subNav.style.left = `${rect.right + 15}px`;
                 }
@@ -123,7 +121,6 @@
 
     // --- ОБРАБОТЧИКИ ---
     document.addEventListener('click', (e) => {
-        // Переход по ссылкам
         const link = e.target.closest('[data-page]');
         if (link) {
             if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -132,7 +129,6 @@
             return;
         }
 
-        // Закрытие при клике вне меню
         if (e.target.closest('details.nav-group') === null) {
             closeAllFlyouts();
         }
