@@ -2,56 +2,49 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Разметка гимнасток</title>
     <link rel="icon" type="image/png" href="icon/gimnastka.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- БОКОВОЕ МЕНЮ (ВСЕГДА СВЕРНУТОЕ НА ПК) -->
     <aside class="sidebar" id="sidebar">
         <nav class="sidebar-nav">
-            <a href="#" class="nav-btn active" onclick="navigate('home')" id="nav-home">
+            <a href="#home" class="nav-btn active" id="nav-home" title="Главная" aria-label="Главная">
                 <div class="nav-icon-wrapper"><div class="nav-icon-img icon-home"></div></div>
                 <span class="nav-text">Главная</span>
             </a>
-            
+
             <details class="nav-group">
-                <summary>
+                <summary title="База знаний" aria-label="База знаний">
                     <div class="nav-icon-wrapper"><div class="nav-icon-img icon-gymnast"></div></div>
                     <span class="nav-text">База знаний</span>
-                    <span class="summary-arrow nav-text">▼</span>
                 </summary>
                 <div class="sub-nav">
-                    <a href="#" class="nav-btn" onclick="navigate('glossary')" id="nav-glossary">Глоссарий</a>
-                    <a href="#" class="nav-btn" onclick="navigate('body-elements')" id="nav-body-elements">Элементы тела</a>
-                    <a href="#" class="nav-btn" onclick="navigate('object-elements')" id="nav-object-elements">Работа с предметом</a>
-                    <a href="#" class="nav-btn" onclick="navigate('da')" id="nav-da">DA</a>
+                    <a href="#glossary" class="nav-btn" id="nav-glossary">Глоссарий</a>
+                    <a href="#body-elements" class="nav-btn" id="nav-body-elements">Элементы тела</a>
+                    <a href="#object-elements" class="nav-btn" id="nav-object-elements">Работа с предметом</a>
+                    <a href="#da" class="nav-btn" id="nav-da">DA</a>
                 </div>
             </details>
 
             <details class="nav-group">
-                <summary>
+                <summary title="Разметка" aria-label="Разметка">
                     <div class="nav-icon-wrapper"><div class="nav-icon-img icon-validation"></div></div>
                     <span class="nav-text">Разметка</span>
-                    <span class="summary-arrow nav-text">▼</span>
                 </summary>
                 <div class="sub-nav">
-                    <a href="#" class="nav-btn" onclick="navigate('gymnasts-august')" id="nav-gymnasts-august">Гимнастки август</a>
-                    <a href="#" class="nav-btn" onclick="navigate('validation')" id="nav-validation">Валидация</a>
+                    <a href="#gymnasts-august" class="nav-btn" id="nav-gymnasts-august">Гимнастки август</a>
+                    <a href="#validation" class="nav-btn" id="nav-validation">Валидация</a>
                 </div>
             </details>
         </nav>
     </aside>
 
-    <!-- ОБЕРТКА ДЛЯ КОНТЕНТА -->
     <div class="main-wrapper">
-        
-        <!-- ШАПКА -->
         <header>
             <div class="header-left">
-                <!-- Убрали onclick, иконка больше не переключает меню -->
                 <div class="header-logo-area">
                     <div class="header-logo-icon">
                         <div class="nav-icon-img icon-gymnast"></div>
@@ -59,15 +52,15 @@
                     <div class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</div>
                 </div>
             </div>
-            
+
             <div class="header-search">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <input type="text" placeholder="Поиск...">
             </div>
         </header>
 
-        <!-- ОСНОВНОЙ КОНТЕНТ -->
         <main>
+            <!-- ГЛАВНАЯ -->
             <div id="page-home" class="page active">
                 <div class="hero-split">
                     <div class="hero-text">
@@ -78,43 +71,90 @@
                         <div class="hero-decor-1"></div>
                         <div class="hero-decor-2"></div>
                         <div class="hero-img-wrapper">
-                            <img src="images/websiteheader.jpg" alt="Гимнастка">
+                            <img src="images/websiteheader.jpg" alt="Гимнастка" loading="lazy">
                         </div>
                     </div>
                 </div>
 
                 <div class="home-grid">
-                    <div class="home-card" onclick="navigate('glossary')">
+                    <a href="#glossary" class="home-card">
                         <div class="card-icon-circle bg-orange">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                         </div>
                         <div><h3>Глоссарий</h3><p>Термины и их сокращения, используемые в разметке.</p></div>
                         <div class="arrow">→</div>
-                    </div>
-                    <div class="home-card" onclick="navigate('body-elements')">
+                    </a>
+                    <a href="#body-elements" class="home-card">
                         <div class="card-icon-circle bg-green">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"></circle><path d="M6 12h12"></path><path d="M12 5v14"></path><path d="M8 22l4-5 4 5"></path></svg>
                         </div>
                         <div><h3>Элементы тела</h3><p>Описание равновесий, вращений, прыжков и других элементов.</p></div>
                         <div class="arrow">→</div>
-                    </div>
-                    <div class="home-card" onclick="navigate('validation')">
+                    </a>
+                    <a href="#validation" class="home-card">
                         <div class="card-icon-circle bg-dark">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
                         </div>
-                        <div><h3>Валидация</h3><p>Инструкция по проверке и исправлению данных на карте кластеров.</p></div>
+                        <div><h3>Валидация</h3><p>Инструкция по проверке и исправлению данных.</p></div>
                         <div class="arrow">→</div>
-                    </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- Другие страницы -->
-            <div id="page-glossary" class="page"><div class="hero-text"><h1>ГЛОССАРИЙ</h1><p>Термины</p></div></div>
-            <div id="page-body-elements" class="page"><div class="hero-text"><h1>ЭЛЕМЕНТЫ ТЕЛА</h1></div></div>
-            <div id="page-object-elements" class="page"><div class="hero-text"><h1>РАБОТА С ПРЕДМЕТОМ</h1></div></div>
-            <div id="page-da" class="page"><div class="hero-text"><h1>КРИТЕРИИ DA</h1></div></div>
-            <div id="page-gymnasts-august" class="page"><div class="hero-text"><h1>ГИМНАСТКИ АВГУСТ</h1></div></div>
-            <div id="page-validation" class="page"><div class="hero-text"><h1>ВАЛИДАЦИЯ</h1></div></div>
+            <!-- ЗАГЛУШКИ РАЗДЕЛОВ -->
+            <div id="page-glossary" class="page">
+                <div class="hero-text"><h1>ГЛОССАРИЙ</h1><p>Термины и сокращения</p></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">📖</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Совсем скоро здесь появятся термины, их определения и сокращения, используемые в разметке гимнастических элементов.</p>
+                </div>
+            </div>
+
+            <div id="page-body-elements" class="page">
+                <div class="hero-text"><h1>ЭЛЕМЕНТЫ ТЕЛА</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">🤸</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь будут описаны равновесия, вращения, прыжки и другие элементы тела.</p>
+                </div>
+            </div>
+
+            <div id="page-object-elements" class="page">
+                <div class="hero-text"><h1>РАБОТА С ПРЕДМЕТОМ</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">🎯</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь появится описание работы с предметом (мяч, обруч, булавы, лента, скакалка).</p>
+                </div>
+            </div>
+
+            <div id="page-da" class="page">
+                <div class="hero-text"><h1>КРИТЕРИИ DA</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">⭐</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь будут изложены критерии DA и правила их применения.</p>
+                </div>
+            </div>
+
+            <div id="page-gymnasts-august" class="page">
+                <div class="hero-text"><h1>ГИМНАСТКИ АВГУСТ</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">📋</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь появятся списки спортсменок и материалы по разметке за август.</p>
+                </div>
+            </div>
+
+            <div id="page-validation" class="page">
+                <div class="hero-text"><h1>ВАЛИДАЦИЯ</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">✅</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь появится инструкция по проверке и исправлению данных на карте кластеров.</p>
+                </div>
+            </div>
         </main>
     </div>
 
