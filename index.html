@@ -9,16 +9,24 @@
 </head>
 <body>
 
+    <!-- БОКОВОЕ МЕНЮ (ПК) / НИЖНЯЯ ПАНЕЛЬ (МОБИЛЬНЫЕ) -->
     <aside class="sidebar" id="sidebar">
         <nav class="sidebar-nav">
+            
+            <!-- 1. ГЛАВНАЯ -->
             <a href="#home" class="nav-btn active" id="nav-home" title="Главная" aria-label="Главная">
-                <div class="nav-icon-wrapper"><div class="nav-icon-img icon-home"></div></div>
+                <div class="nav-icon-wrapper">
+                    <div class="nav-icon-img icon-home"></div>
+                </div>
                 <span class="nav-text">Главная</span>
             </a>
 
+            <!-- 2. БАЗА ЗНАНИЙ (ВЫПАДАЮЩЕЕ) -->
             <details class="nav-group">
                 <summary title="База знаний" aria-label="База знаний">
-                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-gymnast"></div></div>
+                    <div class="nav-icon-wrapper">
+                        <div class="nav-icon-img icon-gymnast"></div>
+                    </div>
                     <span class="nav-text">База знаний</span>
                 </summary>
                 <div class="sub-nav">
@@ -29,9 +37,12 @@
                 </div>
             </details>
 
+            <!-- 3. РАЗМЕТКА (ВЫПАДАЮЩЕЕ) -->
             <details class="nav-group">
                 <summary title="Разметка" aria-label="Разметка">
-                    <div class="nav-icon-wrapper"><div class="nav-icon-img icon-validation"></div></div>
+                    <div class="nav-icon-wrapper">
+                        <div class="nav-icon-img icon-validation"></div>
+                    </div>
                     <span class="nav-text">Разметка</span>
                 </summary>
                 <div class="sub-nav">
@@ -39,10 +50,26 @@
                     <a href="#validation" class="nav-btn" id="nav-validation">Валидация</a>
                 </div>
             </details>
+
+            <!-- 4. ИСТОЧНИКИ (НОВАЯ КНОПКА) -->
+            <a href="#sources" class="nav-btn" id="nav-sources" title="Источники" aria-label="Источники">
+                <div class="nav-icon-wrapper">
+                    <!-- Иконка книги (SVG) -->
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px;">
+                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                    </svg>
+                </div>
+                <span class="nav-text">Источники</span>
+            </a>
+
         </nav>
     </aside>
 
+    <!-- ОБЕРТКА ДЛЯ КОНТЕНТА -->
     <div class="main-wrapper">
+        
+        <!-- ШАПКА -->
         <header>
             <div class="header-left">
                 <div class="header-logo-area">
@@ -52,15 +79,16 @@
                     <div class="logo-text">РАЗМЕТКА<br>ГИМНАСТОК</div>
                 </div>
             </div>
-
+            
             <div class="header-search">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
                 <input type="text" placeholder="Поиск...">
             </div>
         </header>
 
+        <!-- ОСНОВНОЙ КОНТЕНТ -->
         <main>
-            <!-- ГЛАВНАЯ -->
+            <!-- ГЛАВНАЯ СТРАНИЦА -->
             <div id="page-home" class="page active">
                 <div class="hero-split">
                     <div class="hero-text">
@@ -101,7 +129,7 @@
                 </div>
             </div>
 
-            <!-- ЗАГЛУШКИ РАЗДЕЛОВ -->
+            <!-- СТРАНИЦА: ГЛОССАРИЙ -->
             <div id="page-glossary" class="page">
                 <div class="hero-text"><h1>ГЛОССАРИЙ</h1><p>Термины и сокращения</p></div>
                 <div class="page-placeholder">
@@ -111,6 +139,7 @@
                 </div>
             </div>
 
+            <!-- СТРАНИЦА: ЭЛЕМЕНТЫ ТЕЛА -->
             <div id="page-body-elements" class="page">
                 <div class="hero-text"><h1>ЭЛЕМЕНТЫ ТЕЛА</h1></div>
                 <div class="page-placeholder">
@@ -120,6 +149,7 @@
                 </div>
             </div>
 
+            <!-- СТРАНИЦА: РАБОТА С ПРЕДМЕТОМ -->
             <div id="page-object-elements" class="page">
                 <div class="hero-text"><h1>РАБОТА С ПРЕДМЕТОМ</h1></div>
                 <div class="page-placeholder">
@@ -129,6 +159,7 @@
                 </div>
             </div>
 
+            <!-- СТРАНИЦА: КРИТЕРИИ DA -->
             <div id="page-da" class="page">
                 <div class="hero-text"><h1>КРИТЕРИИ DA</h1></div>
                 <div class="page-placeholder">
@@ -138,6 +169,7 @@
                 </div>
             </div>
 
+            <!-- СТРАНИЦА: ГИМНАСТКИ АВГУСТ -->
             <div id="page-gymnasts-august" class="page">
                 <div class="hero-text"><h1>ГИМНАСТКИ АВГУСТ</h1></div>
                 <div class="page-placeholder">
@@ -147,6 +179,7 @@
                 </div>
             </div>
 
+            <!-- СТРАНИЦА: ВАЛИДАЦИЯ -->
             <div id="page-validation" class="page">
                 <div class="hero-text"><h1>ВАЛИДАЦИЯ</h1></div>
                 <div class="page-placeholder">
@@ -155,6 +188,17 @@
                     <p>Здесь появится инструкция по проверке и исправлению данных на карте кластеров.</p>
                 </div>
             </div>
+
+            <!-- СТРАНИЦА: ИСТОЧНИКИ (НОВАЯ) -->
+            <div id="page-sources" class="page">
+                <div class="hero-text"><h1>ИСТОЧНИКИ</h1></div>
+                <div class="page-placeholder">
+                    <div class="page-placeholder-icon">📚</div>
+                    <h2>Раздел наполняется</h2>
+                    <p>Здесь появятся ссылки на официальные правила, таблицы сложности и другие полезные материалы.</p>
+                </div>
+            </div>
+
         </main>
     </div>
 
