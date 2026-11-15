@@ -45,7 +45,6 @@
                         <span class="nav-text">База знаний</span>
                     </summary>
                     <div class="sub-nav">
-                        <!-- Заголовок меню -->
                         <div class="sub-nav-title">База знаний</div>
                         
                         <a href="#glossary" class="nav-btn" id="nav-glossary">
@@ -76,7 +75,6 @@
                         <span class="nav-text">Разметка</span>
                     </summary>
                     <div class="sub-nav">
-                        <!-- Заголовок меню -->
                         <div class="sub-nav-title">Разметка проектов</div>
 
                         <a href="#gymnasts-august" class="nav-btn" id="nav-gymnasts-august">
@@ -107,56 +105,85 @@
             <!-- ГЛАВНАЯ СТРАНИЦА -->
             <div id="page-home" class="page active">
                 <div class="hero-split">
+                    <!-- Текст и зеленый круг -->
                     <div class="hero-text">
                         <h1>РАЗМЕТКА ПРОЕКТОВ<br>ПО ГИМНАСТИКЕ</h1>
                         <p>База знаний и инструкции</p>
+                        <div class="hero-decor-2"></div>
                     </div>
                     
-                    <!-- Изображение с декоративными кругами -->
+                    <!-- Изображение и оранжевый круг -->
                     <div class="hero-image-container">
                         <div class="hero-img-wrapper">
                             <div class="hero-decor-1"></div>
-                            <div class="hero-decor-2"></div>
                             <img src="images/websiteheader.jpg" alt="Гимнастка" loading="lazy">
                         </div>
                     </div>
                 </div>
 
+                <!-- КАРТОЧКИ ПЕРЕХОДА -->
                 <div class="home-grid">
                     <a href="#glossary" class="home-card">
-                        <div class="card-icon-circle bg-orange">
-                            <div class="nav-icon-img icon-glossary"></div>
+                        <div class="card-header">
+                            <div class="card-icon-circle bg-orange">
+                                <div class="nav-icon-img icon-glossary"></div>
+                            </div>
+                            <h3>Глоссарий</h3>
                         </div>
-                        <div><h3>Глоссарий</h3><p>Термины и их сокращения, используемые в разметке.</p></div>
+                        <p>Термины и их сокращения, используемые в разметке.</p>
                         <div class="arrow">→</div>
                     </a>
                     <a href="#body-elements" class="home-card">
-                        <div class="card-icon-circle bg-green">
-                            <div class="nav-icon-img icon-gymnast"></div>
+                        <div class="card-header">
+                            <div class="card-icon-circle bg-green">
+                                <div class="nav-icon-img icon-gymnast"></div>
+                            </div>
+                            <h3>Элементы тела</h3>
                         </div>
-                        <div><h3>Элементы тела</h3><p>Описание равновесий, вращений, прыжков и других элементов.</p></div>
+                        <p>Описание равновесий, вращений, прыжков и других элементов.</p>
                         <div class="arrow">→</div>
                     </a>
                     <a href="#validation" class="home-card">
-                        <div class="card-icon-circle bg-dark">
-                            <div class="nav-icon-img icon-validation"></div>
+                        <div class="card-header">
+                            <div class="card-icon-circle bg-dark">
+                                <div class="nav-icon-img icon-validation"></div>
+                            </div>
+                            <h3>Валидация</h3>
                         </div>
-                        <div><h3>Валидация</h3><p>Инструкция по проверке и исправлению данных.</p></div>
+                        <p>Инструкция по проверке и исправлению данных.</p>
                         <div class="arrow">→</div>
                     </a>
                 </div>
             </div>
 
-            <!-- ЗАГЛУШКИ СТРАНИЦ -->
+            <!-- СТРАНИЦА: ГЛОССАРИЙ -->
             <div id="page-glossary" class="page">
-                <div class="hero-text"><h1>ГЛОССАРИЙ</h1><p>Термины и сокращения</p></div>
-                <div class="page-placeholder">
-                    <div class="page-placeholder-icon">📖</div>
-                    <h2>Раздел наполняется</h2>
-                    <p>Совсем скоро здесь появятся термины, их определения и сокращения.</p>
+                <div class="hero-text" style="margin-bottom: 2rem;">
+                    <h1>ГЛОССАРИЙ</h1>
+                    <p>Термины и сокращения</p>
+                </div>
+                <div class="text-content">
+                    <p><strong>Технические термины.</strong></p>
+                    <p><strong>ХГ</strong> — сокращение от «Художественная гимнастика».</p>
+                    <p><strong>Таймкод</strong> — временная метка, в формате «мм:сс.мсмсмс».</p>
+                    <p><strong>Фрагмент</strong> — отрезок, выделяемый на видео цветным боксом на протяжении всего времени выполнения действия и имеющий две временные метки: таймкод начала и таймкод конца. Фрагмент помимо временных меток содержит также описательную информацию о выполняемом гимнасткой действии: класс, название действия и чек-боксы.</p>
+                    <p><strong>Действие</strong> — движение тела спортсменки (в том числе статичное), относящиеся к определенной группе действий.</p>
+                    <p><strong>Класс действий</strong> — собирательный термин, характеризующий набор различных «действий», выполняемых гимнасткой во время выступления. К ним относятся: Техническое, Равновесие, Вращение, Прыжок, Преакробатический элемент, Вертикальное вращение, Динамический элемент с вращением R, Танцевальные шаги (см. подробнее в разделе «Объекты разметки и их описание»).</p>
+                    <p><strong>Действие прервано</strong> — действие спортсменки, которое не было выполнено в полной мере согласно правилам художественной гимнастики в связи с потерей предмета, потерей равновесия/падением или другими причинами.</p>
+                    
+                    <p style="margin-top: 1.5rem;"><strong>Спортивные термины</strong></p>
+                    <p><strong>Релеве</strong> — движение стопы опорной ноги, подъём на полупальцы с отрывом пятки от пола.</p>
+                    <p><strong>Турлян</strong> — медленный поворот вокруг себя на одной ноге без касания пола другой ногой, осуществляемый за счет перемещения пятки при подъеме на релеве (не считается вращением).</p>
+                    <p><strong>Плие</strong> — сгибание одной либо обеих ног / приседание на двух либо на одной ноге.</p>
+                    <p><strong>Динамическое равновесие</strong> — выполняются плавными последовательными движениями с переходом одной формы в другую без остановки в любой части равновесия.</p>
+                    <p><strong>Элемент</strong> — это минимальная, технически законченная единица движения, которая имеет четко описанную технику выполнения и официально зафиксированную стоимость в Таблицах правил Международной федерации гимнастики.</p>
+                    <p><strong>Элементы DB</strong> — это Прыжки, Равновесия и Вращения.</p>
+                    <p><strong>Элементы DA</strong> — технически сложная манипуляция с предметом, которая состоит из работы с предметом с выполнением во время нее минимум 2 критериев.</p>
+                    <p><strong>Полупальцы</strong> — положение стопы, при котором спортсменка отрывает пятку от пола и стоит, опираясь исключительно на переднюю часть стопы опорной ноги: подушечку и пальцы.</p>
                 </div>
             </div>
 
+            <!-- ОСТАЛЬНЫЕ ЗАГЛУШКИ СТРАНИЦ -->
             <div id="page-body-elements" class="page">
                 <div class="hero-text"><h1>ЭЛЕМЕНТЫ ТЕЛА</h1></div>
                 <div class="page-placeholder">
