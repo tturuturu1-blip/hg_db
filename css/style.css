@@ -7,13 +7,15 @@
 /* --- ПЕРЕМЕННЫЕ --- */
 :root {
     --bg-page: #F7F3E8;
-    --bg-header: #28271D;
+    --bg-header: #28271D; /* Темный фон шапки и нижней панели */
     --bg-sidebar: #4A5240; /* Темно-зеленый */
     --bg-card: #FFFFFF;
     --text-main: #1A1815;
     --text-light: #5A5A5A;
     --text-sidebar: #E8E5DB;
-    --accent-green: #8BA87C; /* Светло-зеленый для выделения */
+    
+    --accent-orange: #D16A48; /* Оранжевый цвет */
+    --accent-green: #8BA87C; /* Светло-зеленый для активных кнопок */
     
     --header-height: 80px;
     --radius-btn: 50px;
@@ -61,6 +63,7 @@ header {
 .header-left { display: flex; align-items: center; }
 .header-logo-area { display: flex; align-items: center; gap: 15px; }
 
+/* Оранжевый круг вокруг иконки в шапке */
 .header-logo-icon {
     width: 50px; height: 50px; 
     background-color: var(--accent-orange);
@@ -110,10 +113,10 @@ header {
     background-color: rgba(255,255,255,0.1);
 }
 
-/* Выделение зеленым */
+/* Выделение активной кнопки зеленым */
 .nav-btn.active, details.nav-group.has-active-child > summary {
     color: var(--accent-green); 
-    background-color: rgba(74, 82, 64, 0.3); /* Полупрозрачный зеленый */
+    background-color: rgba(74, 82, 64, 0.4); /* Полупрозрачный зеленый фон */
 }
 
 .nav-btn:focus-visible, details.nav-group > summary:focus-visible {
@@ -189,12 +192,12 @@ details[open] > .sub-nav { display: flex; }
     .sub-nav .nav-btn:hover { background-color: rgba(255,255,255,0.1); color: #FFF; }
     .sub-nav .nav-btn.active {
         color: var(--accent-green);
-        background-color: rgba(74, 82, 64, 0.3);
+        background-color: rgba(74, 82, 64, 0.4);
     }
 }
 
 /* ========================================= */
-/* --- ИКОНКИ (СТРОГО ПО ВАШЕМУ СПИСКУ) --- */
+/* --- ИКОНКИ --- */
 /* ========================================= */
 .icon-home { -webkit-mask-image: url('../icon/home.png'); mask-image: url('../icon/home.png'); }
 .icon-gymnast { -webkit-mask-image: url('../icon/gimnastka.png'); mask-image: url('../icon/gimnastka.png'); }
@@ -214,7 +217,14 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
 .hero-split { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; }
 .hero-text h1 { font-size: 4.5rem; color: var(--text-main); margin-bottom: 0.5rem; line-height: 0.9; }
-.hero-text p { font-size: 1.5rem; color: var(--bg-sidebar); font-family: 'Bebas Neue', sans-serif; }
+
+/* Оранжевый подзаголовок "База знаний и инструкции" */
+.hero-text p { 
+    font-size: 1.5rem; 
+    color: var(--accent-orange); /* Возвращен оранжевый цвет */
+    font-family: 'Bebas Neue', sans-serif; 
+}
+
 .hero-image-container { flex: 1; display: flex; justify-content: flex-end; position: relative; max-width: 450px; }
 
 .hero-img-wrapper { 
@@ -225,7 +235,14 @@ main { width: 100%; padding: 3rem 2.5rem; }
 }
 .hero-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.hero-decor-1 { position: absolute; top: -20px; right: -20px; width: 250px; height: 250px; background-color: var(--accent-green); border-radius: 50%; z-index: 1; opacity: 0.5; }
+/* Оранжевый декоративный круг */
+.hero-decor-1 { 
+    position: absolute; top: -20px; right: -20px; 
+    width: 250px; height: 250px; 
+    background-color: var(--accent-orange); /* Возвращен оранжевый цвет */
+    border-radius: 50%; z-index: 1; opacity: 0.8; 
+}
+
 .hero-decor-2 { position: absolute; bottom: -30px; left: -40px; width: 150px; height: 150px; background-color: var(--bg-sidebar); border-radius: 50%; z-index: 1; opacity: 0.6; }
 
 /* --- КАРТОЧКИ НА ГЛАВНОЙ --- */
@@ -243,14 +260,14 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: flex; align-items: center; justify-content: center; 
     margin-bottom: 1.5rem; color: #FFF; 
 }
-/* Размер иконки внутри карточки */
 .card-icon-circle .nav-icon-img {
     width: 24px; height: 24px;
 }
 
-.bg-orange { background-color: #D16A48; } /* Оставил оранжевый для контраста в карточках */
+.bg-orange { background-color: var(--accent-orange); }
 .bg-green { background-color: var(--bg-sidebar); }
 .bg-dark { background-color: var(--bg-header); }
+
 .home-card h3 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 2rem; }
 .home-card p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 1.5rem; }
 .home-card .arrow { width: 40px; height: 40px; border-radius: 50%; background-color: var(--bg-page); display: flex; align-items: center; justify-content: center; color: var(--text-main); align-self: flex-end; transition: background-color 0.3s, color 0.3s; }
@@ -266,7 +283,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .page-placeholder h2 { font-size: 2rem; margin-bottom: 0.75rem; color: var(--text-main); }
 .page-placeholder p { color: var(--text-light); max-width: 500px; line-height: 1.6; }
 
-/* Фолбэк (если картинка не загрузилась) */
+/* Фолбэк */
 .nav-icon-wrapper.img-failed .nav-icon-img,
 .header-logo-icon.img-failed .nav-icon-img {
     -webkit-mask-image: none !important; mask-image: none !important;
@@ -289,14 +306,14 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
     .main-wrapper { padding-bottom: 110px; }
 
-    /* Плавающая панель цвета Шапки (bg-header) */
+    /* Плавающая панель цвета Шапки */
     .main-nav {
         position: fixed;
         bottom: 20px; left: 15px; right: 15px;
         height: 70px; 
         border-radius: 35px; 
         padding: 0 10px;
-        background-color: var(--bg-header); /* Такой же цвет, как у шапки */
+        background-color: var(--bg-header); 
         box-shadow: 0 10px 30px rgba(0,0,0,0.25); 
         z-index: 2000;
         justify-content: space-between;
@@ -312,7 +329,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         flex: 1; 
         gap: 0; 
         background: transparent !important;
-        color: var(--text-sidebar); /* Светлый текст на темном фоне */
+        color: var(--text-sidebar); 
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         justify-content: center;
         height: 50px;
@@ -330,11 +347,11 @@ main { width: 100%; padding: 3rem 2.5rem; }
         font-weight: 600; letter-spacing: 0; white-space: nowrap; color: inherit;
     }
 
-    /* Выделение зеленым */
+    /* Выделение зеленым на мобильных */
     .nav-btn.active, 
     details.nav-group.has-active-child > summary {
-        background-color: rgba(255, 255, 255, 0.1) !important; /* Легкая подсветка фона */
-        color: var(--accent-green) !important; /* Зеленый текст и иконка */
+        background-color: rgba(255, 255, 255, 0.1) !important; 
+        color: var(--accent-green) !important; 
         flex: 2.5; 
         gap: 8px; 
     }
@@ -355,7 +372,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         left: 0; right: 0;
         bottom: calc(100% + 15px); 
         width: auto;
-        background-color: var(--bg-header); /* Цвет как у панели */
+        background-color: var(--bg-header); 
         border-radius: 24px;
         padding: 10px;
         box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
