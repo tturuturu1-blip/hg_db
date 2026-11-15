@@ -40,7 +40,7 @@ h1, h2, h3, h4, summary, .logo-text, .nav-btn {
 /* --- ОБЕРТКА КОНТЕНТА --- */
 .main-wrapper {
     padding-top: var(--header-height);
-    padding-left: var(--sidebar-w-collapsed);
+    padding-left: var(--sidebar-w-collapsed); /* Отступ под узкую панель на ПК */
     min-height: 100vh;
 }
 
@@ -85,7 +85,9 @@ header {
 }
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
-/* --- БОКОВОЕ МЕНЮ (ДЕСКТОП) --- */
+/* ========================================= */
+/* --- БОКОВОЕ МЕНЮ (ДЕСКТОП И ПЛАНШЕТЫ) --- */
+/* ========================================= */
 .sidebar {
     position: fixed;
     top: var(--header-height); 
@@ -128,6 +130,7 @@ header {
     border-radius: 8px;
 }
 
+/* Текст на ПК всегда скрыт */
 .nav-text { display: none; }
 
 .nav-icon-wrapper {
@@ -154,7 +157,7 @@ header {
     -webkit-mask-position: center; mask-position: center;
 }
 
-/* --- ВЫПАДАЮЩИЕ СПИСКИ (ДЕСКТОП - FLYOUT) --- */
+/* --- ВЫПАДАЮЩИЕ СПИСКИ НА ПК (FLYOUT) --- */
 details.nav-group { 
     background: transparent; 
     border: none; 
@@ -177,7 +180,6 @@ details.nav-group > summary::-webkit-details-marker { display: none; }
 details.nav-group > summary:hover { color: #FFF; }
 details.nav-group > summary:hover .nav-icon-wrapper { background-color: rgba(255,255,255,0.2); }
 
-/* Активный родитель (если открыт дочерний пункт) */
 details.nav-group.has-active-child > summary .nav-icon-wrapper {
     background-color: var(--accent-orange);
     color: #FFF;
@@ -191,7 +193,7 @@ details.nav-group.has-active-child > summary .nav-icon-wrapper {
 
 details[open] > .sub-nav { display: flex; }
 
-/* Выпадающее подменю для ПК */
+/* Выпадающее подменю для ПК и планшетов */
 @media (min-width: 901px) {
     .sub-nav {
         position: absolute;
@@ -280,7 +282,10 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .icon-ball { -webkit-mask-image: url('../icon/ball.png'); mask-image: url('../icon/ball.png'); }
 .icon-validation { -webkit-mask-image: url('../icon/feedback.png'); mask-image: url('../icon/feedback.png'); }
 
-/* Фолбэк: если картинка не загрузилась, вместо пустоты появляется "?" */
+/* Стилизация SVG-иконки для источников, чтобы она не выбивалась */
+.icon-sources svg { width: 100%; height: 100%; stroke: currentColor; fill: none; }
+
+/* Фолбэк для отсутствующих картинок */
 .nav-icon-wrapper.img-failed .nav-icon-img,
 .header-logo-icon.img-failed .nav-icon-img {
     -webkit-mask-image: none !important;
@@ -324,7 +329,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 @media (max-width: 900px) {
     .main-wrapper {
         padding-left: 0 !important; 
-        padding-bottom: 110px; /* Место под плавающую панель и отступ */
+        padding-bottom: 110px; /* Отступ под плавающую панель */
     }
 
     /* Плавающая панель-пилюля */
@@ -359,7 +364,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         padding: 10px 12px !important;
         margin: 0 !important;
         border-radius: 25px;
-        flex: 1; /* Равномерное распределение */
+        flex: 1; 
         gap: 0; 
         background: transparent !important;
         color: var(--text-main);
@@ -369,6 +374,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         width: 100%;
     }
 
+    /* Иконки остаются прежними (через маски) */
     .nav-icon-wrapper {
         width: 26px;
         height: 26px;
@@ -378,8 +384,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     }
     
     .nav-icon-img { width: 24px; height: 24px; }
-    .header-logo-icon .nav-icon-img { width: 28px; height: 28px; } /* Фикс логотипа в шапке */
-
+    
     /* Текст скрыт по умолчанию */
     .nav-text {
         display: none !important; 
@@ -395,10 +400,10 @@ main { width: 100%; padding: 3rem 2.5rem; }
     /* АКТИВНЫЙ ПУНКТ (Раскрывается в пилюлю с текстом) */
     .nav-btn.active, 
     details.nav-group.has-active-child > summary {
-        background-color: rgba(209, 106, 72, 0.15) !important; /* Нежно-оранжевый фон */
+        background-color: rgba(209, 106, 72, 0.15) !important; 
         color: var(--accent-orange) !important;
-        flex: 2.5; /* Кнопка становится шире */
-        gap: 8px; /* Отступ между иконкой и текстом */
+        flex: 2.5; 
+        gap: 8px; 
     }
 
     .nav-btn.active .nav-text,
@@ -406,26 +411,26 @@ main { width: 100%; padding: 3rem 2.5rem; }
         display: block !important;
     }
 
-    /* Фикс позиционирования details на мобильных */
+    /* Настройки для details (групп) на мобильных */
     details.nav-group {
         position: static; 
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100%;
-        flex: 1; /* По умолчанию занимает 1 часть */
+        flex: 1; 
         transition: flex 0.3s ease;
     }
     details.nav-group.has-active-child {
-        flex: 2.5; /* Расширяется при активности */
+        flex: 2.5; 
     }
 
-    /* Всплывающее подменю (Bottom Sheet) */
+    /* Всплывающее подменю (Bottom Sheet) над панелью */
     .sub-nav {
         position: absolute;
         left: 0;
         right: 0;
-        bottom: calc(100% + 15px); /* Прямо над панелью */
+        bottom: calc(100% + 15px); 
         width: auto;
         background-color: var(--bg-card);
         border-radius: 24px;
@@ -464,7 +469,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         color: var(--accent-orange) !important;
     }
 
-    .sub-nav .nav-btn .nav-text { display: block !important; } /* В подменю текст виден всегда */
+    .sub-nav .nav-btn .nav-text { display: block !important; } 
 
     /* Адаптация контента */
     .hero-split { flex-direction: column-reverse; text-align: center; margin-bottom: 2rem; }
@@ -478,7 +483,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .home-grid { grid-template-columns: 1fr; }
 }
 
-/* Отключаем анимации для пользователей с чувствительностью к движению */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;
