@@ -20,8 +20,6 @@
     --header-height: 80px;
     --radius-btn: 50px;
     --shadow: 0 10px 30px rgba(40, 39, 29, 0.08);
-    
-    /* Прозрачность 20% для панелей */
     --bg-header-transparent: rgba(40, 39, 29, 0.8);
 }
 
@@ -77,7 +75,6 @@ header {
 
 .logo-text { font-size: 1.6rem; font-weight: 700; line-height: 1; color: var(--bg-page); }
 
-/* Правая часть шапки */
 .header-right { display: flex; align-items: center; gap: 20px; }
 
 .header-search { display: flex; align-items: center; position: relative; width: 250px; }
@@ -89,11 +86,7 @@ header {
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
 /* --- МЕНЮ В ШАПКЕ --- */
-.main-nav {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+.main-nav { display: flex; align-items: center; gap: 8px; }
 
 .nav-btn, details.nav-group > summary {
     background: transparent;
@@ -140,9 +133,7 @@ header {
 }
 
 .main-nav > .nav-btn .nav-text,
-.main-nav > details > summary .nav-text {
-    display: none;
-}
+.main-nav > details > summary .nav-text { display: none; }
 
 /* --- ВЫПАДАЮЩИЕ СПИСКИ --- */
 details.nav-group { position: relative; }
@@ -229,7 +220,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Выравнивание текста по верхнему левому краю на ПК */
+/* Выравнивание текста на ПК */
 .hero-split { 
     display: flex; 
     align-items: flex-start; 
@@ -241,6 +232,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .hero-text { 
     align-self: flex-start; 
     text-align: left; 
+    position: relative; /* Для позиционирования зеленого круга */
 }
 
 .hero-text h1 { 
@@ -264,7 +256,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
     max-width: 450px; 
 }
 
-/* Обертка для изображения и декоративных кругов */
 .hero-img-wrapper { 
     position: relative; 
     width: 350px; 
@@ -283,7 +274,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: block;
 }
 
-/* Декоративные элементы выглядывают ровно на 50% */
+/* Оранжевый круг (выглядывает из-за фото) */
 .hero-decor-1 { 
     position: absolute; 
     top: 0; right: 0; 
@@ -295,42 +286,85 @@ main { width: 100%; padding: 3rem 2.5rem; }
     transform: translate(50%, -50%); 
 }
 
+/* Зеленый круг (теперь под текстом) */
 .hero-decor-2 { 
     position: absolute; 
-    bottom: 0; left: 0; 
-    width: 150px; height: 150px; 
+    bottom: -60px; 
+    left: -30px; 
+    width: 150px; 
+    height: 150px; 
     background-color: var(--bg-sidebar); 
     border-radius: 50%; 
-    z-index: 1; 
+    z-index: -1; 
     opacity: 0.6; 
-    transform: translate(-50%, 50%); 
 }
 
 /* --- КАРТОЧКИ НА ГЛАВНОЙ --- */
 .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
+
 .home-card { 
-    background: var(--bg-card); padding: 2rem; border-radius: 24px; box-shadow: var(--shadow); 
-    cursor: pointer; transition: transform 0.3s, border-color 0.3s; border: 1px solid rgba(40, 39, 29, 0.1); 
-    display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: inherit;
+    background: var(--bg-card); 
+    padding: 2rem; 
+    border-radius: 24px; 
+    box-shadow: var(--shadow); 
+    cursor: pointer; 
+    transition: transform 0.3s, border-color 0.3s; 
+    border: 1px solid rgba(40, 39, 29, 0.1); 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    text-decoration: none; 
+    color: inherit;
+    align-items: flex-start; /* Выравнивание по левому краю */
+    text-align: left;
 }
+
 .home-card:hover { transform: translateY(-8px); border-color: var(--accent-green); }
 .home-card:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 4px; }
+
+/* Заголовок и иконка в одну строку */
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
 
 .card-icon-circle { 
     width: 50px; height: 50px; border-radius: 50%; 
     display: flex; align-items: center; justify-content: center; 
-    margin-bottom: 1.5rem; color: #FFF; 
+    color: #FFF; flex-shrink: 0;
 }
 .card-icon-circle .nav-icon-img { width: 24px; height: 24px; }
+
+.card-header h3 { 
+    color: var(--text-main); 
+    margin-bottom: 0; 
+    font-size: 2rem; 
+}
 
 .bg-orange { background-color: var(--accent-orange); }
 .bg-green { background-color: var(--bg-sidebar); }
 .bg-dark { background-color: var(--bg-header); }
 
-.home-card h3 { color: var(--text-main); margin-bottom: 0.5rem; font-size: 2rem; }
 .home-card p { font-size: 0.95rem; color: var(--text-light); margin-bottom: 1.5rem; }
 .home-card .arrow { width: 40px; height: 40px; border-radius: 50%; background-color: var(--bg-page); display: flex; align-items: center; justify-content: center; color: var(--text-main); align-self: flex-end; transition: background-color 0.3s, color 0.3s; }
 .home-card:hover .arrow { background-color: var(--accent-green); color: #FFF; }
+
+/* --- ТЕКСТОВЫЙ КОНТЕНТ (ГЛОССАРИЙ) --- */
+.text-content {
+    background: var(--bg-card);
+    padding: 2.5rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(40, 39, 29, 0.1);
+    line-height: 1.6;
+    color: var(--text-main);
+    max-width: 900px;
+}
+.text-content p { margin-bottom: 1rem; }
+.text-content p:last-child { margin-bottom: 0; }
 
 /* --- ЗАГЛУШКИ ДЛЯ СТРАНИЦ --- */
 .page-placeholder {
@@ -365,7 +399,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
     .main-wrapper { padding-bottom: 110px; }
 
-    /* Прозрачная панель */
     .main-nav {
         position: fixed;
         bottom: 20px; left: 15px; right: 15px;
@@ -426,7 +459,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
     }
     details.nav-group.has-active-child { flex: 2.5; }
 
-    /* Прозрачное всплывающее меню */
     .sub-nav {
         position: absolute;
         left: 0; right: 0;
@@ -484,22 +516,21 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .sub-nav .nav-btn .nav-text { display: block !important; } 
     .sub-nav .nav-btn .nav-icon-wrapper { width: 20px; height: 20px; }
 
-    /* --- ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ --- */
-    
-    /* 1. Центрирование текста и блоков */
+    /* --- МОБИЛЬНАЯ ГЛАВНАЯ --- */
     .hero-split { 
         flex-direction: column-reverse; 
         align-items: center; 
         text-align: center; 
-        margin-top: 2rem; /* Отступ сверху, чтобы круги не прятались под шапку */
+        margin-top: 2rem; 
         margin-bottom: 2rem; 
-        gap: 1.5rem;
+        gap: 2rem;
     }
     
     .hero-text { 
         align-self: center; 
         text-align: center; 
         width: 100%;
+        padding-bottom: 70px; /* Место под зеленый круг */
     }
     
     .hero-text h1 { 
@@ -513,13 +544,22 @@ main { width: 100%; padding: 3rem 2.5rem; }
         text-align: center;
     }
     
-    /* 2. Выравнивание картинки и декоративных кругов */
+    /* Зеленый круг по центру под текстом */
+    .hero-decor-2 { 
+        bottom: 0; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 100px; 
+        height: 100px; 
+        z-index: 1;
+    }
+
     .hero-image-container { 
         margin: 0 auto; 
         width: 100%; 
         max-width: 300px; 
         justify-content: center;
-        margin-top: 30px; /* Дополнительный отступ для верхнего круга */
+        margin-top: 30px;
     }
     
     .hero-img-wrapper { 
@@ -531,33 +571,25 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .hero-decor-1 { 
         width: 130px; 
         height: 130px; 
-        /* Сдвигаем так, чтобы круг не уходил за шапку */
         transform: translate(30%, -20%); 
     }
     
-    .hero-decor-2 { 
-        width: 100px; 
-        height: 100px; 
-    }
-    
-    /* 3. Центрирование карточек */
+    /* Центрирование контента внутри карточек оставляем по левому краю */
     .home-card {
-        align-items: center; /* Центрируем контент внутри карточки */
-        text-align: center;
+        align-items: flex-start;
+        text-align: left;
         padding: 1.5rem;
     }
-    
-    .home-card .card-icon-circle {
-        margin: 0 auto 1rem auto; /* Центрируем иконку */
-    }
-    
     .home-card .arrow {
-        align-self: center; /* Стрелка тоже по центру */
-        margin-top: 1rem;
+        align-self: flex-end; /* Стрелка справа внизу */
     }
     
     main { padding: 1rem; }
     .home-grid { grid-template-columns: 1fr; }
+    
+    .text-content {
+        padding: 1.5rem;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
