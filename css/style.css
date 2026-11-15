@@ -20,7 +20,9 @@
     --header-height: 80px;
     --radius-btn: 50px;
     --shadow: 0 10px 30px rgba(40, 39, 29, 0.08);
-    --bg-header-transparent: rgba(40, 39, 29, 0.85);
+    
+    /* Прозрачность 5% (95% непрозрачности) */
+    --bg-header-transparent: rgba(40, 39, 29, 0.95);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -220,6 +222,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
+/* Выравнивание текста на ПК */
 .hero-split { 
     display: flex; 
     align-items: flex-start; 
@@ -231,6 +234,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .hero-text { 
     align-self: flex-start; 
     text-align: left; 
+    position: relative; 
 }
 
 .hero-text h1 { 
@@ -246,14 +250,12 @@ main { width: 100%; padding: 3rem 2.5rem; }
     font-family: 'Bebas Neue', sans-serif; 
 }
 
-/* Контейнер для изображения и кругов */
 .hero-image-container { 
     flex: 1; 
     display: flex; 
     justify-content: flex-end; 
     position: relative; 
     max-width: 450px; 
-    padding: 20px 40px 40px 20px; /* Отступы, чтобы круги не обрезались краем экрана */
 }
 
 .hero-img-wrapper { 
@@ -274,57 +276,29 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: block;
 }
 
-/* --- ДЕКОРАТИВНЫЕ ЭЛЕМЕНТЫ --- */
-/* Оранжевый круг (справа сверху) */
+/* Оранжевый круг */
 .hero-decor-1 { 
     position: absolute; 
-    top: -20px; 
-    right: -20px; 
-    width: 200px; 
-    height: 200px; 
+    top: 0; right: 0; 
+    width: 250px; height: 250px; 
     background-color: var(--accent-orange); 
     border-radius: 50%; 
     z-index: 1; 
-    opacity: 0.85; 
+    opacity: 0.8; 
+    transform: translate(50%, -50%); 
 }
 
-/* Зеленый круг (слева снизу, выглядывает из-за фото, но не трогает текст) */
+/* Зеленый круг */
 .hero-decor-2 { 
     position: absolute; 
-    bottom: 20px; /* Чуть выше нижнего края */
-    left: -40px; /* Сдвинут влево */
-    width: 130px; 
-    height: 130px; 
+    bottom: -60px; 
+    left: -30px; 
+    width: 150px; 
+    height: 150px; 
     background-color: var(--bg-sidebar); 
     border-radius: 50%; 
-    z-index: 3; /* Поверх изображения (как на фото 1) */
-    opacity: 0.9; 
-}
-
-/* Новый элемент: маленький контурный круг (под изображением) */
-.hero-decor-3 {
-    position: absolute;
-    bottom: -30px;
-    left: 30%;
-    width: 70px;
-    height: 70px;
-    border: 3px solid var(--accent-orange);
-    border-radius: 50%;
-    z-index: 1;
-    opacity: 0.5;
-}
-
-/* Новый элемент: маленькая точка (справа снизу) */
-.hero-decor-4 {
-    position: absolute;
-    bottom: 40px;
-    right: -40px;
-    width: 50px;
-    height: 50px;
-    background-color: var(--accent-green);
-    border-radius: 50%;
-    z-index: 3;
-    opacity: 0.7;
+    z-index: -1; 
+    opacity: 0.6; 
 }
 
 /* --- КАРТОЧКИ НА ГЛАВНОЙ --- */
@@ -343,14 +317,13 @@ main { width: 100%; padding: 3rem 2.5rem; }
     justify-content: space-between; 
     text-decoration: none; 
     color: inherit;
-    align-items: flex-start;
+    align-items: flex-start; 
     text-align: left;
 }
 
 .home-card:hover { transform: translateY(-8px); border-color: var(--accent-green); }
 .home-card:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 4px; }
 
-/* Заголовок и иконка в одну строку */
 .card-header {
     display: flex;
     align-items: center;
@@ -380,8 +353,15 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .home-card .arrow { width: 40px; height: 40px; border-radius: 50%; background-color: var(--bg-page); display: flex; align-items: center; justify-content: center; color: var(--text-main); align-self: flex-end; transition: background-color 0.3s, color 0.3s; }
 .home-card:hover .arrow { background-color: var(--accent-green); color: #FFF; }
 
-/* --- ТЕКСТОВЫЙ КОНТЕНТ (ГЛОССАРИЙ) --- */
-.text-content {
+/* --- СТИЛИ ДЛЯ ГЛОССАРИЯ --- */
+.glossary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 900px;
+}
+
+.glossary-card {
     background: var(--bg-card);
     padding: 2.5rem;
     border-radius: 24px;
@@ -389,10 +369,19 @@ main { width: 100%; padding: 3rem 2.5rem; }
     border: 1px solid rgba(40, 39, 29, 0.1);
     line-height: 1.6;
     color: var(--text-main);
-    max-width: 900px;
 }
-.text-content p { margin-bottom: 1rem; }
-.text-content p:last-child { margin-bottom: 0; }
+
+.glossary-title {
+    font-size: 2rem;
+    color: var(--accent-orange); /* Выделяем заголовки цветом */
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(40, 39, 29, 0.1);
+}
+
+.glossary-card p { margin-bottom: 1rem; }
+.glossary-card p:last-child { margin-bottom: 0; }
+
 
 /* --- ЗАГЛУШКИ ДЛЯ СТРАНИЦ --- */
 .page-placeholder {
@@ -418,23 +407,19 @@ main { width: 100%; padding: 3rem 2.5rem; }
 }
 
 /* ========================================= */
-/* --- МОБИЛЬНАЯ ВЕРСИЯ / ПЛАНШЕТЫ --- */
+/* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
 /* ========================================= */
 @media (max-width: 900px) {
     header { padding: 0 1rem; }
     .header-right { gap: 10px; }
     .header-search { display: none; }
 
-    .main-wrapper { padding-bottom: 110px; }
+    /* Увеличен нижний отступ, чтобы панель не перекрывала контент */
+    .main-wrapper { padding-bottom: 140px; }
 
-    /* ОГРАНИЧЕНИЕ ШИРИНЫ ПАНЕЛИ ДЛЯ ПЛАНШЕТОВ И ЦЕНТРИРОВАНИЕ */
     .main-nav {
         position: fixed;
-        bottom: 20px; 
-        left: 50%;
-        transform: translateX(-50%); /* Центрируем */
-        width: calc(100% - 40px); /* Отступы по 20px с краев */
-        max-width: 500px; /* Не растягиваем на всю ширину планшета */
+        bottom: 20px; left: 15px; right: 15px;
         height: 70px; 
         border-radius: 35px; 
         padding: 0 10px;
@@ -554,16 +539,16 @@ main { width: 100%; padding: 3rem 2.5rem; }
         flex-direction: column-reverse; 
         align-items: center; 
         text-align: center; 
-        margin-top: 2rem; 
+        margin-top: 3rem; 
         margin-bottom: 2rem; 
-        gap: 1rem; /* Уменьшили отступ между картинкой и текстом */
+        gap: 2.5rem;
     }
     
     .hero-text { 
         align-self: center; 
         text-align: center; 
         width: 100%;
-        margin-top: 20px; /* Отодвигаем текст от зеленого круга */
+        padding-bottom: 40px;
     }
     
     .hero-text h1 { 
@@ -576,13 +561,31 @@ main { width: 100%; padding: 3rem 2.5rem; }
         font-size: 1.2rem; 
         text-align: center;
     }
+    
+    /* Оранжевый круг справа сверху */
+    .hero-decor-1 { 
+        width: 140px; 
+        height: 140px; 
+        transform: translate(-20%, -10%); /* Выглядывает слева от фото */
+        z-index: 1;
+    }
+
+    /* Зеленый круг по центру под текстом */
+    .hero-decor-2 { 
+        bottom: -10px; 
+        left: 50%; 
+        transform: translateX(-50%); 
+        width: 110px; 
+        height: 110px; 
+        z-index: -1; /* Уходит за текст */
+    }
 
     .hero-image-container { 
         margin: 0 auto; 
         width: 100%; 
         max-width: 300px; 
         justify-content: center;
-        padding: 0; /* Убираем лишние отступы для мобилок */
+        margin-top: 20px;
     }
     
     .hero-img-wrapper { 
@@ -591,49 +594,17 @@ main { width: 100%; padding: 3rem 2.5rem; }
         margin: 0 auto;
     }
     
-    /* Уменьшаем и смещаем круги, чтобы они не улетали за экран */
-    .hero-decor-1 { 
-        width: 120px; 
-        height: 120px; 
-        top: -10px; 
-        right: -10px;
-    }
-    
-    .hero-decor-2 { 
-        width: 90px; 
-        height: 90px; 
-        bottom: -30px; /* Выглядывает снизу */
-        left: -20px; 
-    }
-
-    .hero-decor-3 {
-        width: 50px;
-        height: 50px;
-        bottom: -20px;
-        left: 20%;
-    }
-
-    .hero-decor-4 {
-        width: 40px;
-        height: 40px;
-        bottom: 30px;
-        right: -20px;
-    }
-    
-    /* Карточки */
+    /* Карточки остаются выровненными по левому краю */
     .home-card {
         align-items: flex-start;
         text-align: left;
         padding: 1.5rem;
     }
-    .home-card .arrow {
-        align-self: flex-end; 
-    }
     
     main { padding: 1rem; }
     .home-grid { grid-template-columns: 1fr; }
-    
-    .text-content {
+
+    .glossary-card {
         padding: 1.5rem;
     }
 }
