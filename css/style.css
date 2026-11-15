@@ -21,7 +21,7 @@
     --radius-btn: 50px;
     --shadow: 0 10px 30px rgba(40, 39, 29, 0.08);
     
-    /* Прозрачность 20% для панелей (0.8 означает 80% непрозрачности) */
+    /* Прозрачность 20% для панелей */
     --bg-header-transparent: rgba(40, 39, 29, 0.8);
 }
 
@@ -168,7 +168,6 @@ details[open] > .sub-nav { display: flex; }
         border: 1px solid rgba(255,255,255,0.1);
     }
     
-    /* Название кнопки в подменю */
     .sub-nav-title {
         font-family: 'Bebas Neue', sans-serif;
         font-size: 1.1rem;
@@ -192,7 +191,7 @@ details[open] > .sub-nav { display: flex; }
         width: 100%;
         height: auto;
         gap: 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.05); /* Разделительные линии */
+        border-bottom: 1px solid rgba(255,255,255,0.05);
     }
     .sub-nav .nav-btn:last-child { border-bottom: none; }
     
@@ -233,7 +232,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 /* Выравнивание текста по верхнему левому краю на ПК */
 .hero-split { 
     display: flex; 
-    align-items: flex-start; /* Прижимает элементы к верху */
+    align-items: flex-start; 
     justify-content: space-between; 
     margin-bottom: 4rem; 
     gap: 2rem; 
@@ -293,7 +292,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     border-radius: 50%; 
     z-index: 1; 
     opacity: 0.8; 
-    transform: translate(50%, -50%); /* Центрируем на углу */
+    transform: translate(50%, -50%); 
 }
 
 .hero-decor-2 { 
@@ -304,7 +303,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     border-radius: 50%; 
     z-index: 1; 
     opacity: 0.6; 
-    transform: translate(-50%, 50%); /* Центрируем на углу */
+    transform: translate(-50%, 50%); 
 }
 
 /* --- КАРТОЧКИ НА ГЛАВНОЙ --- */
@@ -474,7 +473,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
         flex: none !important;
         height: auto;
         gap: 12px;
-        border-bottom: 1px solid rgba(255,255,255,0.05); /* Разделительные линии */
+        border-bottom: 1px solid rgba(255,255,255,0.05); 
     }
     .sub-nav .nav-btn:last-child { border-bottom: none; }
     
@@ -485,19 +484,79 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .sub-nav .nav-btn .nav-text { display: block !important; } 
     .sub-nav .nav-btn .nav-icon-wrapper { width: 20px; height: 20px; }
 
-    /* Контент на мобильных */
-    .hero-split { flex-direction: column-reverse; text-align: center; margin-bottom: 2rem; align-items: center; }
-    .hero-text { align-self: center; text-align: center; }
-    .hero-text h1 { font-size: 2.8rem; margin-top: 1.5rem; }
-    .hero-text p { font-size: 1.2rem; }
+    /* --- ИСПРАВЛЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ --- */
     
-    /* Уменьшение декоративных элементов для мобильных */
-    .hero-image-container { margin: 0 auto; width: 100%; max-width: 300px; }
-    .hero-img-wrapper { width: 250px; height: 300px; }
-    .hero-decor-1 { width: 150px; height: 150px; }
-    .hero-decor-2 { width: 100px; height: 100px; }
+    /* 1. Центрирование текста и блоков */
+    .hero-split { 
+        flex-direction: column-reverse; 
+        align-items: center; 
+        text-align: center; 
+        margin-top: 2rem; /* Отступ сверху, чтобы круги не прятались под шапку */
+        margin-bottom: 2rem; 
+        gap: 1.5rem;
+    }
     
-    main { padding: 2rem 1rem; }
+    .hero-text { 
+        align-self: center; 
+        text-align: center; 
+        width: 100%;
+    }
+    
+    .hero-text h1 { 
+        font-size: 2.8rem; 
+        text-align: center;
+        word-wrap: break-word;
+    }
+    
+    .hero-text p { 
+        font-size: 1.2rem; 
+        text-align: center;
+    }
+    
+    /* 2. Выравнивание картинки и декоративных кругов */
+    .hero-image-container { 
+        margin: 0 auto; 
+        width: 100%; 
+        max-width: 300px; 
+        justify-content: center;
+        margin-top: 30px; /* Дополнительный отступ для верхнего круга */
+    }
+    
+    .hero-img-wrapper { 
+        width: 250px; 
+        height: 300px; 
+        margin: 0 auto;
+    }
+    
+    .hero-decor-1 { 
+        width: 130px; 
+        height: 130px; 
+        /* Сдвигаем так, чтобы круг не уходил за шапку */
+        transform: translate(30%, -20%); 
+    }
+    
+    .hero-decor-2 { 
+        width: 100px; 
+        height: 100px; 
+    }
+    
+    /* 3. Центрирование карточек */
+    .home-card {
+        align-items: center; /* Центрируем контент внутри карточки */
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .home-card .card-icon-circle {
+        margin: 0 auto 1rem auto; /* Центрируем иконку */
+    }
+    
+    .home-card .arrow {
+        align-self: center; /* Стрелка тоже по центру */
+        margin-top: 1rem;
+    }
+    
+    main { padding: 1rem; }
     .home-grid { grid-template-columns: 1fr; }
 }
 
