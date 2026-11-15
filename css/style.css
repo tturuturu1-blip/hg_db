@@ -7,19 +7,22 @@
 /* --- ПЕРЕМЕННЫЕ --- */
 :root {
     --bg-page: #F7F3E8;
-    --bg-header: #28271D; /* Темный фон шапки и нижней панели */
-    --bg-sidebar: #4A5240; /* Темно-зеленый */
+    --bg-header: #28271D;
+    --bg-sidebar: #4A5240;
     --bg-card: #FFFFFF;
     --text-main: #1A1815;
     --text-light: #5A5A5A;
     --text-sidebar: #E8E5DB;
     
-    --accent-orange: #D16A48; /* Оранжевый цвет */
-    --accent-green: #8BA87C; /* Светло-зеленый для активных кнопок */
+    --accent-orange: #D16A48;
+    --accent-green: #8BA87C;
     
     --header-height: 80px;
     --radius-btn: 50px;
     --shadow: 0 10px 30px rgba(40, 39, 29, 0.08);
+    
+    /* Прозрачность 20% для панелей (0.8 означает 80% непрозрачности) */
+    --bg-header-transparent: rgba(40, 39, 29, 0.8);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -63,7 +66,6 @@ header {
 .header-left { display: flex; align-items: center; }
 .header-logo-area { display: flex; align-items: center; gap: 15px; }
 
-/* Оранжевый круг вокруг иконки в шапке */
 .header-logo-icon {
     width: 50px; height: 50px; 
     background-color: var(--accent-orange);
@@ -86,7 +88,7 @@ header {
 }
 .header-search svg { position: absolute; left: 15px; color: rgba(255,255,255,0.5); width: 18px; height: 18px; }
 
-/* --- ГОРИЗОНТАЛЬНОЕ МЕНЮ В ШАПКЕ --- */
+/* --- МЕНЮ В ШАПКЕ --- */
 .main-nav {
     display: flex;
     align-items: center;
@@ -113,10 +115,9 @@ header {
     background-color: rgba(255,255,255,0.1);
 }
 
-/* Выделение активной кнопки зеленым */
 .nav-btn.active, details.nav-group.has-active-child > summary {
     color: var(--accent-green); 
-    background-color: rgba(74, 82, 64, 0.4); /* Полупрозрачный зеленый фон */
+    background-color: rgba(74, 82, 64, 0.4);
 }
 
 .nav-btn:focus-visible, details.nav-group > summary:focus-visible {
@@ -124,7 +125,6 @@ header {
     outline-offset: 2px;
 }
 
-/* Иконки */
 .nav-icon-wrapper {
     width: 24px; height: 24px;
     display: flex; align-items: center; justify-content: center;
@@ -139,7 +139,6 @@ header {
     -webkit-mask-position: center; mask-position: center;
 }
 
-/* СКРЫВАЕМ ТЕКСТ В ШАПКЕ НА ПК */
 .main-nav > .nav-btn .nav-text,
 .main-nav > details > summary .nav-text {
     display: none;
@@ -150,7 +149,7 @@ details.nav-group { position: relative; }
 details.nav-group > summary { list-style: none; }
 details.nav-group > summary::-webkit-details-marker { display: none; }
 
-.sub-nav { display: none; flex-direction: column; gap: 4px; }
+.sub-nav { display: none; flex-direction: column; gap: 0; }
 details[open] > .sub-nav { display: flex; }
 
 @media (min-width: 901px) {
@@ -159,27 +158,43 @@ details[open] > .sub-nav { display: flex; }
         right: 0;
         top: calc(100% + 10px);
         min-width: 240px;
-        background-color: var(--bg-header);
+        background-color: var(--bg-header-transparent);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-radius: 15px;
-        padding: 10px;
+        padding: 10px 0; 
         box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         z-index: 1100;
         border: 1px solid rgba(255,255,255,0.1);
     }
     
+    /* Название кнопки в подменю */
+    .sub-nav-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.1rem;
+        color: var(--text-sidebar);
+        padding: 5px 16px 10px 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: left;
+        letter-spacing: 1px;
+        opacity: 0.7;
+    }
+    
     .sub-nav .nav-btn {
         justify-content: flex-start;
-        padding: 10px 14px;
+        padding: 12px 16px;
         font-family: 'Raleway', sans-serif;
         font-size: 0.95rem;
         text-transform: none;
         letter-spacing: 0;
-        border-radius: 8px;
+        border-radius: 0;
         color: var(--text-sidebar);
         width: 100%;
         height: auto;
         gap: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.05); /* Разделительные линии */
     }
+    .sub-nav .nav-btn:last-child { border-bottom: none; }
     
     .sub-nav .nav-btn .nav-text {
         display: block;
@@ -189,7 +204,7 @@ details[open] > .sub-nav { display: flex; }
     }
     .sub-nav .nav-btn .nav-icon-wrapper { width: 20px; height: 20px; }
     
-    .sub-nav .nav-btn:hover { background-color: rgba(255,255,255,0.1); color: #FFF; }
+    .sub-nav .nav-btn:hover { background-color: rgba(255,255,255,0.05); color: #FFF; }
     .sub-nav .nav-btn.active {
         color: var(--accent-green);
         background-color: rgba(74, 82, 64, 0.4);
@@ -215,35 +230,82 @@ main { width: 100%; padding: 3rem 2.5rem; }
 .page.active { display: block; animation: fadeIn 0.4s ease; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-.hero-split { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4rem; gap: 2rem; }
-.hero-text h1 { font-size: 4.5rem; color: var(--text-main); margin-bottom: 0.5rem; line-height: 0.9; }
+/* Выравнивание текста по верхнему левому краю на ПК */
+.hero-split { 
+    display: flex; 
+    align-items: flex-start; /* Прижимает элементы к верху */
+    justify-content: space-between; 
+    margin-bottom: 4rem; 
+    gap: 2rem; 
+}
 
-/* Оранжевый подзаголовок "База знаний и инструкции" */
+.hero-text { 
+    align-self: flex-start; 
+    text-align: left; 
+}
+
+.hero-text h1 { 
+    font-size: 4.5rem; 
+    color: var(--text-main); 
+    margin-bottom: 0.5rem; 
+    line-height: 0.9; 
+}
+
 .hero-text p { 
     font-size: 1.5rem; 
-    color: var(--accent-orange); /* Возвращен оранжевый цвет */
+    color: var(--accent-orange); 
     font-family: 'Bebas Neue', sans-serif; 
 }
 
-.hero-image-container { flex: 1; display: flex; justify-content: flex-end; position: relative; max-width: 450px; }
+.hero-image-container { 
+    flex: 1; 
+    display: flex; 
+    justify-content: flex-end; 
+    position: relative; 
+    max-width: 450px; 
+}
 
+/* Обертка для изображения и декоративных кругов */
 .hero-img-wrapper { 
-    position: relative; width: 350px; height: 400px; z-index: 2; 
-    background-color: var(--bg-sidebar);
+    position: relative; 
+    width: 350px; 
+    height: 400px; 
+    z-index: 2; 
+}
+
+.hero-img-wrapper img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
     border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
-    overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); 
+    position: relative; 
+    z-index: 2; 
+    display: block;
 }
-.hero-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-/* Оранжевый декоративный круг */
+/* Декоративные элементы выглядывают ровно на 50% */
 .hero-decor-1 { 
-    position: absolute; top: -20px; right: -20px; 
+    position: absolute; 
+    top: 0; right: 0; 
     width: 250px; height: 250px; 
-    background-color: var(--accent-orange); /* Возвращен оранжевый цвет */
-    border-radius: 50%; z-index: 1; opacity: 0.8; 
+    background-color: var(--accent-orange); 
+    border-radius: 50%; 
+    z-index: 1; 
+    opacity: 0.8; 
+    transform: translate(50%, -50%); /* Центрируем на углу */
 }
 
-.hero-decor-2 { position: absolute; bottom: -30px; left: -40px; width: 150px; height: 150px; background-color: var(--bg-sidebar); border-radius: 50%; z-index: 1; opacity: 0.6; }
+.hero-decor-2 { 
+    position: absolute; 
+    bottom: 0; left: 0; 
+    width: 150px; height: 150px; 
+    background-color: var(--bg-sidebar); 
+    border-radius: 50%; 
+    z-index: 1; 
+    opacity: 0.6; 
+    transform: translate(-50%, 50%); /* Центрируем на углу */
+}
 
 /* --- КАРТОЧКИ НА ГЛАВНОЙ --- */
 .home-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
@@ -260,9 +322,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
     display: flex; align-items: center; justify-content: center; 
     margin-bottom: 1.5rem; color: #FFF; 
 }
-.card-icon-circle .nav-icon-img {
-    width: 24px; height: 24px;
-}
+.card-icon-circle .nav-icon-img { width: 24px; height: 24px; }
 
 .bg-orange { background-color: var(--accent-orange); }
 .bg-green { background-color: var(--bg-sidebar); }
@@ -297,7 +357,7 @@ main { width: 100%; padding: 3rem 2.5rem; }
 }
 
 /* ========================================= */
-/* --- МОБИЛЬНАЯ ВЕРСИЯ (ЦВЕТ ШАПКИ) --- */
+/* --- МОБИЛЬНАЯ ВЕРСИЯ --- */
 /* ========================================= */
 @media (max-width: 900px) {
     header { padding: 0 1rem; }
@@ -306,19 +366,21 @@ main { width: 100%; padding: 3rem 2.5rem; }
 
     .main-wrapper { padding-bottom: 110px; }
 
-    /* Плавающая панель цвета Шапки */
+    /* Прозрачная панель */
     .main-nav {
         position: fixed;
         bottom: 20px; left: 15px; right: 15px;
         height: 70px; 
         border-radius: 35px; 
         padding: 0 10px;
-        background-color: var(--bg-header); 
+        background-color: var(--bg-header-transparent); 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         box-shadow: 0 10px 30px rgba(0,0,0,0.25); 
         z-index: 2000;
         justify-content: space-between;
         gap: 5px;
-        border: 1px solid rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
     }
 
     .nav-btn, details.nav-group > summary {
@@ -347,7 +409,6 @@ main { width: 100%; padding: 3rem 2.5rem; }
         font-weight: 600; letter-spacing: 0; white-space: nowrap; color: inherit;
     }
 
-    /* Выделение зеленым на мобильных */
     .nav-btn.active, 
     details.nav-group.has-active-child > summary {
         background-color: rgba(255, 255, 255, 0.1) !important; 
@@ -366,15 +427,17 @@ main { width: 100%; padding: 3rem 2.5rem; }
     }
     details.nav-group.has-active-child { flex: 2.5; }
 
-    /* Всплывающее подменю */
+    /* Прозрачное всплывающее меню */
     .sub-nav {
         position: absolute;
         left: 0; right: 0;
         bottom: calc(100% + 15px); 
         width: auto;
-        background-color: var(--bg-header); 
+        background-color: var(--bg-header-transparent); 
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
         border-radius: 24px;
-        padding: 10px;
+        padding: 10px 0; 
         box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
         display: none;
         flex-direction: column;
@@ -388,19 +451,32 @@ main { width: 100%; padding: 3rem 2.5rem; }
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
     }
+    
+    .sub-nav-title {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.1rem;
+        color: var(--text-sidebar);
+        padding: 5px 20px 10px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        text-align: left;
+        letter-spacing: 1px;
+        opacity: 0.7;
+    }
 
     .sub-nav .nav-btn {
         flex-direction: row !important;
         padding: 14px 20px !important;
         justify-content: flex-start;
-        border-radius: 12px;
+        border-radius: 0;
         font-size: 1rem;
         color: var(--text-sidebar);
         background: transparent !important;
         flex: none !important;
         height: auto;
         gap: 12px;
+        border-bottom: 1px solid rgba(255,255,255,0.05); /* Разделительные линии */
     }
+    .sub-nav .nav-btn:last-child { border-bottom: none; }
     
     .sub-nav .nav-btn.active {
         background-color: rgba(255, 255, 255, 0.05) !important;
@@ -409,12 +485,17 @@ main { width: 100%; padding: 3rem 2.5rem; }
     .sub-nav .nav-btn .nav-text { display: block !important; } 
     .sub-nav .nav-btn .nav-icon-wrapper { width: 20px; height: 20px; }
 
-    /* Контент */
-    .hero-split { flex-direction: column-reverse; text-align: center; margin-bottom: 2rem; }
+    /* Контент на мобильных */
+    .hero-split { flex-direction: column-reverse; text-align: center; margin-bottom: 2rem; align-items: center; }
+    .hero-text { align-self: center; text-align: center; }
     .hero-text h1 { font-size: 2.8rem; margin-top: 1.5rem; }
     .hero-text p { font-size: 1.2rem; }
+    
+    /* Уменьшение декоративных элементов для мобильных */
     .hero-image-container { margin: 0 auto; width: 100%; max-width: 300px; }
     .hero-img-wrapper { width: 250px; height: 300px; }
+    .hero-decor-1 { width: 150px; height: 150px; }
+    .hero-decor-2 { width: 100px; height: 100px; }
     
     main { padding: 2rem 1rem; }
     .home-grid { grid-template-columns: 1fr; }
