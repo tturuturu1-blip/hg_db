@@ -1,8 +1,11 @@
 /* ========================================= */
-/* --- ПРОВЕРКА ЗАГРУЗКИ ИКОНОК (ФОЛБЭК) --- */
+/* --- ПРОВЕРКА ЗАГРУЗКИ ИКОНОК --- */
 /* ========================================= */
-// Обновил имена файлов в точном соответствии с вашей папкой icon
-const iconFiles = ['home.png', 'gimnastka.png', 'Knowledgebase.png', 'Validation.png', 'Projects.png'];
+const iconFiles = [
+    'home.png', 'gimnastka.png', 'Knowledgebase.png', 
+    'Projects.png', 'Validation.png', 'Copyright.png',
+    'Glossary.png', 'GymnastsAugust.png', 'ball.png'
+];
 
 iconFiles.forEach(file => {
     const img = new Image();
@@ -12,8 +15,12 @@ iconFiles.forEach(file => {
             'home.png': '.icon-home',
             'gimnastka.png': '.icon-gymnast',
             'Knowledgebase.png': '.icon-knowledge',
+            'Projects.png': '.icon-project',
             'Validation.png': '.icon-validation',
-            'Projects.png': '.icon-sources'
+            'Copyright.png': '.icon-sources',
+            'Glossary.png': '.icon-glossary',
+            'GymnastsAugust.png': '.icon-gymnasts-august',
+            'ball.png': '.icon-ball'
         };
         
         const selector = classMap[file];
@@ -28,7 +35,7 @@ iconFiles.forEach(file => {
 });
 
 /* ========================================= */
-/* --- НАВИГАЦИЯ И МАРШРУТИЗАЦИЯ --- */
+/* --- НАВИГАЦИЯ --- */
 /* ========================================= */
 function navigate(pageId) {
     let targetPage = document.getElementById('page-' + pageId);
@@ -37,11 +44,9 @@ function navigate(pageId) {
         targetPage = document.getElementById('page-home');
     }
 
-    // 1. Переключаем страницы
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     if (targetPage) targetPage.classList.add('active');
 
-    // 2. Обновляем активные кнопки
     document.querySelectorAll('.main-nav .nav-btn').forEach(btn => {
         btn.classList.remove('active');
         btn.removeAttribute('aria-current');
@@ -53,23 +58,20 @@ function navigate(pageId) {
         activeBtn.setAttribute('aria-current', 'page');
     }
 
-    // 3. Подсветка родительской группы
     document.querySelectorAll('details.nav-group').forEach(details => {
         const hasActiveChild = !!details.querySelector('.sub-nav .nav-btn.active');
         details.classList.toggle('has-active-child', hasActiveChild);
     });
 
-    // 4. Закрываем открытые подменю
     document.querySelectorAll('details.nav-group[open]').forEach(details => {
         details.removeAttribute('open');
     });
 
-    // 5. Скролл наверх
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 /* ========================================= */
-/* --- ОБРАБОТЧИКИ СОБЫТИЙ --- */
+/* --- ОБРАБОТЧИКИ --- */
 /* ========================================= */
 window.addEventListener('hashchange', () => {
     const pageId = window.location.hash.replace('#', '') || 'home';
