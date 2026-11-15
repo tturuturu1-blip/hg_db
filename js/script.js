@@ -1,39 +1,87 @@
-// Проверка загрузки иконок (без изменений)
+/* --- Проверка загрузки PNG-иконок (фолбэк в CSS через .img-failed) --- */
 const iconFiles = ['home.png', 'gimnastka.png', 'ball.png', 'feedback.png'];
 iconFiles.forEach(file => {
     const img = new Image();
     img.src = `icon/${file}`;
-    img.onerror = function() {
-        let className = '';
-        if(file === 'home.png') className = '.icon-home';
-        if(file === 'gimnastka.png') className = '.icon-gymnast';
-        if(file === 'ball.png') className = '.icon-ball';
-        if(file === 'feedback.png') className = '.icon-validation';
-        
-        if(className) {
-            document.querySelectorAll(className).forEach(el => {
-                if(el.parentElement) el.parentElement.classList.add('img-failed');
-            });
-        }
+    img.onerror = () => {
+        const classMap = {
+            'home.png': '.icon-home',
+            'gimnastka.png': '.icon-gymnast',
+            'ball.png': '.icon-ball',
+            'feedback.png': '.icon-validation'
+        };
+        const selector = classMap[file];
+        if (!selector) return;
+        document.querySelectorAll(selector).forEach(el => {
+            if (el.parentElement) el.parentElement.classList.add('img-failed');
+        });
     };
 });
 
-// Переключение страниц
+/* --- Навигация через hash --- */
 function navigate(pageId) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(page => page.classList.remove('active'));
-
-    const targetPage = document.getElementById('page-' + pageId);
-    if (targetPage) {
-        targetPage.classList.add('active');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    let targetPage = document.getElementById('page-' + pageId);
+    if (!targetPage) {
+        pageId = 'home';
+        targetPage = document.getElementById('page-home');
     }
 
-    const navBtns = document.querySelectorAll('.sidebar-nav .nav-btn');
-    navBtns.forEach(btn => btn.classList.remove('active'));
-    
+    // Переключаем страницы
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    targetPage.classList.add('active');
+
+    // Снимаем/ставим active на пунктах
+    document.querySelectorAll('.sidebar-nav .nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+        btn.removeAttribute('aria-current');
+    });
     const activeBtn = document.getElementById('nav-' + pageId);
-    if (activeBtn) activeBtn.classList.add('active');
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+        activeBtn.setAttribute('aria-current', 'page');
+    }
+
+    // Подсветка родительской группы, если активен дочерний пункт
+    document.querySelectorAll('details.nav-group').forEach(details => {
+        const hasActive = !!details.querySelector('.sub-nav .nav-btn.active');
+        details.classList.toggle('has-active-child', hasActive);
+    });
+
+    // Всегда закрываем открытые подменю после перехода
+    document.querySelectorAll('details.nav-group[open]').forEach(d => {
+        d.removeAttribute('open');
+    });
+
+    // Скролл наверх
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Функция toggleMenu полностью удалена, так как сворачивание больше не нужно
+/* --- Реакция на изменение hash --- */
+window.addEventListener('hashchange', () => {
+    const pageId = window.location.hash.replace('#', '') || 'home';
+    navigate(pageId);
+});
+
+/* --- Инициализация при загрузке --- */
+document.addEventListener('DOMContentLoaded', () => {
+    const pageId = window.location.hash.replace('#', '') || 'home';
+    navigate(pageId);
+});
+
+/* --- Закрытие подменю по клику вне details --- */
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('details.nav-group')) {
+        document.querySelectorAll('details.nav-group[open]').forEach(d => {
+            d.removeAttribute('open');
+        });
+    }
+});
+
+/* --- Закрытие подменю по Escape --- */
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        document.querySelectorAll('details.nav-group[open]').forEach(d => {
+            d.removeAttribute('open');
+        });
+    }
+});
